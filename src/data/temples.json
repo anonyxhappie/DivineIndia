@@ -1,0 +1,736 @@
+[
+  {
+    "id": 1,
+    "name": "Somnath Temple",
+    "lat": 20.888,
+    "lng": 70.4013,
+    "deity": "Shiva",
+    "state": "Gujarat",
+    "era": "11th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Jyotirlinga"
+    ],
+    "wiki_slug": "Somnath_temple",
+    "google_maps_link": "https://maps.google.com/?q=Somnath+Temple"
+  },
+  {
+    "id": 2,
+    "name": "Mallikarjuna Temple",
+    "lat": 16.0744,
+    "lng": 78.8682,
+    "deity": "Shiva",
+    "state": "Andhra Pradesh",
+    "era": "2nd Century",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Jyotirlinga",
+      "Shakti Peetha"
+    ],
+    "wiki_slug": "Mallikarjuna_Temple,_Srisailam",
+    "google_maps_link": "https://maps.google.com/?q=Mallikarjuna+Temple+Srisailam"
+  },
+  {
+    "id": 3,
+    "name": "Mahakaleshwar Temple",
+    "lat": 23.1827,
+    "lng": 75.7682,
+    "deity": "Shiva",
+    "state": "Madhya Pradesh",
+    "era": "4th Century BCE",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Jyotirlinga",
+      "Sapta Puri"
+    ],
+    "wiki_slug": "Mahakaleshwar_Jyotirlinga",
+    "google_maps_link": "https://maps.google.com/?q=Mahakaleshwar+Jyotirlinga"
+  },
+  {
+    "id": 4,
+    "name": "Omkareshwar Temple",
+    "lat": 22.2467,
+    "lng": 76.1517,
+    "deity": "Shiva",
+    "state": "Madhya Pradesh",
+    "era": "11th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Jyotirlinga"
+    ],
+    "wiki_slug": "Omkareshwar_Temple",
+    "google_maps_link": "https://maps.google.com/?q=Omkareshwar+Temple"
+  },
+  {
+    "id": 5,
+    "name": "Kedarnath Temple",
+    "lat": 30.7352,
+    "lng": 79.0669,
+    "deity": "Shiva",
+    "state": "Uttarakhand",
+    "era": "8th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Jyotirlinga",
+      "Panch Kedar",
+      "Char Dham"
+    ],
+    "wiki_slug": "Kedarnath_Temple",
+    "google_maps_link": "https://maps.google.com/?q=Kedarnath+Temple"
+  },
+  {
+    "id": 6,
+    "name": "Bhimashankar Temple",
+    "lat": 19.0721,
+    "lng": 73.5358,
+    "deity": "Shiva",
+    "state": "Maharashtra",
+    "era": "13th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Jyotirlinga"
+    ],
+    "wiki_slug": "Bhimashankar_Temple",
+    "google_maps_link": "https://maps.google.com/?q=Bhimashankar+Temple"
+  },
+  {
+    "id": 7,
+    "name": "Kashi Vishwanath Temple",
+    "lat": 25.3109,
+    "lng": 83.0107,
+    "deity": "Shiva",
+    "state": "Uttar Pradesh",
+    "era": "11th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Jyotirlinga",
+      "Sapta Puri"
+    ],
+    "wiki_slug": "Kashi_Vishwanath_Temple",
+    "google_maps_link": "https://maps.google.com/?q=Kashi+Vishwanath+Temple"
+  },
+  {
+    "id": 8,
+    "name": "Trimbakeshwar Shiva Temple",
+    "lat": 19.9322,
+    "lng": 73.5307,
+    "deity": "Shiva",
+    "state": "Maharashtra",
+    "era": "18th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Jyotirlinga"
+    ],
+    "wiki_slug": "Trimbakeshwar_Shiva_Temple",
+    "google_maps_link": "https://maps.google.com/?q=Trimbakeshwar+Shiva+Temple"
+  },
+  {
+    "id": 9,
+    "name": "Baidyanath Temple",
+    "lat": 24.4925,
+    "lng": 86.7,
+    "deity": "Shiva",
+    "state": "Jharkhand",
+    "era": "16th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Jyotirlinga",
+      "Shakti Peetha"
+    ],
+    "wiki_slug": "Baidyanath_Temple",
+    "google_maps_link": "https://maps.google.com/?q=Baidyanath+Temple+Deoghar"
+  },
+  {
+    "id": 10,
+    "name": "Nageshwar Jyotirlinga",
+    "lat": 22.3347,
+    "lng": 69.0911,
+    "deity": "Shiva",
+    "state": "Gujarat",
+    "era": "Ancient",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Jyotirlinga"
+    ],
+    "wiki_slug": "Nageshvara_Jyotirlinga",
+    "google_maps_link": "https://maps.google.com/?q=Nageshwar+Jyotirlinga"
+  },
+  {
+    "id": 11,
+    "name": "Ramanathaswamy Temple",
+    "lat": 9.2881,
+    "lng": 79.3174,
+    "deity": "Shiva",
+    "state": "Tamil Nadu",
+    "era": "12th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Jyotirlinga",
+      "Char Dham"
+    ],
+    "wiki_slug": "Ramanathaswamy_Temple",
+    "google_maps_link": "https://maps.google.com/?q=Ramanathaswamy+Temple"
+  },
+  {
+    "id": 12,
+    "name": "Grishneshwar Temple",
+    "lat": 20.0249,
+    "lng": 75.1706,
+    "deity": "Shiva",
+    "state": "Maharashtra",
+    "era": "18th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Jyotirlinga"
+    ],
+    "wiki_slug": "Grishneshwar_Temple",
+    "google_maps_link": "https://maps.google.com/?q=Grishneshwar+Temple"
+  },
+  {
+    "id": 13,
+    "name": "Badrinath Temple",
+    "lat": 30.7433,
+    "lng": 79.4938,
+    "deity": "Vishnu",
+    "state": "Uttarakhand",
+    "era": "8th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Char Dham",
+      "Divya Desam"
+    ],
+    "wiki_slug": "Badrinath_Temple",
+    "google_maps_link": "https://maps.google.com/?q=Badrinath+Temple"
+  },
+  {
+    "id": 14,
+    "name": "Dwarkadhish Temple",
+    "lat": 22.2376,
+    "lng": 68.9678,
+    "deity": "Vishnu",
+    "state": "Gujarat",
+    "era": "16th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Char Dham",
+      "Divya Desam",
+      "Sapta Puri"
+    ],
+    "wiki_slug": "Dwarkadhish_Temple",
+    "google_maps_link": "https://maps.google.com/?q=Dwarkadhish+Temple"
+  },
+  {
+    "id": 15,
+    "name": "Jagannath Temple, Puri",
+    "lat": 19.8049,
+    "lng": 85.8179,
+    "deity": "Vishnu",
+    "state": "Odisha",
+    "era": "12th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Char Dham",
+      "Sapta Puri"
+    ],
+    "wiki_slug": "Jagannath_Temple,_Puri",
+    "google_maps_link": "https://maps.google.com/?q=Jagannath+Temple+Puri"
+  },
+  {
+    "id": 16,
+    "name": "Meenakshi Temple",
+    "lat": 9.9195,
+    "lng": 78.1193,
+    "deity": "Goddess",
+    "state": "Tamil Nadu",
+    "era": "14th-17th Century",
+    "period": "Medieval",
+    "circuit_tags": [],
+    "wiki_slug": "Meenakshi_Temple",
+    "google_maps_link": "https://maps.google.com/?q=Meenakshi+Temple+Madurai"
+  },
+  {
+    "id": 17,
+    "name": "Brihadisvara Temple",
+    "lat": 10.7828,
+    "lng": 79.1318,
+    "deity": "Shiva",
+    "state": "Tamil Nadu",
+    "era": "11th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "UNESCO"
+    ],
+    "wiki_slug": "Brihadisvara_Temple,_Thanjavur",
+    "google_maps_link": "https://maps.google.com/?q=Brihadisvara+Temple+Thanjavur"
+  },
+  {
+    "id": 18,
+    "name": "Konark Sun Temple",
+    "lat": 19.8876,
+    "lng": 86.0945,
+    "deity": "Surya",
+    "state": "Odisha",
+    "era": "13th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "UNESCO"
+    ],
+    "wiki_slug": "Konark_Sun_Temple",
+    "google_maps_link": "https://maps.google.com/?q=Konark+Sun+Temple"
+  },
+  {
+    "id": 19,
+    "name": "Venkateswara Temple, Tirumala",
+    "lat": 13.6833,
+    "lng": 79.3472,
+    "deity": "Vishnu",
+    "state": "Andhra Pradesh",
+    "era": "4th Century",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Divya Desam"
+    ],
+    "wiki_slug": "Venkateswara_Temple,_Tirumala",
+    "google_maps_link": "https://maps.google.com/?q=Venkateswara+Temple+Tirumala"
+  },
+  {
+    "id": 20,
+    "name": "Swaminarayan Akshardham",
+    "lat": 28.6127,
+    "lng": 77.2773,
+    "deity": "Vishnu",
+    "state": "Delhi",
+    "era": "2005",
+    "period": "Modern",
+    "circuit_tags": [],
+    "wiki_slug": "Swaminarayan_Akshardham_(Delhi)",
+    "google_maps_link": "https://maps.google.com/?q=Swaminarayan+Akshardham+Delhi"
+  },
+  {
+    "id": 21,
+    "name": "Kandariya Mahadeva Temple",
+    "lat": 24.8536,
+    "lng": 79.9197,
+    "deity": "Shiva",
+    "state": "Madhya Pradesh",
+    "era": "11th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "UNESCO"
+    ],
+    "wiki_slug": "Kandariya_Mahadeva_Temple",
+    "google_maps_link": "https://maps.google.com/?q=Kandariya+Mahadeva+Temple+Khajuraho"
+  },
+  {
+    "id": 22,
+    "name": "Golden Temple",
+    "lat": 31.62,
+    "lng": 74.8765,
+    "deity": "Sikh",
+    "state": "Punjab",
+    "era": "16th Century",
+    "period": "Medieval",
+    "circuit_tags": [],
+    "wiki_slug": "Golden_Temple",
+    "google_maps_link": "https://maps.google.com/?q=Golden+Temple+Amritsar"
+  },
+  {
+    "id": 23,
+    "name": "Lingaraja Temple",
+    "lat": 20.2382,
+    "lng": 85.8336,
+    "deity": "Shiva",
+    "state": "Odisha",
+    "era": "11th Century",
+    "period": "Medieval",
+    "circuit_tags": [],
+    "wiki_slug": "Lingaraja_Temple",
+    "google_maps_link": "https://maps.google.com/?q=Lingaraja+Temple"
+  },
+  {
+    "id": 24,
+    "name": "Kailasa Temple, Ellora",
+    "lat": 20.0238,
+    "lng": 75.179,
+    "deity": "Shiva",
+    "state": "Maharashtra",
+    "era": "8th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "UNESCO"
+    ],
+    "wiki_slug": "Kailasa_Temple,_Ellora",
+    "google_maps_link": "https://maps.google.com/?q=Kailasa+Temple+Ellora"
+  },
+  {
+    "id": 25,
+    "name": "Virupaksha Temple, Hampi",
+    "lat": 15.335,
+    "lng": 76.46,
+    "deity": "Shiva",
+    "state": "Karnataka",
+    "era": "7th Century",
+    "period": "Ancient",
+    "circuit_tags": [
+      "UNESCO"
+    ],
+    "wiki_slug": "Virupaksha_Temple,_Hampi",
+    "google_maps_link": "https://maps.google.com/?q=Virupaksha+Temple+Hampi"
+  },
+  {
+    "id": 26,
+    "name": "Padmanabhaswamy Temple",
+    "lat": 8.4831,
+    "lng": 76.9436,
+    "deity": "Vishnu",
+    "state": "Kerala",
+    "era": "8th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Divya Desam"
+    ],
+    "wiki_slug": "Padmanabhaswamy_Temple",
+    "google_maps_link": "https://maps.google.com/?q=Padmanabhaswamy+Temple"
+  },
+  {
+    "id": 27,
+    "name": "Brihadisvara Temple, Gangaikonda Cholapuram",
+    "lat": 11.2059,
+    "lng": 79.4542,
+    "deity": "Shiva",
+    "state": "Tamil Nadu",
+    "era": "11th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "UNESCO"
+    ],
+    "wiki_slug": "Brihadisvara_Temple,_Gangaikonda_Cholapuram",
+    "google_maps_link": "https://maps.google.com/?q=Brihadisvara+Temple+Gangaikonda+Cholapuram"
+  },
+  {
+    "id": 28,
+    "name": "Shore Temple",
+    "lat": 12.6169,
+    "lng": 80.1989,
+    "deity": "Shiva",
+    "state": "Tamil Nadu",
+    "era": "8th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "UNESCO"
+    ],
+    "wiki_slug": "Shore_Temple",
+    "google_maps_link": "https://maps.google.com/?q=Shore+Temple+Mamallapuram"
+  },
+  {
+    "id": 29,
+    "name": "Dilwara Temples",
+    "lat": 24.6044,
+    "lng": 72.7231,
+    "deity": "Jain",
+    "state": "Rajasthan",
+    "era": "11th-13th Century",
+    "period": "Medieval",
+    "circuit_tags": [],
+    "wiki_slug": "Dilwara_Temples",
+    "google_maps_link": "https://maps.google.com/?q=Dilwara+Temples"
+  },
+  {
+    "id": 30,
+    "name": "Ranganathaswamy Temple, Srirangam",
+    "lat": 10.8624,
+    "lng": 78.69,
+    "deity": "Vishnu",
+    "state": "Tamil Nadu",
+    "era": "6th-9th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Divya Desam"
+    ],
+    "wiki_slug": "Ranganathaswamy_Temple,_Srirangam",
+    "google_maps_link": "https://maps.google.com/?q=Ranganathaswamy+Temple+Srirangam"
+  },
+  {
+    "id": 31,
+    "name": "Sun Temple, Modhera",
+    "lat": 23.5835,
+    "lng": 72.1331,
+    "deity": "Surya",
+    "state": "Gujarat",
+    "era": "11th Century",
+    "period": "Medieval",
+    "circuit_tags": [],
+    "wiki_slug": "Sun_Temple,_Modhera",
+    "google_maps_link": "https://maps.google.com/?q=Sun+Temple+Modhera"
+  },
+  {
+    "id": 32,
+    "name": "Kamakhya Temple",
+    "lat": 26.1664,
+    "lng": 91.7056,
+    "deity": "Goddess",
+    "state": "Assam",
+    "era": "8th-17th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Shakti Peetha"
+    ],
+    "wiki_slug": "Kamakhya_Temple",
+    "google_maps_link": "https://maps.google.com/?q=Kamakhya+Temple"
+  },
+  {
+    "id": 33,
+    "name": "Vaishno Devi Temple",
+    "lat": 33.0308,
+    "lng": 74.949,
+    "deity": "Goddess",
+    "state": "Jammu and Kashmir",
+    "era": "Ancient",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Shakti Peetha"
+    ],
+    "wiki_slug": "Vaishno_Devi",
+    "google_maps_link": "https://maps.google.com/?q=Vaishno+Devi+Temple"
+  },
+  {
+    "id": 34,
+    "name": "Siddhivinayak Temple, Mumbai",
+    "lat": 19.0169,
+    "lng": 72.8304,
+    "deity": "Ganesh",
+    "state": "Maharashtra",
+    "era": "1801",
+    "period": "Modern",
+    "circuit_tags": [],
+    "wiki_slug": "Siddhivinayak_Temple,_Mumbai",
+    "google_maps_link": "https://maps.google.com/?q=Siddhivinayak+Temple+Mumbai"
+  },
+  {
+    "id": 35,
+    "name": "Mahabodhi Temple",
+    "lat": 24.696,
+    "lng": 84.9911,
+    "deity": "Buddha",
+    "state": "Bihar",
+    "era": "3rd Century BCE",
+    "period": "Ancient",
+    "circuit_tags": [
+      "UNESCO"
+    ],
+    "wiki_slug": "Mahabodhi_Temple",
+    "google_maps_link": "https://maps.google.com/?q=Mahabodhi+Temple"
+  },
+  {
+    "id": 36,
+    "name": "Dakshineswar Kali Temple",
+    "lat": 22.655,
+    "lng": 88.3576,
+    "deity": "Goddess",
+    "state": "West Bengal",
+    "era": "1855",
+    "period": "Modern",
+    "circuit_tags": [],
+    "wiki_slug": "Dakshineswar_Kali_Temple",
+    "google_maps_link": "https://maps.google.com/?q=Dakshineswar+Kali+Temple"
+  },
+  {
+    "id": 37,
+    "name": "Birla Mandir, Jaipur",
+    "lat": 26.8924,
+    "lng": 75.8155,
+    "deity": "Vishnu",
+    "state": "Rajasthan",
+    "era": "1988",
+    "period": "Modern",
+    "circuit_tags": [],
+    "wiki_slug": "Birla_Mandir,_Jaipur",
+    "google_maps_link": "https://maps.google.com/?q=Birla+Mandir+Jaipur"
+  },
+  {
+    "id": 38,
+    "name": "Sri Krishna Balaram Temple (ISKCON Vrindavan)",
+    "lat": 27.5732,
+    "lng": 77.6744,
+    "deity": "Vishnu",
+    "state": "Uttar Pradesh",
+    "era": "1975",
+    "period": "Modern",
+    "circuit_tags": [],
+    "wiki_slug": "ISKCON_temple,_Vrindavan",
+    "google_maps_link": "https://maps.google.com/?q=ISKCON+Temple+Vrindavan"
+  },
+  {
+    "id": 39,
+    "name": "Prem Mandir, Vrindavan",
+    "lat": 27.5714,
+    "lng": 77.6702,
+    "deity": "Vishnu",
+    "state": "Uttar Pradesh",
+    "era": "2012",
+    "period": "Modern",
+    "circuit_tags": [],
+    "wiki_slug": "Prem_Mandir,_Vrindavan",
+    "google_maps_link": "https://maps.google.com/?q=Prem+Mandir+Vrindavan"
+  },
+  {
+    "id": 40,
+    "name": "Annamalaiyar Temple",
+    "lat": 12.2274,
+    "lng": 79.0674,
+    "deity": "Shiva",
+    "state": "Tamil Nadu",
+    "era": "9th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Pancha Bhoota"
+    ],
+    "wiki_slug": "Annamalaiyar_Temple",
+    "google_maps_link": "https://maps.google.com/?q=Annamalaiyar+Temple+Tiruvannamalai"
+  },
+  {
+    "id": 41,
+    "name": "Brahma Temple, Pushkar",
+    "lat": 26.4886,
+    "lng": 74.5519,
+    "deity": "Brahma",
+    "state": "Rajasthan",
+    "era": "14th Century",
+    "period": "Medieval",
+    "circuit_tags": [],
+    "wiki_slug": "Brahma_Temple,_Pushkar",
+    "google_maps_link": "https://maps.google.com/?q=Brahma+Temple+Pushkar"
+  },
+  {
+    "id": 42,
+    "name": "Ekambareswarar Temple",
+    "lat": 12.8475,
+    "lng": 79.6997,
+    "deity": "Shiva",
+    "state": "Tamil Nadu",
+    "era": "600 CE",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Pancha Bhoota",
+      "Sapta Puri"
+    ],
+    "wiki_slug": "Ekambareswarar_Temple_(Kanchipuram)",
+    "google_maps_link": "https://maps.google.com/?q=Ekambareswarar+Temple+Kanchipuram"
+  },
+  {
+    "id": 43,
+    "name": "Jambukeswarar Temple, Thiruvanaikaval",
+    "lat": 10.8534,
+    "lng": 78.7054,
+    "deity": "Shiva",
+    "state": "Tamil Nadu",
+    "era": "2nd Century",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Pancha Bhoota"
+    ],
+    "wiki_slug": "Jambukeswarar_Temple,_Thiruvanaikaval",
+    "google_maps_link": "https://maps.google.com/?q=Jambukeswarar+Temple+Thiruvanaikaval"
+  },
+  {
+    "id": 44,
+    "name": "Nataraja Temple, Chidambaram",
+    "lat": 11.3992,
+    "lng": 79.6935,
+    "deity": "Shiva",
+    "state": "Tamil Nadu",
+    "era": "10th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Pancha Bhoota"
+    ],
+    "wiki_slug": "Nataraja_Temple,_Chidambaram",
+    "google_maps_link": "https://maps.google.com/?q=Nataraja+Temple+Chidambaram"
+  },
+  {
+    "id": 45,
+    "name": "Srikalahasteeswara Temple",
+    "lat": 13.7498,
+    "lng": 79.6984,
+    "deity": "Shiva",
+    "state": "Andhra Pradesh",
+    "era": "5th Century",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Pancha Bhoota"
+    ],
+    "wiki_slug": "Srikalahasteeswara_temple",
+    "google_maps_link": "https://maps.google.com/?q=Srikalahasteeswara+Temple"
+  },
+  {
+    "id": 46,
+    "name": "Kalighat Kali Temple",
+    "lat": 22.5204,
+    "lng": 88.3426,
+    "deity": "Goddess",
+    "state": "West Bengal",
+    "era": "1809",
+    "period": "Modern",
+    "circuit_tags": [
+      "Shakti Peetha"
+    ],
+    "wiki_slug": "Kalighat_Kali_Temple",
+    "google_maps_link": "https://maps.google.com/?q=Kalighat+Kali+Temple"
+  },
+  {
+    "id": 47,
+    "name": "Tungnath Temple",
+    "lat": 30.4889,
+    "lng": 79.2183,
+    "deity": "Shiva",
+    "state": "Uttarakhand",
+    "era": "8th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Panch Kedar"
+    ],
+    "wiki_slug": "Tungnath",
+    "google_maps_link": "https://maps.google.com/?q=Tungnath+Temple"
+  },
+  {
+    "id": 48,
+    "name": "Sanchi Stupa",
+    "lat": 23.4794,
+    "lng": 77.7397,
+    "deity": "Buddha",
+    "state": "Madhya Pradesh",
+    "era": "3rd Century BCE",
+    "period": "Ancient",
+    "circuit_tags": [
+      "UNESCO"
+    ],
+    "wiki_slug": "Sanchi",
+    "google_maps_link": "https://maps.google.com/?q=Sanchi+Stupa"
+  },
+  {
+    "id": 49,
+    "name": "Palitana Temples",
+    "lat": 21.5033,
+    "lng": 71.782,
+    "deity": "Jain",
+    "state": "Gujarat",
+    "era": "11th Century",
+    "period": "Medieval",
+    "circuit_tags": [],
+    "wiki_slug": "Palitana_temples",
+    "google_maps_link": "https://maps.google.com/?q=Palitana+Temples"
+  },
+  {
+    "id": 50,
+    "name": "Chhatarpur Temple",
+    "lat": 28.5025,
+    "lng": 77.1812,
+    "deity": "Goddess",
+    "state": "Delhi",
+    "era": "1974",
+    "period": "Modern",
+    "circuit_tags": [],
+    "wiki_slug": "Chhatarpur_Temple",
+    "google_maps_link": "https://maps.google.com/?q=Chhatarpur+Temple+Delhi"
+  }
+]

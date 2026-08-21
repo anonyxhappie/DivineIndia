@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react'
+import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react'
 import { MapContainer, TileLayer, Marker, Tooltip, Polyline, ZoomControl, useMap, useMapEvents } from 'react-leaflet'
 import MarkerClusterGroup from 'react-leaflet-cluster'
 import L from 'leaflet'
 import { motion, AnimatePresence } from 'framer-motion'
 import { fetchOSMTemples } from '../api/overpassService'
 import { fetchTempleDetails } from '../api/wikipediaService'
+import { calculateDistance, formatDistance } from '../utils/geoUtils'
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Deity Emojis
@@ -22,11 +23,31 @@ const DEITY_EMOJIS = {
   Brahma: '📿',
   Multi: '🛕',
   Hindu: '🕉️',
+  Deity: '🛕',
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// Custom temple SVG marker icons
+// Custom temple & user location SVG marker icons
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+function createUserLocationIcon() {
+  const svg = `
+    <div style="position: relative; width: 40px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: grab;">
+      <div style="position: absolute; width: 36px; height: 36px; border-radius: 50%; background: rgba(14, 165, 233, 0.3); animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;"></div>
+      <div style="position: absolute; top: 2px; width: 26px; height: 26px; border-radius: 50%; background: #0284C7; border: 3px solid #FFFFFF; box-shadow: 0 0 18px rgba(14, 165, 233, 0.95); display: flex; align-items: center; justify-content: center;">
+        <div style="width: 8px; height: 8px; border-radius: 50%; background: #FFFFFF;"></div>
+      </div>
+      <div style="position: absolute; bottom: 6px; width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 9px solid #0284C7;"></div>
+    </div>`
+
+  return L.divIcon({
+    html: svg,
+    className: 'user-location-marker',
+    iconSize: [40, 44],
+    iconAnchor: [20, 38],
+    popupAnchor: [0, -38],
+  })
+}
 
 function createTempleIcon(isActive = false, isLight = false) {
   const glow = isActive
@@ -114,7 +135,7 @@ function createClusterIcon(cluster) {
 function FlyToController({ target }) {
   const map = useMap()
   useEffect(() => {
-    if (target && target.center) {
+    if (target && target.center && target.center[0] != null && target.center[1] != null) {
       map.flyTo(target.center, target.zoom || 13, {
         duration: 1.4,
         easeLinearity: 0.25,
@@ -157,12 +178,17 @@ function BoundsWatcher({ onBoundsChange }) {
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// Temple Card Tooltip Component with Image
+// Temple Card Tooltip Component with Image & Distance
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-function TempleTooltipContent({ temple, activeImage }) {
+function TempleTooltipContent({ temple, activeImage, userLocation }) {
   const deityEmoji = DEITY_EMOJIS[temple.deity] || '🛕'
   const imgUrl = activeImage || temple.image_url || null
+
+  const distanceKm = userLocation && temple.lat != null && temple.lng != null
+    ? calculateDistance(userLocation.lat, userLocation.lng, temple.lat, temple.lng)
+    : null
+  const formattedDist = distanceKm != null ? formatDistance(distanceKm) : null
 
   return (
     <div className="temple-tooltip-bubble">
@@ -182,10 +208,16 @@ function TempleTooltipContent({ temple, activeImage }) {
           <span className="font-bold text-xs sm:text-sm font-cinzel leading-snug whitespace-nowrap theme-title">
             {temple.name}
           </span>
-          <span className="text-[10px] text-saffron font-sans font-semibold mt-0.5 whitespace-nowrap flex items-center gap-1">
-            <span>✦</span>
-            <span>{temple.deity || 'Hindu Shrine'} {temple.state ? `· ${temple.state}` : ''}</span>
-          </span>
+          <div className="flex items-center gap-1.5 mt-0.5 whitespace-nowrap">
+            <span className="text-[10px] text-saffron font-sans font-semibold">
+              ✦ {temple.deity || 'Hindu Shrine'} {temple.state ? `· ${temple.state}` : ''}
+            </span>
+            {formattedDist && (
+              <span className="text-[9.5px] font-sans font-bold px-1.5 py-0.2 rounded-full bg-sky-500/15 text-sky-600 dark:text-sky-400 border border-sky-500/30">
+                📍 {formattedDist}
+              </span>
+            )}
+          </div>
           {temple.era && (
             <span className="text-[9px] theme-muted font-sans mt-0.5 whitespace-nowrap">
               {temple.era}
@@ -239,11 +271,21 @@ export default function TempleMap({
   theme = 'dark',
   activeCircuit = null,
   circuitTemples = [],
+  userLocation = null,
+  onUpdateUserLocation = null,
 }) {
   const defaultIcon = useMemo(() => createTempleIcon(false, theme === 'light'), [theme])
   const activeIcon = useMemo(() => createTempleIcon(true, theme === 'light'), [theme])
   const osmIcon = useMemo(() => createOSMIcon(false), [])
   const activeOsmIcon = useMemo(() => createOSMIcon(true), [])
+  const userIcon = useMemo(() => createUserLocationIcon(), [])
+
+  // Safely filter out temples with null/undefined/invalid coordinates for map marker rendering
+  const mapTemples = useMemo(() => {
+    return filteredTemples.filter(
+      (t) => t && t.lat != null && t.lng != null && !isNaN(t.lat) && !isNaN(t.lng)
+    )
+  }, [filteredTemples])
 
   // Active temple image state for the floating map card
   const [activeTempleImage, setActiveTempleImage] = useState(null)
@@ -321,13 +363,29 @@ export default function TempleMap({
       ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
       : 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png'
 
-  // Positions array for glowing pilgrimage circuit polyline
+  // Positions array for glowing pilgrimage circuit polyline (null-safe)
   const circuitPositions = useMemo(() => {
     if (!activeCircuit || !circuitTemples || circuitTemples.length < 2) return []
     return circuitTemples
-      .filter((t) => t.lat != null && t.lng != null)
+      .filter((t) => t && t.lat != null && t.lng != null && !isNaN(t.lat) && !isNaN(t.lng))
       .map((t) => [t.lat, t.lng])
   }, [activeCircuit, circuitTemples])
+
+  // Drag handler for user location pin
+  const handleUserMarkerDragEnd = useCallback(
+    (e) => {
+      const marker = e.target
+      if (marker != null) {
+        const pos = marker.getLatLng()
+        onUpdateUserLocation?.({
+          lat: Number(pos.lat.toFixed(4)),
+          lng: Number(pos.lng.toFixed(4)),
+          isManual: true,
+        })
+      }
+    },
+    [onUpdateUserLocation]
+  )
 
   return (
     <>
@@ -350,11 +408,37 @@ export default function TempleMap({
         {/* Custom positioned ZoomControl at bottom-right */}
         <ZoomControl position="bottomright" />
 
-        {/* Smooth camera flyTo on temple selection */}
-        {flyTarget && <FlyToController target={flyTarget} />}
+        {/* Smooth camera flyTo on temple selection or user location */}
+        {flyTarget && flyTarget.center && <FlyToController target={flyTarget} />}
 
         {/* Track map bounds */}
         <BoundsWatcher onBoundsChange={setMapBounds} />
+
+        {/* Draggable User Current Location Marker with Note */}
+        {userLocation && userLocation.lat != null && userLocation.lng != null && (
+          <Marker
+            key="user-current-location"
+            position={[userLocation.lat, userLocation.lng]}
+            icon={userIcon}
+            draggable={true}
+            zIndexOffset={4000}
+            eventHandlers={{
+              dragend: handleUserMarkerDragEnd,
+            }}
+          >
+            <Tooltip
+              direction="top"
+              offset={[0, -28]}
+              opacity={1}
+              permanent={false}
+              className="custom-temple-tooltip"
+            >
+              <div className="temple-tooltip-bubble !px-3 !py-1.5 flex items-center justify-center gap-1.5 font-bold text-xs font-sans text-sky-500 shadow-xl border border-sky-500/40">
+                <span>📍 Your Location</span>
+              </div>
+            </Tooltip>
+          </Marker>
+        )}
 
         {/* Pilgrimage Circuit Golden Path Polyline */}
         {circuitPositions.length > 1 && (
@@ -397,7 +481,7 @@ export default function TempleMap({
           disableClusteringAtZoom={10}
           animate={true}
         >
-          {filteredTemples.map((temple) => {
+          {mapTemples.map((temple) => {
             const isSelected = selectedTemple?.id === temple.id
 
             return (
@@ -417,7 +501,11 @@ export default function TempleMap({
                     opacity={1}
                     className="custom-temple-tooltip"
                   >
-                    <TempleTooltipContent temple={temple} activeImage={null} />
+                    <TempleTooltipContent
+                      temple={temple}
+                      activeImage={null}
+                      userLocation={userLocation}
+                    />
                   </Tooltip>
                 )}
               </Marker>
@@ -426,58 +514,69 @@ export default function TempleMap({
         </MarkerClusterGroup>
 
         {/* Dedicated active selected marker (always in foreground with pulsing Shikhara pin + floating image card) */}
-        {selectedTemple && selectedTemple.lat != null && selectedTemple.lng != null && (
-          <Marker
-            key={`active-selected-${selectedTemple.id}`}
-            position={[selectedTemple.lat, selectedTemple.lng]}
-            icon={selectedTemple.isOSM ? activeOsmIcon : activeIcon}
-            zIndexOffset={3000}
-            eventHandlers={{
-              click: () => onSelectTemple?.(selectedTemple),
-            }}
-          >
-            <Tooltip
-              direction="top"
-              offset={[0, -62]}
-              opacity={1}
-              permanent={true}
-              className="custom-temple-tooltip"
-            >
-              <TempleTooltipContent
-                temple={selectedTemple}
-                activeImage={activeTempleImage}
-              />
-            </Tooltip>
-          </Marker>
-        )}
-
-        {/* OSM discovery markers */}
-        {osmTemples.map((t) => {
-          const isSelected = selectedTemple?.id === t.id
-
-          return (
+        {selectedTemple &&
+          selectedTemple.lat != null &&
+          selectedTemple.lng != null &&
+          !isNaN(selectedTemple.lat) &&
+          !isNaN(selectedTemple.lng) && (
             <Marker
-              key={t.id}
-              position={[t.lat, t.lng]}
-              icon={isSelected ? activeOsmIcon : osmIcon}
-              zIndexOffset={isSelected ? 1000 : 1}
+              key={`active-selected-${selectedTemple.id}`}
+              position={[selectedTemple.lat, selectedTemple.lng]}
+              icon={selectedTemple.isOSM ? activeOsmIcon : activeIcon}
+              zIndexOffset={3000}
               eventHandlers={{
-                click: () => onSelectTemple?.(t),
+                click: () => onSelectTemple?.(selectedTemple),
               }}
             >
-              {!isSelected && (
-                <Tooltip
-                  direction="top"
-                  offset={[0, -42]}
-                  opacity={1}
-                  className="custom-temple-tooltip"
-                >
-                  <TempleTooltipContent temple={t} activeImage={null} />
-                </Tooltip>
-              )}
+              <Tooltip
+                direction="top"
+                offset={[0, -62]}
+                opacity={1}
+                permanent={true}
+                className="custom-temple-tooltip"
+              >
+                <TempleTooltipContent
+                  temple={selectedTemple}
+                  activeImage={activeTempleImage}
+                  userLocation={userLocation}
+                />
+              </Tooltip>
             </Marker>
-          )
-        })}
+          )}
+
+        {/* OSM discovery markers (null-safe) */}
+        {osmTemples
+          .filter((t) => t && t.lat != null && t.lng != null && !isNaN(t.lat) && !isNaN(t.lng))
+          .map((t) => {
+            const isSelected = selectedTemple?.id === t.id
+
+            return (
+              <Marker
+                key={t.id}
+                position={[t.lat, t.lng]}
+                icon={isSelected ? activeOsmIcon : osmIcon}
+                zIndexOffset={isSelected ? 1000 : 1}
+                eventHandlers={{
+                  click: () => onSelectTemple?.(t),
+                }}
+              >
+                {!isSelected && (
+                  <Tooltip
+                    direction="top"
+                    offset={[0, -42]}
+                    opacity={1}
+                    className="custom-temple-tooltip"
+                  >
+                    <TempleTooltipContent
+                      temple={t}
+                      activeImage={null}
+                      userLocation={userLocation}
+                    />
+                  </Tooltip>
+                )}
+              </Marker>
+            )
+          })}
       </MapContainer>
 
       {/* ── Scan Region Controls (bottom-center when not in tour mode) ── */}

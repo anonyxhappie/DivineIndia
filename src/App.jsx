@@ -6,6 +6,7 @@ import Sidebar from './components/Sidebar'
 import CircuitTourBar from './components/CircuitTourBar'
 import { TanpuraEngine } from './audio/tanpuraEngine'
 import { playTempleChime } from './audio/chimeSound'
+import { getUserLocation } from './utils/locationService'
 import TEMPLES from './data/temples.json'
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -75,6 +76,23 @@ const VolumeOffIcon = () => (
   </svg>
 )
 
+const GpsIcon = ({ active, loading }) => (
+  <svg
+    className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`}
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    viewBox="0 0 24 24"
+  >
+    <circle cx="12" cy="12" r="8" />
+    <line x1="12" y1="2" x2="12" y2="6" />
+    <line x1="12" y1="18" x2="12" y2="22" />
+    <line x1="2" y1="12" x2="6" y2="12" />
+    <line x1="18" y1="12" x2="22" y2="12" />
+    {active && <circle cx="12" cy="12" r="3" fill="currentColor" />}
+  </svg>
+)
+
 const SunIcon = () => (
   <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
     <circle cx="12" cy="12" r="5" fill="currentColor" opacity="0.2" />
@@ -109,6 +127,9 @@ function TopBar({
   onToggleTheme,
   activeCircuit,
   onStartCircuitTour,
+  userLocation,
+  isLocating,
+  onToggleLocation,
 }) {
   const [progressOpen, setProgressOpen] = useState(false)
 
@@ -140,6 +161,28 @@ function TopBar({
           <span className="font-bold text-saffron font-mono">{filteredCount}</span>
           <span className="theme-muted text-[10px]">/ {totalCount}</span>
         </div>
+
+        <div className="w-px h-5 bg-[var(--border-gold)]" />
+
+        {/* Current Location (Near Me) Button */}
+        <button
+          onClick={onToggleLocation}
+          disabled={isLocating}
+          className={`px-2.5 py-1.5 rounded-xl font-sans text-xs font-bold transition-all duration-200 flex items-center gap-1.5
+            ${userLocation
+              ? 'bg-sky-500/20 text-sky-500 border border-sky-500/40 shadow-md shadow-sky-500/15'
+              : 'hover:bg-black/5 dark:hover:bg-white/5 theme-title'
+            }`}
+          title={userLocation ? 'Reset GPS location filter' : 'Locate temples near my current position'}
+        >
+          <GpsIcon active={Boolean(userLocation)} loading={isLocating} />
+          <span className="hidden sm:inline">
+            {isLocating ? 'Locating…' : userLocation ? 'Near Me' : 'Near Me'}
+          </span>
+          {userLocation && (
+            <span className="w-1.5 h-1.5 rounded-full bg-sky-500 animate-pulse" />
+          )}
+        </button>
 
         <div className="w-px h-5 bg-[var(--border-gold)]" />
 
@@ -336,6 +379,49 @@ export default function App() {
   const [sidebarOpen, setSidebarOpen] = useState(true)
   const [mapTarget, setMapTarget] = useState(null)
 
+  // User Current Location State
+  const [userLocation, setUserLocation] = useState(null)
+  const [isLocating, setIsLocating] = useState(false)
+  const [locationToast, setLocationToast] = useState(null)
+
+  const showLocationToast = (msg, duration = 4000) => {
+    setLocationToast(msg)
+    setTimeout(() => setLocationToast(null), duration)
+  }
+
+  // Update user location (e.g. from dragging the pin)
+  const handleUpdateUserLocation = useCallback((newLoc) => {
+    setUserLocation(newLoc)
+    showLocationToast('📍 Pin moved! Distances & nearest temples updated.', 3500)
+  }, [])
+
+  // Toggle user geolocation with multi-tier fallback
+  const handleToggleLocation = useCallback(async () => {
+    if (userLocation) {
+      setUserLocation(null)
+      showLocationToast('📍 Location reset to India overview', 3000)
+      setMapTarget({ center: [22.5, 79.0], zoom: 5 })
+      return
+    }
+
+    setIsLocating(true)
+    try {
+      const loc = await getUserLocation()
+      setIsLocating(false)
+      if (loc && loc.lat != null && loc.lng != null) {
+        setUserLocation({ lat: loc.lat, lng: loc.lng })
+        playTempleChime()
+        setMapTarget({ center: [loc.lat, loc.lng], zoom: 11 })
+        showLocationToast('📍 Located! Showing nearest temples sorted by distance.', 4000)
+      } else {
+        showLocationToast('Could not detect location. Please check location permissions.', 5000)
+      }
+    } catch {
+      setIsLocating(false)
+      showLocationToast('Location detection error. Please check browser settings.', 5000)
+    }
+  }, [userLocation])
+
   // Interactive Circuit Tour state
   const [activeCircuit, setActiveCircuit] = useState(null)
   const [currentTourIndex, setCurrentTourIndex] = useState(0)
@@ -408,7 +494,7 @@ export default function App() {
 
   const handleSelectTemple = useCallback((temple) => {
     setSelectedTemple(temple)
-    if (temple.lat != null && temple.lng != null) {
+    if (temple && temple.lat != null && temple.lng != null && !isNaN(temple.lat) && !isNaN(temple.lng)) {
       setMapTarget({ center: [temple.lat, temple.lng], zoom: 13 })
     }
     setVisitedIds((prev) => {
@@ -467,9 +553,11 @@ export default function App() {
         theme={theme}
         activeCircuit={activeCircuit}
         circuitTemples={circuitTemples}
+        userLocation={userLocation}
+        onUpdateUserLocation={handleUpdateUserLocation}
       />
 
-      {/* ── Top Bar Header ── */}
+      {/* ── Top Bar Header (with GPS Near Me & Pilgrimage) ── */}
       <TopBar
         filteredCount={filteredTemples.length}
         totalCount={TEMPLES.length}
@@ -480,9 +568,12 @@ export default function App() {
         onToggleTheme={toggleTheme}
         activeCircuit={activeCircuit}
         onStartCircuitTour={startCircuitTour}
+        userLocation={userLocation}
+        isLocating={isLocating}
+        onToggleLocation={handleToggleLocation}
       />
 
-      {/* ── Left Explorer Sidebar with 44x44px Thumbnails ── */}
+      {/* ── Left Explorer Sidebar with 44x44px Thumbnails & Distance Badges ── */}
       <Sidebar
         search={search} setSearch={setSearch}
         deity={deity} setDeity={setDeity}
@@ -498,9 +589,10 @@ export default function App() {
         onSelectTemple={handleSelectTemple}
         isOpen={sidebarOpen}
         onToggle={() => setSidebarOpen(!sidebarOpen)}
+        userLocation={userLocation}
       />
 
-      {/* ── Right Darshan Detail Panel (with Gallery & Clean Typography) ── */}
+      {/* ── Right Darshan Detail Panel (with Gallery & Directions) ── */}
       <AnimatePresence>
         {selectedTemple && (
           <DarshanPanel
@@ -508,6 +600,7 @@ export default function App() {
             selectedTemple={selectedTemple}
             onClose={handleCloseDetail}
             theme={theme}
+            userLocation={userLocation}
           />
         )}
       </AnimatePresence>
@@ -522,6 +615,20 @@ export default function App() {
             onSelectIndex={handleTourIndexSelect}
             onExitTour={handleExitTour}
           />
+        )}
+      </AnimatePresence>
+
+      {/* ── Geolocation Toast Notification ── */}
+      <AnimatePresence>
+        {locationToast && (
+          <motion.div
+            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.95 }}
+            className="fixed top-16 left-1/2 -translate-x-1/2 z-[1002] glass-strong rounded-2xl px-4 py-2.5 text-xs font-sans font-semibold text-sky-600 dark:text-sky-400 border border-sky-500/30 shadow-2xl flex items-center gap-2"
+          >
+            <span>{locationToast}</span>
+          </motion.div>
         )}
       </AnimatePresence>
 

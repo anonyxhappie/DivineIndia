@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { fetchTempleDetails } from '../api/wikipediaService'
 import { playTempleChime } from '../audio/chimeSound'
+import { calculateDistance, formatDistance } from '../utils/geoUtils'
 import Lightbox from './Lightbox'
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -25,12 +26,12 @@ const ExternalLinkIcon = () => (
 
 const WikiIcon = () => (
   <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" opacity="0.85">
-    <path d="M12.09 13.119c-.14 1.064-.496 2.4-1.066 3.816-.57 1.416-1.15 2.484-1.74 3.203l-.207.255c-.122.134-.32.134-.44 0l-.208-.255c-.59-.72-1.17-1.787-1.74-3.203-.57-1.416-.926-2.752-1.066-3.816h6.467zm-7.281 0C4.994 14.842 5.744 16.408 7.09 17.772l.175.172c.12.113.12.305 0 .418l-.175.172C5.744 19.898 4.994 21.464 4.809 23.187H2.315c.277-3.58 1.263-6.533 2.494-10.068zm14.382 0c1.231 3.535 2.217 6.488 2.494 10.068H19.19c-.185-1.723-.935-3.289-2.281-4.653l-.175-.172c-.12-.113-.12-.305 0-.418l.175-.172c1.346-1.364 2.096-2.93 2.281-4.653zM12.09 1.005c.14 1.064.496 2.4 1.066 3.816.57 1.416 1.15 2.484 1.74 3.203l.207.255c.122.134.32.134.44 0l.208-.255c.59-.72 1.17-1.787 1.74-3.203.57-1.416.926-2.752 1.066-3.816H12.09z" />
+    <path d="M12.09 13.119c-.14 1.064-.496 2.4-1.066 3.816-.57 1.416-1.15 2.484-1.74 3.203l-.207.255c-.122.134-.32.134-.44 0l-.208-.255c-.59-.72-1.17-1.787-1.74-3.203-.57-1.416-.926-2.752-1.066-3.816h6.467zm-7.281 0C4.994 14.842 5.744 16.408 7.09 17.772l.175.172c.12.113.12.305 0 .418l-.175.172C5.744 19.898 4.994 21.464 4.809 23.187H2.315c.277-3.58 1.263-6.533 2.494-10.068zm14.382 0c1.231 3.535 2.217 6.488 2.494 10.068H19.19c-.185-1.723-.935-3.289-2.281-4.653l-.175-.172c-.12-.113-.12-.305 0-.418l.175-.172c1.346-1.364 2.096-2.93 2.281-4.653zM12.09 1.005c.14 1.064.496 2.4 1.066 3.816.57 1.416 1.15 2.484 1.74 3.203l.207.255c.122.134.32.134.44 0l.208-.255c.59-.72 1.17-1.787 1.74-3.203-.57-1.416.926-2.752 1.066-3.816H12.09z" />
   </svg>
 )
 
 const ExpandIcon = () => (
-  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24">
     <polyline points="15 3 21 3 21 9" />
     <polyline points="9 21 3 21 3 15" />
     <line x1="21" y1="3" x2="14" y2="10" />
@@ -50,6 +51,7 @@ const DEITY_EMOJIS = {
   Brahma: '📿',
   Multi: '🛕',
   Hindu: '🕉️',
+  Deity: '🛕',
 }
 
 const TABS = [
@@ -75,7 +77,7 @@ function ContentSkeleton() {
 
 function HistoryTab({ temple, wikiData, loading, error }) {
   // Split raw text by newline characters into distinct formatted paragraphs
-  const paragraphs = React.useMemo(() => {
+  const paragraphs = useMemo(() => {
     if (!wikiData?.extract) return []
     return wikiData.extract
       .split(/\n+/)
@@ -163,8 +165,13 @@ function HistoryTab({ temple, wikiData, loading, error }) {
   )
 }
 
-function ArchitectureTab({ temple }) {
+function ArchitectureTab({ temple, userLocation }) {
   const deityEmoji = DEITY_EMOJIS[temple.deity] || '🛕'
+
+  const distanceKm = userLocation && temple.lat != null && temple.lng != null
+    ? calculateDistance(userLocation.lat, userLocation.lng, temple.lat, temple.lng)
+    : null
+  const formattedDist = distanceKm != null ? formatDistance(distanceKm) : null
 
   return (
     <motion.div
@@ -195,13 +202,25 @@ function ArchitectureTab({ temple }) {
       {/* Geographic Coordinates & Location */}
       <div className="glass rounded-xl p-4 space-y-3">
         <h4 className="text-[10px] font-bold uppercase tracking-widest theme-gold font-cinzel">
-          Location & Architecture
+          Location & Geography
         </h4>
         <div className="space-y-2 text-xs font-sans">
           <div className="flex items-center justify-between">
             <span className="theme-muted">Region / State:</span>
             <span className="font-bold theme-title">{temple.state || 'India'}</span>
           </div>
+
+          {formattedDist && (
+            <div className="flex items-center justify-between p-2 rounded-lg bg-sky-500/10 border border-sky-500/25">
+              <span className="text-sky-600 dark:text-sky-400 font-semibold flex items-center gap-1">
+                <span>📍</span> Distance from You:
+              </span>
+              <span className="font-mono font-bold text-sky-600 dark:text-sky-400">
+                {formattedDist} away
+              </span>
+            </div>
+          )}
+
           <div className="flex items-center justify-between">
             <span className="theme-muted">Coordinates:</span>
             <span className="font-mono text-saffron font-bold">
@@ -288,7 +307,7 @@ function PilgrimageTab({ temple }) {
 // Main DarshanPanel Component
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-export default function DarshanPanel({ selectedTemple, onClose, theme = 'dark' }) {
+export default function DarshanPanel({ selectedTemple, onClose, theme = 'dark', userLocation = null }) {
   const [activeTab, setActiveTab] = useState('history')
   const [wikiData, setWikiData] = useState(null)
   const [wikiLoading, setWikiLoading] = useState(false)
@@ -350,19 +369,49 @@ export default function DarshanPanel({ selectedTemple, onClose, theme = 'dark' }
 
   if (!selectedTemple) return null
 
-  // Gallery of Wikimedia images
-  const galleryImages = wikiData?.galleryImages || (selectedTemple.image_url ? [selectedTemple.image_url] : [])
   const currentHero = selectedHeroImage || wikiData?.imageUrl || selectedTemple.image_url || null
 
+  // Ensure all available photos are included in the Lightbox array (guaranteed at least [currentHero] if an image exists)
+  const allGalleryImages = useMemo(() => {
+    const list = []
+    if (currentHero) list.push(currentHero)
+    if (wikiData?.imageUrl && !list.includes(wikiData.imageUrl)) list.push(wikiData.imageUrl)
+    if (selectedTemple.image_url && !list.includes(selectedTemple.image_url)) list.push(selectedTemple.image_url)
+    if (Array.isArray(wikiData?.galleryImages)) {
+      for (const img of wikiData.galleryImages) {
+        if (img && !list.includes(img)) list.push(img)
+      }
+    }
+    return list
+  }, [currentHero, wikiData?.imageUrl, wikiData?.galleryImages, selectedTemple.image_url])
+
   const openLightboxForImage = (imgUrl) => {
-    const idx = galleryImages.findIndex((g) => g === imgUrl)
+    let targetList = allGalleryImages
+    if (imgUrl && !targetList.includes(imgUrl)) {
+      targetList = [imgUrl, ...targetList]
+    }
+    const idx = targetList.findIndex((g) => g === imgUrl)
     setLightboxIndex(idx >= 0 ? idx : 0)
     setLightboxOpen(true)
   }
 
-  const mapsLink =
-    selectedTemple.google_maps_link ||
-    `https://maps.google.com/?q=${encodeURIComponent(selectedTemple.name + ' ' + (selectedTemple.state || 'India'))}`
+  // Exact place search query for Google Maps (snaps directly to verified temple place listing rather than raw coordinates)
+  const placeSearchQuery = [
+    selectedTemple.name,
+    selectedTemple.location,
+    selectedTemple.state,
+    'India',
+  ]
+    .filter(Boolean)
+    .join(', ')
+
+  // Turn-by-turn navigation link to the exact temple
+  const mapsDirectionsLink = userLocation && userLocation.lat != null && userLocation.lng != null
+    ? `https://www.google.com/maps/dir/?api=1&origin=${userLocation.lat},${userLocation.lng}&destination=${encodeURIComponent(placeSearchQuery)}&travelmode=driving`
+    : `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(placeSearchQuery)}&travelmode=driving`
+
+  // Exact Google Maps place page (photos, timings, reviews, exact entrance gate)
+  const mapsPlaceLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(placeSearchQuery)}`
 
   return (
     <>
@@ -372,7 +421,7 @@ export default function DarshanPanel({ selectedTemple, onClose, theme = 'dark' }
         exit={{ x: 420, opacity: 0 }}
         transition={{ type: 'spring', stiffness: 320, damping: 32 }}
         className="fixed top-14 sm:top-16 right-0 sm:right-4 bottom-2 sm:bottom-4 w-full sm:w-[420px] z-[1000]
-                   glass-strong rounded-none sm:rounded-2xl flex flex-col overflow-hidden shadow-2xl"
+                 glass-strong rounded-none sm:rounded-2xl flex flex-col overflow-hidden shadow-2xl"
       >
         {/* ── Hero Banner Section (clickable for Lightbox) ── */}
         <div
@@ -409,10 +458,17 @@ export default function DarshanPanel({ selectedTemple, onClose, theme = 'dark' }
 
           {/* Fullscreen Expand Hint Badge */}
           {currentHero && (
-            <div className="absolute top-3 left-3 p-1.5 rounded-full bg-black/50 backdrop-blur-md text-white/90 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 text-[10px] font-sans px-2">
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation()
+                openLightboxForImage(currentHero)
+              }}
+              className="absolute top-3 left-3 p-1.5 rounded-full bg-black/60 hover:bg-black/85 backdrop-blur-md text-white border border-white/20 transition-all flex items-center gap-1 text-[11px] font-sans px-2.5 z-10 shadow-lg cursor-pointer hover:scale-105 active:scale-95"
+            >
               <ExpandIcon />
               <span>Expand</span>
-            </div>
+            </button>
           )}
 
           {/* Loading Shimmer */}
@@ -458,13 +514,13 @@ export default function DarshanPanel({ selectedTemple, onClose, theme = 'dark' }
         </div>
 
         {/* ── Wikimedia Gallery Strip (horizontal thumbnails with lightbox trigger) ── */}
-        {galleryImages.length > 1 && (
+        {allGalleryImages.length > 1 && (
           <div className="px-4 py-2 border-b border-[var(--border-gold)] flex-shrink-0 overflow-x-auto custom-scrollbar">
             <div className="flex items-center gap-2">
               <span className="text-[9px] uppercase font-bold tracking-wider theme-muted font-cinzel flex-shrink-0">
                 Gallery:
               </span>
-              {galleryImages.map((imgUrl, idx) => {
+              {allGalleryImages.map((imgUrl, idx) => {
                 const isActive = currentHero === imgUrl
                 return (
                   <button
@@ -526,7 +582,11 @@ export default function DarshanPanel({ selectedTemple, onClose, theme = 'dark' }
               />
             )}
             {activeTab === 'architecture' && (
-              <ArchitectureTab key="architecture" temple={selectedTemple} />
+              <ArchitectureTab
+                key="architecture"
+                temple={selectedTemple}
+                userLocation={userLocation}
+              />
             )}
             {activeTab === 'pilgrimage' && (
               <PilgrimageTab key="pilgrimage" temple={selectedTemple} />
@@ -534,13 +594,13 @@ export default function DarshanPanel({ selectedTemple, onClose, theme = 'dark' }
           </AnimatePresence>
         </div>
 
-        {/* ── Bottom CTA Google Maps ── */}
-        <div className="p-3.5 border-t border-[var(--border-gold)] flex-shrink-0">
+        {/* ── Bottom CTA Google Maps / Directions ── */}
+        <div className="p-3 border-t border-[var(--border-gold)] flex-shrink-0 space-y-1.5">
           <motion.a
-            href={mapsLink}
+            href={mapsDirectionsLink}
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ scale: 1.02 }}
+            whileHover={{ scale: 1.015 }}
             whileTap={{ scale: 0.98 }}
             className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl
                        bg-gradient-to-r from-saffron via-amber-500 to-saffron-dark
@@ -549,15 +609,25 @@ export default function DarshanPanel({ selectedTemple, onClose, theme = 'dark' }
                        transition-shadow duration-300"
           >
             <ExternalLinkIcon />
-            View on Google Maps
+            {userLocation ? 'Get Driving Directions (Exact Temple)' : 'Directions to Temple Entrance'}
           </motion.a>
+
+          <a
+            href={mapsPlaceLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-1.5 w-full py-1 text-[11px] font-sans font-semibold theme-gold hover:text-saffron transition-colors"
+          >
+            <span>📍 Open Verified Place on Google Maps</span>
+            <ExternalLinkIcon />
+          </a>
         </div>
       </motion.aside>
 
       {/* ── Fullscreen Image Lightbox Modal ── */}
       <Lightbox
         isOpen={lightboxOpen}
-        images={galleryImages}
+        images={allGalleryImages}
         currentIndex={lightboxIndex}
         title={selectedTemple.name}
         onClose={() => setLightboxOpen(false)}

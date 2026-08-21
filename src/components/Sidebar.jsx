@@ -1,5 +1,6 @@
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useRef, useEffect, useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { calculateDistance, formatDistance } from '../utils/geoUtils'
 
 const DEITY_EMOJIS = {
   Shiva: '🔱',
@@ -13,6 +14,7 @@ const DEITY_EMOJIS = {
   Brahma: '📿',
   Multi: '🛕',
   Hindu: '🕉️',
+  Deity: '🛕',
 }
 
 const SearchIcon = () => (
@@ -103,6 +105,7 @@ export default function Sidebar({
   selectedTemple, visitedIds,
   onSelectTemple,
   isOpen, onToggle,
+  userLocation,
 }) {
   // Store item DOM refs for smooth scroll-into-view behavior
   const itemRefs = useRef({})
@@ -116,6 +119,23 @@ export default function Sidebar({
       })
     }
   }, [selectedTemple?.id])
+
+  // Sort temples by distance if user location is active
+  const sortedTemples = useMemo(() => {
+    if (!userLocation || userLocation.lat == null || userLocation.lng == null) {
+      return filteredTemples
+    }
+
+    return [...filteredTemples].sort((a, b) => {
+      const distA = a.lat != null && a.lng != null
+        ? calculateDistance(userLocation.lat, userLocation.lng, a.lat, a.lng)
+        : Infinity
+      const distB = b.lat != null && b.lng != null
+        ? calculateDistance(userLocation.lat, userLocation.lng, b.lat, b.lng)
+        : Infinity
+      return distA - distB
+    })
+  }, [filteredTemples, userLocation])
 
   return (
     <>
@@ -150,9 +170,17 @@ export default function Sidebar({
                   <CloseIcon />
                 </button>
               </div>
-              <p className="text-[10px] tracking-[0.2em] uppercase font-sans font-semibold mt-0.5 theme-muted">
-                Discover Iconic Indian Shrines
-              </p>
+              <div className="flex items-center justify-between mt-0.5">
+                <p className="text-[10px] tracking-[0.2em] uppercase font-sans font-semibold theme-muted">
+                  Discover Iconic Indian Shrines
+                </p>
+                {userLocation && (
+                  <span className="text-[9.5px] font-sans font-bold text-sky-500 bg-sky-500/15 px-2 py-0.5 rounded-full border border-sky-500/30 flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-sky-500 animate-pulse" />
+                    <span>Nearest First</span>
+                  </span>
+                )}
+              </div>
             </div>
 
             {/* Divider */}
@@ -187,18 +215,23 @@ export default function Sidebar({
             {/* Divider */}
             <div className="mx-4 h-px bg-gradient-to-r from-transparent via-[var(--border-gold)] to-transparent" />
 
-            {/* Temple list with 44x44px rounded thumbnails & smooth scroll into view */}
+            {/* Temple list with 44x44px rounded thumbnails, distance badges & smooth scroll into view */}
             <div className="flex-1 overflow-y-auto custom-scrollbar px-3 py-2 space-y-1.5">
-              {filteredTemples.length === 0 ? (
+              {sortedTemples.length === 0 ? (
                 <div className="text-center py-12">
                   <p className="theme-title text-sm font-sans font-medium">No temples found</p>
                   <p className="theme-muted text-xs mt-1 font-sans">Try adjusting your filters</p>
                 </div>
               ) : (
-                filteredTemples.map((temple) => {
+                sortedTemples.map((temple) => {
                   const isVisited = visitedIds.has(temple.id)
                   const isSelected = selectedTemple?.id === temple.id
                   const deityEmoji = DEITY_EMOJIS[temple.deity] || '🛕'
+
+                  const distanceKm = userLocation && temple.lat != null && temple.lng != null
+                    ? calculateDistance(userLocation.lat, userLocation.lng, temple.lat, temple.lng)
+                    : null
+                  const formattedDist = distanceKm != null ? formatDistance(distanceKm) : null
 
                   return (
                     <motion.button
@@ -245,13 +278,19 @@ export default function Sidebar({
                           >
                             {temple.name}
                           </p>
+                          {/* Distance badge on right */}
+                          {formattedDist && (
+                            <span className="text-[10px] font-sans font-bold px-1.5 py-0.2 rounded-full bg-sky-500/15 text-sky-600 dark:text-sky-400 border border-sky-500/25 flex-shrink-0">
+                              {formattedDist}
+                            </span>
+                          )}
                         </div>
 
                         <div className="flex items-center gap-1.5 mt-0.5 flex-wrap text-[10px] font-sans">
                           <span className="px-1.5 py-0.2 rounded bg-saffron/15 text-saffron font-bold">
                             {temple.deity}
                           </span>
-                          <span className="theme-muted font-medium">{temple.era}</span>
+                          <span className="theme-muted font-medium">{temple.era || 'Sacred Shrine'}</span>
                           {temple.state && (
                             <span className="theme-muted truncate">· {temple.state}</span>
                           )}

@@ -420,15 +420,15 @@ export default function DarshanPanel({ selectedTemple, onClose, theme = 'dark', 
         animate={{ x: 0, opacity: 1 }}
         exit={{ x: 420, opacity: 0 }}
         transition={{ type: 'spring', stiffness: 320, damping: 32 }}
-        className="fixed top-14 sm:top-16 right-0 sm:right-4 bottom-2 sm:bottom-4 w-full sm:w-[420px] z-[1000]
-                 glass-strong rounded-none sm:rounded-2xl flex flex-col overflow-hidden shadow-2xl"
+        className="fixed top-12 sm:top-16 right-0 sm:right-4 bottom-0 sm:bottom-4 w-full sm:w-[420px] z-[1000]
+                 glass-strong rounded-t-2xl sm:rounded-2xl flex flex-col overflow-hidden shadow-2xl"
       >
         {/* ── Hero Banner Section (clickable for Lightbox) ── */}
         <div
           onClick={() => {
             if (currentHero) openLightboxForImage(currentHero)
           }}
-          className="relative h-48 sm:h-52 overflow-hidden flex-shrink-0 bg-gradient-to-b from-amber-950/30 to-transparent cursor-pointer group"
+          className="relative h-44 sm:h-52 overflow-hidden flex-shrink-0 bg-gradient-to-b from-amber-950/30 to-transparent cursor-pointer group"
           title="Click to view full-screen photo"
         >
           <AnimatePresence mode="wait">
@@ -560,7 +560,7 @@ export default function DarshanPanel({ selectedTemple, onClose, theme = 'dark', 
                   }`}
               >
                 <span>{tab.icon}</span>
-                <span className="hidden sm:inline">{tab.label}</span>
+                <span className="text-[10.5px] sm:text-[11px]">{tab.label}</span>
               </button>
             ))}
           </div>
@@ -609,7 +609,7 @@ export default function DarshanPanel({ selectedTemple, onClose, theme = 'dark', 
                        transition-shadow duration-300"
           >
             <ExternalLinkIcon />
-            {userLocation ? 'Get Driving Directions (Exact Temple)' : 'Directions to Temple Entrance'}
+            {userLocation ? 'Driving Directions' : 'Directions to Temple'}
           </motion.a>
 
           <a

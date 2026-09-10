@@ -114,14 +114,27 @@ html, body, #root {
 }
 
 .leaflet-control-attribution {
-  font-size: 10px !important;
+  font-size: 9px !important;
   backdrop-filter: blur(6px);
   border-radius: 6px;
-  margin: 6px !important;
-  padding: 2px 8px !important;
+  margin: 4px !important;
+  padding: 2px 6px !important;
   background: var(--bg-glass-strong) !important;
   color: var(--text-muted) !important;
   border: 1px solid var(--border-gold) !important;
+  max-width: 58vw;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (min-width: 640px) {
+  .leaflet-control-attribution {
+    font-size: 10px !important;
+    margin: 6px !important;
+    padding: 2px 8px !important;
+    max-width: none;
+  }
 }
 
 .leaflet-control-attribution a {
@@ -133,8 +146,15 @@ html, body, #root {
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25) !important;
   border: 1px solid var(--border-gold) !important;
-  margin-right: 16px !important;
-  margin-bottom: 24px !important;
+  margin-right: 12px !important;
+  margin-bottom: 30px !important;
+}
+
+@media (min-width: 640px) {
+  .leaflet-control-zoom {
+    margin-right: 16px !important;
+    margin-bottom: 24px !important;
+  }
 }
 
 .leaflet-control-zoom a {

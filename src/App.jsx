@@ -113,6 +113,14 @@ const MoonIcon = () => (
   </svg>
 )
 
+const MenuIcon = () => (
+  <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+    <line x1="3" y1="6" x2="21" y2="6" />
+    <line x1="3" y1="12" x2="21" y2="12" />
+    <line x1="3" y1="18" x2="21" y2="18" />
+  </svg>
+)
+
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // TOP BAR
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -130,45 +138,68 @@ function TopBar({
   userLocation,
   isLocating,
   onToggleLocation,
+  sidebarOpen,
+  onToggleSidebar,
 }) {
   const [progressOpen, setProgressOpen] = useState(false)
+
+  const totalPilgrimageTemples = useMemo(
+    () => HOLY_CIRCUITS.reduce((sum, c) => sum + c.total, 0),
+    []
+  )
+  const totalPilgrimageVisited = useMemo(
+    () =>
+      TEMPLES.filter(
+        (t) =>
+          HOLY_CIRCUITS.some((c) => t.circuit_tags?.includes(c.tag)) &&
+          visitedIds.has(t.id)
+      ).length,
+    [visitedIds]
+  )
 
   return (
     <motion.header
       initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ delay: 0.2, duration: 0.5, type: 'spring', stiffness: 200 }}
-      className="fixed top-0 left-0 right-0 z-[1000] flex items-center justify-between px-3 sm:px-6 py-2.5 pointer-events-none"
+      className="fixed top-0 left-0 right-0 z-[1000] flex items-center justify-between px-2 sm:px-6 py-2 sm:py-2.5 pointer-events-none"
     >
-      {/* Brand title */}
-      <div className="glass-strong rounded-2xl px-4 py-2 flex items-center gap-2 pointer-events-auto shadow-lg">
-        <span className="text-xl">🛕</span>
+      {/* Brand title & Mobile Menu Toggle */}
+      <div className="glass-strong rounded-2xl px-2.5 sm:px-4 py-1.5 sm:py-2 flex items-center gap-1.5 sm:gap-2 pointer-events-auto shadow-lg">
+        <button
+          onClick={onToggleSidebar}
+          className="md:hidden p-1 -ml-1 text-saffron hover:bg-black/10 dark:hover:bg-white/10 rounded-xl transition-all active:scale-90 flex items-center justify-center"
+          aria-label={sidebarOpen ? 'Close explorer menu' : 'Open explorer menu'}
+        >
+          {sidebarOpen ? <CloseIcon /> : <MenuIcon />}
+        </button>
+        <span className="text-lg sm:text-xl select-none">🛕</span>
         <div>
-          <h1 className="text-sm font-extrabold text-shimmer font-cinzel tracking-wider leading-none">
+          <h1 className="text-xs sm:text-sm font-extrabold text-shimmer font-cinzel tracking-wider leading-none">
             Divine India
           </h1>
-          <p className="text-[9px] uppercase tracking-[0.2em] font-sans font-semibold mt-0.5 theme-muted">
+          <p className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] font-sans font-semibold mt-0.5 theme-muted hidden sm:block">
             The Temple Explorer
           </p>
         </div>
       </div>
 
       {/* Center & Right Controls */}
-      <div className="glass-strong rounded-2xl px-2 sm:px-3 py-1.5 flex items-center gap-1.5 sm:gap-2 pointer-events-auto shadow-lg">
+      <div className="glass-strong rounded-2xl px-1.5 sm:px-3 py-1 sm:py-1.5 flex items-center gap-1 sm:gap-2 pointer-events-auto shadow-lg">
         {/* Temple count */}
-        <div className="px-2 py-1 flex items-center gap-1 text-xs font-sans">
+        <div className="px-1.5 sm:px-2 py-1 flex items-center gap-1 text-xs font-sans">
           <span className="theme-muted hidden sm:inline">Temples</span>
-          <span className="font-bold text-saffron font-mono">{filteredCount}</span>
-          <span className="theme-muted text-[10px]">/ {totalCount}</span>
+          <span className="font-bold text-saffron font-mono text-xs sm:text-sm">{filteredCount}</span>
+          <span className="theme-muted text-[10px] hidden sm:inline">/ {totalCount}</span>
         </div>
 
-        <div className="w-px h-5 bg-[var(--border-gold)]" />
+        <div className="w-px h-4 sm:h-5 bg-[var(--border-gold)]" />
 
         {/* Current Location (Near Me) Button */}
         <button
           onClick={onToggleLocation}
           disabled={isLocating}
-          className={`px-2.5 py-1.5 rounded-xl font-sans text-xs font-bold transition-all duration-200 flex items-center gap-1.5
+          className={`px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-xl font-sans text-xs font-bold transition-all duration-200 flex items-center gap-1.5
             ${userLocation
               ? 'bg-sky-500/20 text-sky-500 border border-sky-500/40 shadow-md shadow-sky-500/15'
               : 'hover:bg-black/5 dark:hover:bg-white/5 theme-title'
@@ -177,130 +208,169 @@ function TopBar({
         >
           <GpsIcon active={Boolean(userLocation)} loading={isLocating} />
           <span className="hidden sm:inline">
-            {isLocating ? 'Locating…' : userLocation ? 'Near Me' : 'Near Me'}
+            {isLocating ? 'Locating…' : 'Near Me'}
           </span>
           {userLocation && (
             <span className="w-1.5 h-1.5 rounded-full bg-sky-500 animate-pulse" />
           )}
         </button>
 
-        <div className="w-px h-5 bg-[var(--border-gold)]" />
+        <div className="w-px h-4 sm:h-5 bg-[var(--border-gold)]" />
 
-        {/* Pilgrimage Circuit Tour Interactive Buttons */}
-        <div className="relative flex items-center gap-1">
-          {HOLY_CIRCUITS.map((c) => {
-            const visited = TEMPLES.filter(
-              (t) => t.circuit_tags?.includes(c.tag) && visitedIds.has(t.id)
-            ).length
-            const isTourActive = activeCircuit === c.tag
-
-            return (
-              <button
-                key={c.tag}
-                onClick={() => onStartCircuitTour(c.tag)}
-                className={`px-2 py-1 rounded-xl text-xs font-sans font-bold transition-all duration-200 flex items-center gap-1
-                  ${isTourActive
-                    ? 'bg-saffron text-slate-950 shadow-md shadow-saffron/30 scale-105'
-                    : 'hover:bg-black/5 dark:hover:bg-white/5 theme-title'
-                  }`}
-                title={`Start interactive ${c.name} tour`}
-              >
-                <span>{c.icon}</span>
-                <span className="hidden lg:inline">{c.name}</span>
-                <span
-                  className={`text-[9px] px-1 py-0.2 rounded-full font-mono ${
-                    isTourActive
-                      ? 'bg-black/20 text-slate-950'
-                      : 'bg-saffron/15 text-saffron'
-                  }`}
-                >
-                  {visited}/{c.total}
-                </span>
-              </button>
-            )
-          })}
-
+        {/* Pilgrimage Circuits - Compact on Mobile & Tablets, Expanded on Desktop */}
+        <div className="relative flex items-center">
+          {/* Mobile & Tablet Compact Circuit Tour Trigger Button */}
           <button
             onClick={() => setProgressOpen(!progressOpen)}
-            className="p-1 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors theme-muted"
-            title="View full pilgrimage progress"
+            className={`lg:hidden px-2 py-1 rounded-xl text-xs font-sans font-bold transition-all duration-200 flex items-center gap-1
+              ${activeCircuit
+                ? 'bg-saffron text-slate-950 shadow-md shadow-saffron/30'
+                : 'hover:bg-black/5 dark:hover:bg-white/5 theme-title'
+              }`}
+            title="Sacred Pilgrimage Circuit Tours"
           >
+            <span>
+              {activeCircuit
+                ? HOLY_CIRCUITS.find((c) => c.tag === activeCircuit)?.icon || '🔱'
+                : '🔱'}
+            </span>
+            <span className="hidden sm:inline">
+              {activeCircuit || 'Circuits'}
+            </span>
+            <span
+              className={`text-[9px] px-1 py-0.2 rounded-full font-mono ${
+                activeCircuit
+                  ? 'bg-black/20 text-slate-950'
+                  : 'bg-saffron/15 text-saffron'
+              }`}
+            >
+              {totalPilgrimageVisited}/{totalPilgrimageTemples}
+            </span>
             <ChevronIcon open={progressOpen} />
           </button>
 
-          {/* Progress Dropdown */}
+          {/* Desktop Full Circuit Tour Buttons */}
+          <div className="hidden lg:flex items-center gap-1">
+            {HOLY_CIRCUITS.map((c) => {
+              const visited = TEMPLES.filter(
+                (t) => t.circuit_tags?.includes(c.tag) && visitedIds.has(t.id)
+              ).length
+              const isTourActive = activeCircuit === c.tag
+
+              return (
+                <button
+                  key={c.tag}
+                  onClick={() => onStartCircuitTour(c.tag)}
+                  className={`px-2 py-1 rounded-xl text-xs font-sans font-bold transition-all duration-200 flex items-center gap-1
+                    ${isTourActive
+                      ? 'bg-saffron text-slate-950 shadow-md shadow-saffron/30 scale-105'
+                      : 'hover:bg-black/5 dark:hover:bg-white/5 theme-title'
+                    }`}
+                  title={`Start interactive ${c.name} tour`}
+                >
+                  <span>{c.icon}</span>
+                  <span>{c.name}</span>
+                  <span
+                    className={`text-[9px] px-1 py-0.2 rounded-full font-mono ${
+                      isTourActive
+                        ? 'bg-black/20 text-slate-950'
+                        : 'bg-saffron/15 text-saffron'
+                    }`}
+                  >
+                    {visited}/{c.total}
+                  </span>
+                </button>
+              )
+            })}
+
+            <button
+              onClick={() => setProgressOpen(!progressOpen)}
+              className="p-1 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors theme-muted"
+              title="View full pilgrimage progress"
+            >
+              <ChevronIcon open={progressOpen} />
+            </button>
+          </div>
+
+          {/* Progress Dropdown Modal with tap-outside backdrop */}
           <AnimatePresence>
             {progressOpen && (
-              <motion.div
-                initial={{ opacity: 0, y: -6, scale: 0.96 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -6, scale: 0.96 }}
-                transition={{ duration: 0.15 }}
-                className="absolute top-full right-0 mt-2 w-72 sm:w-80 glass-strong rounded-2xl p-4 space-y-3.5 shadow-2xl z-[1001]"
-              >
-                <div className="flex items-center justify-between">
-                  <h3 className="text-xs font-bold uppercase tracking-widest theme-gold font-cinzel">
-                    Sacred Circuit Tours
-                  </h3>
-                  <button onClick={() => setProgressOpen(false)} className="theme-muted hover:theme-title p-1">
-                    <CloseIcon />
-                  </button>
-                </div>
+              <>
+                <div
+                  className="fixed inset-0 z-[1000]"
+                  onClick={() => setProgressOpen(false)}
+                />
+                <motion.div
+                  initial={{ opacity: 0, y: -6, scale: 0.96 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -6, scale: 0.96 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute top-full right-0 mt-2 w-72 sm:w-80 max-w-[calc(100vw-20px)] glass-strong rounded-2xl p-4 space-y-3.5 shadow-2xl z-[1001]"
+                >
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-xs font-bold uppercase tracking-widest theme-gold font-cinzel">
+                      Sacred Circuit Tours
+                    </h3>
+                    <button onClick={() => setProgressOpen(false)} className="theme-muted hover:theme-title p-1">
+                      <CloseIcon />
+                    </button>
+                  </div>
 
-                {HOLY_CIRCUITS.map((c) => {
-                  const circuitTemples = TEMPLES.filter((t) => t.circuit_tags?.includes(c.tag))
-                  const visited = circuitTemples.filter((t) => visitedIds.has(t.id)).length
-                  const pct = c.total > 0 ? (visited / c.total) * 100 : 0
+                  {HOLY_CIRCUITS.map((c) => {
+                    const circuitTemples = TEMPLES.filter((t) => t.circuit_tags?.includes(c.tag))
+                    const visited = circuitTemples.filter((t) => visitedIds.has(t.id)).length
+                    const pct = c.total > 0 ? (visited / c.total) * 100 : 0
 
-                  return (
-                    <div key={c.tag} className="space-y-1.5">
-                      <div className="flex items-center justify-between text-xs font-sans">
-                        <button
-                          onClick={() => {
-                            setProgressOpen(false)
-                            onStartCircuitTour(c.tag)
-                          }}
-                          className="font-bold theme-title hover:text-saffron transition-colors flex items-center gap-1.5 text-left"
-                        >
-                          <span>{c.icon}</span>
-                          <span>{c.name}</span>
-                          <span className="text-[9px] px-1.5 py-0.2 rounded-full bg-saffron/15 text-saffron">
-                            Start Tour ↗
+                    return (
+                      <div key={c.tag} className="space-y-1.5">
+                        <div className="flex items-center justify-between text-xs font-sans">
+                          <button
+                            onClick={() => {
+                              setProgressOpen(false)
+                              onStartCircuitTour(c.tag)
+                            }}
+                            className="font-bold theme-title hover:text-saffron transition-colors flex items-center gap-1.5 text-left"
+                          >
+                            <span>{c.icon}</span>
+                            <span>{c.name}</span>
+                            <span className="text-[9px] px-1.5 py-0.2 rounded-full bg-saffron/15 text-saffron">
+                              Start Tour ↗
+                            </span>
+                          </button>
+                          <span className="font-mono text-saffron font-bold">
+                            {visited}/{c.total}
                           </span>
-                        </button>
-                        <span className="font-mono text-saffron font-bold">
-                          {visited}/{c.total}
-                        </span>
+                        </div>
+                        <div className="h-2 rounded-full bg-black/10 dark:bg-white/10 overflow-hidden">
+                          <motion.div
+                            initial={{ width: 0 }}
+                            animate={{ width: `${pct}%` }}
+                            transition={{ duration: 0.6, ease: 'easeOut' }}
+                            className={`h-full rounded-full ${
+                              pct === 100
+                                ? 'bg-gradient-to-r from-emerald-500 to-teal-400'
+                                : 'bg-gradient-to-r from-saffron to-amber-400'
+                            }`}
+                          />
+                        </div>
                       </div>
-                      <div className="h-2 rounded-full bg-black/10 dark:bg-white/10 overflow-hidden">
-                        <motion.div
-                          initial={{ width: 0 }}
-                          animate={{ width: `${pct}%` }}
-                          transition={{ duration: 0.6, ease: 'easeOut' }}
-                          className={`h-full rounded-full ${
-                            pct === 100
-                              ? 'bg-gradient-to-r from-emerald-500 to-teal-400'
-                              : 'bg-gradient-to-r from-saffron to-amber-400'
-                          }`}
-                        />
-                      </div>
-                    </div>
-                  )
-                })}
-                <p className="text-[10px] theme-muted font-sans italic pt-1 text-center">
-                  Click any circuit to embark on an interactive pilgrimage tour ✦
-                </p>
-              </motion.div>
+                    )
+                  })}
+                  <p className="text-[10px] theme-muted font-sans italic pt-1 text-center">
+                    Click any circuit to embark on an interactive pilgrimage tour ✦
+                  </p>
+                </motion.div>
+              </>
             )}
           </AnimatePresence>
         </div>
 
-        <div className="w-px h-5 bg-[var(--border-gold)]" />
+        <div className="w-px h-4 sm:h-5 bg-[var(--border-gold)]" />
 
         {/* Ambient Tanpura Drone Toggle */}
         <button
           onClick={onToggleTanpura}
-          className={`px-2.5 py-1.5 flex items-center gap-1.5 rounded-xl transition-all duration-300 font-sans text-xs
+          className={`p-1.5 sm:px-2.5 sm:py-1.5 flex items-center gap-1 sm:gap-1.5 rounded-xl transition-all duration-300 font-sans text-xs
             ${tanpuraPlaying
               ? 'bg-saffron/20 text-saffron font-bold'
               : 'theme-muted hover:theme-title hover:bg-black/5 dark:hover:bg-white/5'
@@ -330,12 +400,12 @@ function TopBar({
           )}
         </button>
 
-        <div className="w-px h-5 bg-[var(--border-gold)]" />
+        <div className="w-px h-4 sm:h-5 bg-[var(--border-gold)]" />
 
         {/* Light / Dark Mode Toggle */}
         <button
           onClick={onToggleTheme}
-          className="p-2 rounded-xl text-saffron hover:bg-black/5 dark:hover:bg-white/5 transition-transform duration-200 hover:scale-110 active:scale-95"
+          className="p-1.5 sm:p-2 rounded-xl text-saffron hover:bg-black/5 dark:hover:bg-white/5 transition-transform duration-200 hover:scale-110 active:scale-95"
           title={theme === 'dark' ? 'Switch to Sunrise Theme (Light)' : 'Switch to Temple Night Theme (Dark)'}
           aria-label="Toggle theme"
         >
@@ -376,7 +446,12 @@ export default function App() {
   const [era, setEra] = useState('All')
   const [circuit, setCircuit] = useState('All')
   const [selectedTemple, setSelectedTemple] = useState(null)
-  const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [sidebarOpen, setSidebarOpen] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth >= 768
+    }
+    return false
+  })
   const [mapTarget, setMapTarget] = useState(null)
 
   // User Current Location State
@@ -571,6 +646,8 @@ export default function App() {
         userLocation={userLocation}
         isLocating={isLocating}
         onToggleLocation={handleToggleLocation}
+        sidebarOpen={sidebarOpen}
+        onToggleSidebar={() => setSidebarOpen((prev) => !prev)}
       />
 
       {/* ── Left Explorer Sidebar with 44x44px Thumbnails & Distance Badges ── */}

@@ -32,24 +32,24 @@ export default function CircuitTourBar({
       animate={{ y: 0, opacity: 1, scale: 1 }}
       exit={{ y: 80, opacity: 0, scale: 0.95 }}
       transition={{ type: 'spring', stiffness: 320, damping: 28 }}
-      className="fixed bottom-5 left-1/2 -translate-x-1/2 z-[1001] max-w-[95vw] sm:max-w-xl w-full px-2"
+      className="fixed bottom-3 sm:bottom-5 left-1/2 -translate-x-1/2 z-[1001] max-w-[96vw] sm:max-w-xl w-full px-2"
     >
-      <div className="glass-strong rounded-2xl p-3 sm:p-4 shadow-2xl border border-[var(--border-saffron)] flex flex-col gap-2.5">
+      <div className="glass-strong rounded-2xl p-2.5 sm:p-4 shadow-2xl border border-[var(--border-saffron)] flex flex-col gap-2 sm:gap-2.5">
         {/* Top Header Row */}
-        <div className="flex items-center justify-between gap-2 border-b border-[var(--border-gold)] pb-2">
-          <div className="flex items-center gap-2">
-            <span className="flex h-2 w-2 relative">
+        <div className="flex items-center justify-between gap-2 border-b border-[var(--border-gold)] pb-1.5 sm:pb-2">
+          <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
+            <span className="flex h-2 w-2 relative flex-shrink-0">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-saffron opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-saffron" />
             </span>
-            <span className="text-xs font-extrabold uppercase tracking-widest font-cinzel text-saffron">
+            <span className="text-[11px] sm:text-xs font-extrabold uppercase tracking-wider sm:tracking-widest font-cinzel text-saffron truncate">
               {activeCircuit} Sacred Pilgrimage Tour
             </span>
           </div>
 
           <button
             onClick={onExitTour}
-            className="text-[11px] px-2.5 py-0.5 rounded-full glass theme-muted hover:text-red-400 hover:border-red-400/40 transition-all font-sans font-bold flex items-center gap-1"
+            className="text-[10px] sm:text-[11px] px-2 sm:px-2.5 py-0.5 rounded-full glass theme-muted hover:text-red-400 hover:border-red-400/40 transition-all font-sans font-bold flex items-center gap-1 flex-shrink-0"
           >
             <span>✕</span>
             <span>Exit Tour</span>

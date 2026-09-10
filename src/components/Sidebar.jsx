@@ -138,24 +138,26 @@ export default function Sidebar({
   }, [filteredTemples, userLocation])
 
   return (
-    <>
-      {/* Mobile sidebar toggle button */}
-      <button
-        onClick={onToggle}
-        className="md:hidden fixed top-20 left-3 z-[1001] glass-strong rounded-xl p-2.5 text-saffron hover:scale-105 transition-all shadow-lg"
-        aria-label="Toggle explorer sidebar"
-      >
-        <MenuIcon />
-      </button>
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          {/* Mobile backdrop overlay to tap outside and close */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={onToggle}
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[998] md:hidden"
+            aria-hidden="true"
+          />
 
-      <AnimatePresence>
-        {isOpen && (
           <motion.aside
             initial={{ x: -360, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: -360, opacity: 0 }}
             transition={{ type: 'spring', stiffness: 320, damping: 32 }}
-            className="fixed top-14 sm:top-16 left-0 bottom-0 w-full sm:w-[350px] z-[999] glass-strong rounded-none sm:rounded-r-2xl flex flex-col overflow-hidden shadow-2xl"
+            className="fixed top-12 sm:top-16 left-0 bottom-0 w-[88vw] sm:w-[350px] max-w-[360px] z-[999] glass-strong rounded-none sm:rounded-r-2xl flex flex-col overflow-hidden shadow-2xl"
           >
             {/* Header */}
             <div className="px-5 pt-4 pb-2">
@@ -165,7 +167,8 @@ export default function Sidebar({
                 </h2>
                 <button
                   onClick={onToggle}
-                  className="md:hidden theme-muted hover:theme-title p-1"
+                  className="md:hidden theme-muted hover:theme-title p-1.5 rounded-lg active:scale-95 transition-all"
+                  aria-label="Close explorer sidebar"
                 >
                   <CloseIcon />
                 </button>
@@ -322,8 +325,8 @@ export default function Sidebar({
               <span>🙏 Har Har Mahadev</span>
             </div>
           </motion.aside>
-        )}
-      </AnimatePresence>
-    </>
+        </>
+      )}
+    </AnimatePresence>
   )
 }

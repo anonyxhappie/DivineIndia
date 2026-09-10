@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { fetchTempleDetails } from '../api/wikipediaService'
-import { playTempleChime } from '../audio/chimeSound'
+import { playTempleChime, playTempleBellSound } from '../audio/chimeSound'
 import { calculateDistance, formatDistance } from '../utils/geoUtils'
 import { getCuratedLore } from '../data/curatedLore'
 import Lightbox from './Lightbox'
@@ -81,6 +81,12 @@ function HistoryTab({ temple, wikiData, loading, error }) {
 
   // Split raw text by newline characters into distinct formatted paragraphs
   const paragraphs = useMemo(() => {
+    // If community edited or added with custom description, respect it
+    if (temple?.isCommunityAdded || (temple?.isCommunityEdited && temple?.description)) {
+      if (temple.description) {
+        return temple.description.split(/\n+/).map((p) => p.trim()).filter(Boolean)
+      }
+    }
     if (curated?.paragraphs?.length) {
       return curated.paragraphs
     }
@@ -89,7 +95,7 @@ function HistoryTab({ temple, wikiData, loading, error }) {
       .split(/\n+/)
       .map((p) => p.trim())
       .filter((p) => p.length > 0)
-  }, [curated, wikiData?.extract])
+  }, [curated, wikiData?.extract, temple?.description, temple?.isCommunityEdited, temple?.isCommunityAdded])
 
   // Detect sensitive northern/border regions to avoid linking to modern partition discussions
   const isBorderOrSensitiveRegion = useMemo(() => {
@@ -118,6 +124,25 @@ function HistoryTab({ temple, wikiData, loading, error }) {
       transition={{ duration: 0.22 }}
       className="space-y-4"
     >
+      {(temple?.isCommunityEdited || temple?.isCommunityAdded) && (
+        <div className="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-xs text-amber-200 space-y-1">
+          <div className="flex items-center justify-between">
+            <span className="font-bold text-amber-300">
+              {temple.isCommunityAdded ? '🪔 Community Contributed Shrine' : '✨ Community Edited Record'}
+            </span>
+            <span className="text-[10px] px-2 py-0.5 rounded bg-amber-500/20 text-amber-200">
+              Active locally
+            </span>
+          </div>
+          {temple.contributor_name && (
+            <p className="text-[11px] text-amber-400/80">
+              Contributed by <span className="font-semibold text-amber-200">{temple.contributor_name}</span>
+              {temple.edit_note && ` • "${temple.edit_note}"`}
+            </p>
+          )}
+        </div>
+      )}
+
       <div>
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-1.5 theme-gold">
@@ -159,11 +184,19 @@ function HistoryTab({ temple, wikiData, loading, error }) {
 
         {!showLoading && paragraphs.length === 0 && !error && (
           <div className="space-y-3">
-            <p className="mb-4 text-[15px] font-sans leading-[1.75] tracking-normal theme-body">
-              {temple.name} is a renowned spiritual pilgrimage shrine situated in{' '}
-              <strong className="font-semibold theme-gold">{temple.state || 'India'}</strong>
-              {temple.era ? `, historically dated to the ${temple.era}` : ''}.
-            </p>
+            {temple.description ? (
+              <p className="mb-4 text-[15px] font-sans leading-[1.75] tracking-normal theme-body">
+                {temple.description}
+              </p>
+            ) : (
+              <p className="mb-4 text-[15px] font-sans leading-[1.75] tracking-normal theme-body">
+                {temple.name} is a renowned spiritual pilgrimage shrine situated in{' '}
+                <strong className="font-semibold theme-gold">
+                  {[temple.state, temple.country || 'India'].filter(Boolean).join(', ')}
+                </strong>
+                {temple.era ? `, historically dated to the ${temple.era}` : ''}.
+              </p>
+            )}
             <p className="mb-4 text-[15px] font-sans leading-[1.75] tracking-normal theme-body">
               Dedicated to <strong className="font-semibold text-saffron">{temple.deity || 'the Divine'}</strong>, it represents an enduring pinnacle of sacred devotion, architecture, and Vedic heritage.
             </p>
@@ -247,8 +280,10 @@ function ArchitectureTab({ temple, userLocation }) {
         </h4>
         <div className="space-y-2 text-xs font-sans">
           <div className="flex items-center justify-between">
-            <span className="theme-muted">Region / State:</span>
-            <span className="font-bold theme-title">{temple.state || 'India'}</span>
+            <span className="theme-muted">Region / Country:</span>
+            <span className="font-bold theme-title">
+              {[temple.state, temple.country || 'India'].filter(Boolean).join(', ')}
+            </span>
           </div>
 
           {formattedDist && (
@@ -272,6 +307,18 @@ function ArchitectureTab({ temple, userLocation }) {
             <div className="flex items-center justify-between">
               <span className="theme-muted">Historical Period:</span>
               <span className="font-bold theme-title">{temple.period} Period</span>
+            </div>
+          )}
+          {temple.osmTags?.opening_hours && (
+            <div className="flex items-center justify-between">
+              <span className="theme-muted">Timings:</span>
+              <span className="font-mono text-xs theme-title">{temple.osmTags.opening_hours}</span>
+            </div>
+          )}
+          {temple.isOSM && (
+            <div className="flex items-center justify-between pt-1 text-[11px]">
+              <span className="theme-muted">Data Source:</span>
+              <span className="font-semibold text-emerald-500">Live OpenStreetMap POI</span>
             </div>
           )}
         </div>
@@ -308,6 +355,32 @@ function PilgrimageTab({ temple }) {
       transition={{ duration: 0.22 }}
       className="space-y-4"
     >
+      {(temple.timings || temple.festivals || temple.dress_code) && (
+        <div className="glass rounded-xl p-4 space-y-2.5 border-l-2 border-saffron">
+          <h4 className="text-[10px] font-bold uppercase tracking-widest theme-gold font-cinzel">
+            Darshan Schedules & Details
+          </h4>
+          {temple.timings && (
+            <div className="text-xs font-sans theme-body">
+              <span className="font-bold text-saffron">Timings: </span>
+              {temple.timings}
+            </div>
+          )}
+          {temple.festivals && (
+            <div className="text-xs font-sans theme-body">
+              <span className="font-bold text-saffron">Major Festivals: </span>
+              {temple.festivals}
+            </div>
+          )}
+          {temple.dress_code && (
+            <div className="text-xs font-sans theme-body">
+              <span className="font-bold text-saffron">Dress Code: </span>
+              {temple.dress_code}
+            </div>
+          )}
+        </div>
+      )}
+
       <div className="glass rounded-xl p-4 space-y-2">
         <h4 className="text-[10px] font-bold uppercase tracking-widest theme-gold font-cinzel">
           Best Time For Darshan
@@ -348,7 +421,14 @@ function PilgrimageTab({ temple }) {
 // Main DarshanPanel Component
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-export default function DarshanPanel({ selectedTemple, onClose, theme = 'dark', userLocation = null }) {
+export default function DarshanPanel({
+  selectedTemple,
+  onClose,
+  theme = 'dark',
+  userLocation = null,
+  onSuggestEdit,
+  onContributePhoto,
+}) {
   const [activeTab, setActiveTab] = useState('history')
   const [wikiData, setWikiData] = useState(null)
   const [wikiLoading, setWikiLoading] = useState(false)
@@ -360,6 +440,7 @@ export default function DarshanPanel({ selectedTemple, onClose, theme = 'dark', 
   // Lightbox modal state
   const [lightboxOpen, setLightboxOpen] = useState(false)
   const [lightboxIndex, setLightboxIndex] = useState(0)
+  const [isBellRinging, setIsBellRinging] = useState(false)
 
   // Fetch Wikipedia details and Wikimedia gallery when temple changes
   useEffect(() => {
@@ -413,8 +494,10 @@ export default function DarshanPanel({ selectedTemple, onClose, theme = 'dark', 
   // Filter out broken / 404 image URLs from gallery and lightboxes
   const allGalleryImages = useMemo(() => {
     const list = []
+    const communityUrls = (selectedTemple?.community_photos || []).map((p) => p.dataUrl || p)
     const candidates = [
       selectedHeroImage,
+      ...communityUrls,
       wikiData?.imageUrl,
       selectedTemple?.image_url,
       ...(wikiData?.galleryImages || []),
@@ -425,7 +508,7 @@ export default function DarshanPanel({ selectedTemple, onClose, theme = 'dark', 
       }
     }
     return list
-  }, [selectedHeroImage, wikiData?.imageUrl, wikiData?.galleryImages, selectedTemple?.image_url, failedImages])
+  }, [selectedHeroImage, wikiData?.imageUrl, wikiData?.galleryImages, selectedTemple?.image_url, selectedTemple?.community_photos, failedImages])
 
   const currentHero = useMemo(() => {
     if (selectedHeroImage && !failedImages.has(selectedHeroImage)) {
@@ -451,7 +534,7 @@ export default function DarshanPanel({ selectedTemple, onClose, theme = 'dark', 
     selectedTemple.name,
     selectedTemple.location,
     selectedTemple.state,
-    'India',
+    selectedTemple.country || 'India',
   ]
     .filter(Boolean)
     .join(', ')
@@ -551,8 +634,61 @@ export default function DarshanPanel({ selectedTemple, onClose, theme = 'dark', 
             <CloseIcon />
           </button>
 
+          {/* Edit Button in Hero Top */}
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation()
+              onSuggestEdit?.(selectedTemple)
+            }}
+            className="absolute top-3 right-12 py-1 px-2.5 rounded-full bg-black/60 hover:bg-black/85 backdrop-blur-md text-amber-200 hover:text-amber-100 border border-amber-500/30 transition-all flex items-center gap-1 text-[11px] font-sans z-10 shadow-lg cursor-pointer hover:scale-105 active:scale-95"
+            title="Suggest Edits or Updates for this Temple"
+          >
+            <span>✏️ Edit</span>
+          </button>
+
+          {/* Sacred Temple Bell Ring Button */}
+          <motion.button
+            type="button"
+            whileTap={{ scale: 0.92 }}
+            onClick={(e) => {
+              e.stopPropagation()
+              playTempleBellSound(selectedTemple)
+              setIsBellRinging(true)
+              setTimeout(() => setIsBellRinging(false), 900)
+            }}
+            className="absolute top-3 right-[124px] py-1 px-2.5 rounded-full bg-black/60 hover:bg-black/85 backdrop-blur-md text-amber-300 hover:text-amber-100 border border-amber-500/40 transition-all flex items-center gap-1.5 text-[11px] font-sans z-10 shadow-lg cursor-pointer hover:scale-105 active:scale-95"
+            title="Ring Sacred Mandir Ghanta / Temple Bell"
+          >
+            <motion.span
+              animate={isBellRinging ? { rotate: [0, -24, 24, -14, 14, -6, 6, 0] } : { rotate: 0 }}
+              transition={{ duration: 0.8, ease: 'easeInOut' }}
+              className="inline-block origin-top text-xs"
+            >
+              🔔
+            </motion.span>
+            <span className="font-semibold hidden xs:inline">Ring Bell</span>
+          </motion.button>
+
           {/* Title & Location in Banner */}
           <div className="absolute bottom-2.5 left-4 right-4 pointer-events-none">
+            <div className="flex items-center gap-1.5 mb-1 flex-wrap">
+              {selectedTemple.isDraftPending && (
+                <span className="px-2 py-0.5 rounded text-[9px] font-bold bg-amber-500/30 text-amber-200 border border-amber-400/40 pointer-events-auto shadow-sm">
+                  🟡 Pending Review (Draft)
+                </span>
+              )}
+              {!selectedTemple.isDraftPending && selectedTemple.isCommunityAdded && (
+                <span className="px-2 py-0.5 rounded text-[9px] font-bold bg-emerald-500/30 text-emerald-200 border border-emerald-500/40 pointer-events-auto shadow-sm">
+                  🟢 Community Shrine
+                </span>
+              )}
+              {!selectedTemple.isDraftPending && selectedTemple.isCommunityEdited && (
+                <span className="px-2 py-0.5 rounded text-[9px] font-bold bg-emerald-500/30 text-emerald-200 border border-emerald-500/40 pointer-events-auto shadow-sm">
+                  🟢 Community Edited
+                </span>
+              )}
+            </div>
             <motion.h2
               key={selectedTemple.name}
               initial={{ y: 8, opacity: 0 }}
@@ -562,47 +698,55 @@ export default function DarshanPanel({ selectedTemple, onClose, theme = 'dark', 
               {selectedTemple.name}
             </motion.h2>
             <p className="text-[11px] font-sans theme-muted font-bold mt-0.5">
-              📍 {selectedTemple.state || 'India'}
+              📍 {[selectedTemple.state, selectedTemple.country || 'India'].filter(Boolean).join(', ')}
               {selectedTemple.era ? ` · ${selectedTemple.era}` : ''}
             </p>
           </div>
         </div>
 
-        {/* ── Wikimedia Gallery Strip (horizontal thumbnails with lightbox trigger) ── */}
-        {allGalleryImages.length > 1 && (
-          <div className="px-4 py-2 border-b border-[var(--border-gold)] flex-shrink-0 overflow-x-auto custom-scrollbar">
-            <div className="flex items-center gap-2">
-              <span className="text-[9px] uppercase font-bold tracking-wider theme-muted font-cinzel flex-shrink-0">
-                Gallery:
-              </span>
-              {allGalleryImages.map((imgUrl, idx) => {
-                const isActive = currentHero === imgUrl
-                return (
-                  <button
-                    key={imgUrl}
-                    onClick={() => {
-                      playTempleChime()
-                      setSelectedHeroImage(imgUrl)
-                      openLightboxForImage(imgUrl)
-                    }}
-                    className={`relative w-12 h-10 rounded-lg overflow-hidden flex-shrink-0 transition-all duration-200
-                      ${isActive
-                        ? 'ring-2 ring-saffron scale-105 shadow-md shadow-saffron/25'
-                        : 'opacity-70 hover:opacity-100 hover:scale-105 border border-[var(--border-gold)]'
-                      }`}
-                  >
-                    <img
-                      src={imgUrl}
-                      alt={`Gallery view ${idx + 1}`}
-                      onError={() => setFailedImages((prev) => new Set([...prev, imgUrl]))}
-                      className="w-full h-full object-cover"
-                    />
-                  </button>
-                )
-              })}
-            </div>
+        {/* ── Gallery Strip (with + Add Photo action) ── */}
+        <div className="px-4 py-2 border-b border-[var(--border-gold)] flex-shrink-0 overflow-x-auto custom-scrollbar">
+          <div className="flex items-center gap-2">
+            <span className="text-[9px] uppercase font-bold tracking-wider theme-muted font-cinzel flex-shrink-0">
+              Photos:
+            </span>
+            {allGalleryImages.map((imgUrl, idx) => {
+              const isActive = currentHero === imgUrl
+              return (
+                <button
+                  key={imgUrl}
+                  onClick={() => {
+                    playTempleChime()
+                    setSelectedHeroImage(imgUrl)
+                    openLightboxForImage(imgUrl)
+                  }}
+                  className={`relative w-12 h-10 rounded-lg overflow-hidden flex-shrink-0 transition-all duration-200 cursor-pointer
+                    ${isActive
+                      ? 'ring-2 ring-saffron scale-105 shadow-md shadow-saffron/25'
+                      : 'opacity-70 hover:opacity-100 hover:scale-105 border border-[var(--border-gold)]'
+                    }`}
+                >
+                  <img
+                    src={imgUrl}
+                    alt={`Gallery view ${idx + 1}`}
+                    onError={() => setFailedImages((prev) => new Set([...prev, imgUrl]))}
+                    className="w-full h-full object-cover"
+                  />
+                </button>
+              )
+            })}
+
+            {/* Contribute Photo Button */}
+            <button
+              onClick={() => onContributePhoto?.(selectedTemple)}
+              className="px-2.5 py-1.5 rounded-lg border border-amber-500/40 bg-amber-500/15 hover:bg-amber-500/25 text-amber-200 hover:text-white text-[11px] font-sans font-bold flex items-center gap-1 flex-shrink-0 transition-all cursor-pointer shadow-sm"
+              title="Upload photos from your device for this temple"
+            >
+              <span>📸</span>
+              <span>+ Add Photo</span>
+            </button>
           </div>
-        )}
+        </div>
 
         {/* ── Tabs Header ── */}
         <div className="px-4 pt-3 pb-1 flex-shrink-0">
@@ -672,15 +816,26 @@ export default function DarshanPanel({ selectedTemple, onClose, theme = 'dark', 
             {userLocation ? 'Driving Directions' : 'Directions to Temple'}
           </motion.a>
 
-          <a
-            href={mapsPlaceLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-1.5 w-full py-1 text-[11px] font-sans font-semibold theme-gold hover:text-saffron transition-colors"
-          >
-            <span>📍 Open Verified Place on Google Maps</span>
-            <ExternalLinkIcon />
-          </a>
+          <div className="flex items-center gap-2 pt-0.5">
+            <a
+              href={mapsPlaceLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg bg-black/20 hover:bg-black/40 border border-[var(--border-gold)] text-[11px] font-sans font-semibold theme-gold hover:text-saffron transition-colors truncate"
+            >
+              <span>📍 Maps Place</span>
+              <ExternalLinkIcon />
+            </a>
+
+            <button
+              type="button"
+              onClick={() => onSuggestEdit?.(selectedTemple)}
+              className="flex-1 flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/30 text-[11px] font-sans font-semibold text-amber-200 hover:text-amber-100 transition-colors truncate cursor-pointer"
+              title="Propose edits or updates for this shrine"
+            >
+              <span>✏️ Suggest Edits</span>
+            </button>
+          </div>
         </div>
       </motion.aside>
 

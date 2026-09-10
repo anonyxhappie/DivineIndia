@@ -1,0 +1,491 @@
+[
+  {
+    "id": 1001,
+    "name": "Angkor Wat",
+    "state": "Siem Reap",
+    "country": "Cambodia",
+    "lat": 13.4125,
+    "lng": 103.867,
+    "deity": "Vishnu",
+    "period": "Ancient",
+    "circuit_tags": [
+      "UNESCO",
+      "Heritage",
+      "Global Shrines"
+    ],
+    "description": "The largest religious monument in the world, built in the 12th century by King Suryavarman II as a grand temple dedicated to Lord Vishnu and representing Mount Meru.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/20171126_Angkor_Wat_4712_presat.jpg/640px-20171126_Angkor_Wat_4712_presat.jpg",
+    "wiki_slug": "Angkor_Wat"
+  },
+  {
+    "id": 1002,
+    "name": "Banteay Srei",
+    "state": "Siem Reap",
+    "country": "Cambodia",
+    "lat": 13.5989,
+    "lng": 103.9631,
+    "deity": "Shiva",
+    "period": "Ancient",
+    "circuit_tags": [
+      "UNESCO",
+      "Heritage",
+      "Global Shrines"
+    ],
+    "description": "10th-century Cambodian temple dedicated to the Hindu god Shiva. Built of red sandstone that can be carved like wood, it is renowned as the jewel of Khmer art.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Banteay_Srei_entrance_2011.jpg/640px-Banteay_Srei_entrance_2011.jpg",
+    "wiki_slug": "Banteay_Srei"
+  },
+  {
+    "id": 1003,
+    "name": "Prasat Preah Vihear",
+    "state": "Preah Vihear",
+    "country": "Cambodia",
+    "lat": 14.3906,
+    "lng": 104.68,
+    "deity": "Shiva",
+    "period": "Ancient",
+    "circuit_tags": [
+      "UNESCO",
+      "Heritage",
+      "Global Shrines"
+    ],
+    "description": "An ancient Hindu temple built during the Khmer Empire, situated atop a 525-metre cliff in the Dângrêk Mountains, dedicated to Lord Shiva as Bhadresvara.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Preah_Vihear_Temple_2014.jpg/640px-Preah_Vihear_Temple_2014.jpg",
+    "wiki_slug": "Preah_Vihear_Temple"
+  },
+  {
+    "id": 1004,
+    "name": "Prambanan Temple",
+    "state": "Special Region of Yogyakarta",
+    "country": "Indonesia",
+    "lat": -7.752,
+    "lng": 110.4915,
+    "deity": "Shiva",
+    "period": "Ancient",
+    "circuit_tags": [
+      "UNESCO",
+      "Heritage",
+      "Global Shrines"
+    ],
+    "description": "A 9th-century Hindu temple compound in Central Java, the largest Hindu temple site in Indonesia, dedicated to the Trimurti: Brahma, Vishnu, and Shiva.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Prambanan_temple_complex.jpg/640px-Prambanan_temple_complex.jpg",
+    "wiki_slug": "Prambanan"
+  },
+  {
+    "id": 1005,
+    "name": "Pura Besakih (Mother Temple of Bali)",
+    "state": "Bali",
+    "country": "Indonesia",
+    "lat": -8.374,
+    "lng": 115.451,
+    "deity": "Shiva",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Heritage",
+      "Global Shrines",
+      "Pilgrimage"
+    ],
+    "description": "The Mother Temple of Bali, perched on the slopes of Mount Agung. It is the most important, largest, and holiest temple of Balinese Hinduism.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Besakih_temple_complex_Bali.jpg/640px-Besakih_temple_complex_Bali.jpg",
+    "wiki_slug": "Besakih_Temple"
+  },
+  {
+    "id": 1006,
+    "name": "Pura Tanah Lot",
+    "state": "Bali",
+    "country": "Indonesia",
+    "lat": -8.6212,
+    "lng": 115.0868,
+    "deity": "Multi",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Heritage",
+      "Global Shrines"
+    ],
+    "description": "An ancient Balinese sea temple sitting on a large offshore rock which has been shaped continuously over the years by the ocean tide, dedicated to the sea gods.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Tanah_Lot_Bali_Indonesia.jpg/640px-Tanah_Lot_Bali_Indonesia.jpg",
+    "wiki_slug": "Tanah_Lot"
+  },
+  {
+    "id": 1007,
+    "name": "Pura Luhur Uluwatu",
+    "state": "Bali",
+    "country": "Indonesia",
+    "lat": -8.8291,
+    "lng": 115.0849,
+    "deity": "Shiva",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Heritage",
+      "Global Shrines"
+    ],
+    "description": "Perched on top of a steep cliff approximately 70 metres above the Indian Ocean, this sea temple is dedicated to Sang Hyang Widhi Wasa in his manifestation as Rudra.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Uluwatu_Temple_Bali.jpg/640px-Uluwatu_Temple_Bali.jpg",
+    "wiki_slug": "Uluwatu_Temple"
+  },
+  {
+    "id": 1008,
+    "name": "Pura Ulun Danu Beratan",
+    "state": "Bali",
+    "country": "Indonesia",
+    "lat": -8.2753,
+    "lng": 115.1667,
+    "deity": "Shiva",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Heritage",
+      "Global Shrines"
+    ],
+    "description": "A major Hindu Shaivite water temple on the shores of Lake Beratan in the mountains near Bedugul, dedicated to Dewi Danu, the goddess of lakes and rivers.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Pura_Ulun_Danu_Bratan_Bali.jpg/640px-Pura_Ulun_Danu_Bratan_Bali.jpg",
+    "wiki_slug": "Pura_Ulun_Danu_Bratan"
+  },
+  {
+    "id": 1009,
+    "name": "Pashupatinath Temple",
+    "state": "Kathmandu",
+    "country": "Nepal",
+    "lat": 27.7104,
+    "lng": 85.3488,
+    "deity": "Shiva",
+    "period": "Ancient",
+    "circuit_tags": [
+      "UNESCO",
+      "Pilgrimage",
+      "Global Shrines"
+    ],
+    "description": "One of the most sacred Hindu temples of Lord Shiva in the world, located on both banks of the holy Bagmati River in Kathmandu. The central shrine houses the revered four-faced lingam.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Pashupatinath_Temple_Kathmandu_Nepal.jpg/640px-Pashupatinath_Temple_Kathmandu_Nepal.jpg",
+    "wiki_slug": "Pashupatinath_Temple"
+  },
+  {
+    "id": 1010,
+    "name": "Muktinath Temple",
+    "state": "Mustang",
+    "country": "Nepal",
+    "lat": 28.8168,
+    "lng": 83.8716,
+    "deity": "Vishnu",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Pilgrimage",
+      "Global Shrines",
+      "Char Dham"
+    ],
+    "description": "Located at an altitude of 3,800 metres in the Himalayas, Muktinath is one of the 108 Divya Desams, revered as Muktikshetra (place of liberation), featuring 108 sacred water spouts.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Muktinath_temple_Nepal.jpg/640px-Muktinath_temple_Nepal.jpg",
+    "wiki_slug": "Muktinath"
+  },
+  {
+    "id": 1011,
+    "name": "Janaki Mandir",
+    "state": "Janakpur",
+    "country": "Nepal",
+    "lat": 26.7299,
+    "lng": 85.9269,
+    "deity": "Vishnu",
+    "period": "Modern",
+    "circuit_tags": [
+      "Pilgrimage",
+      "Heritage",
+      "Global Shrines"
+    ],
+    "description": "Magnificent Hindu temple dedicated to Goddess Sita in Janakpur, the ancient capital of King Janaka's Kingdom of Mithila. Built in Mughal and Rajput architectural styles.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Janaki_Mandir_Janakpur_Nepal.jpg/640px-Janaki_Mandir_Janakpur_Nepal.jpg",
+    "wiki_slug": "Janaki_Mandir"
+  },
+  {
+    "id": 1012,
+    "name": "Budhanilkantha Temple",
+    "state": "Kathmandu",
+    "country": "Nepal",
+    "lat": 27.7667,
+    "lng": 85.3644,
+    "deity": "Vishnu",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Heritage",
+      "Global Shrines"
+    ],
+    "description": "An open-air Hindu temple dedicated to Lord Mahavishnu, famed for its massive carved stone statue of Vishnu reclining on the coils of the cosmic serpent Sheshanaga in a sacred pool.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Budhanilkantha_Statue_of_Vishnu.jpg/640px-Budhanilkantha_Statue_of_Vishnu.jpg",
+    "wiki_slug": "Budhanilkantha_Temple"
+  },
+  {
+    "id": 1013,
+    "name": "Batu Caves Temple",
+    "state": "Selangor",
+    "country": "Malaysia",
+    "lat": 3.2374,
+    "lng": 101.6839,
+    "deity": "Murugan",
+    "period": "Modern",
+    "circuit_tags": [
+      "Pilgrimage",
+      "Global Shrines"
+    ],
+    "description": "A limestone hill that has a series of caves and cave temples in Gombak, guarded by a colossal 42.7-metre gold-plated statue of Lord Murugan, drawing millions during Thaipusam.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Batu_Caves_Lord_Murugan_Statue.jpg/640px-Batu_Caves_Lord_Murugan_Statue.jpg",
+    "wiki_slug": "Batu_Caves"
+  },
+  {
+    "id": 1014,
+    "name": "Sri Mariamman Temple",
+    "state": "Chinatown",
+    "country": "Singapore",
+    "lat": 1.2827,
+    "lng": 103.8453,
+    "deity": "Goddess",
+    "period": "Modern",
+    "circuit_tags": [
+      "Heritage",
+      "Global Shrines"
+    ],
+    "description": "Singapore's oldest Hindu temple, founded in 1827 by Naraina Pillai. Dedicated to Goddess Mariamman, it is famed for its majestic ornate six-tiered gopuram.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Sri_Mariamman_Temple_Singapore.jpg/640px-Sri_Mariamman_Temple_Singapore.jpg",
+    "wiki_slug": "Sri_Mariamman_Temple,_Singapore"
+  },
+  {
+    "id": 1015,
+    "name": "Koneswaram Temple",
+    "state": "Eastern Province",
+    "country": "Sri Lanka",
+    "lat": 8.5881,
+    "lng": 81.2411,
+    "deity": "Shiva",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Heritage",
+      "Global Shrines",
+      "Pilgrimage"
+    ],
+    "description": "Revered as Dakshina-Kailasam (Mount Kailash of the South), this classical-medieval Hindu temple complex sits atop Swami Rock overlooking Trincomalee Bay.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Koneswaram_Temple_Trincomalee.jpg/640px-Koneswaram_Temple_Trincomalee.jpg",
+    "wiki_slug": "Koneswaram_Temple"
+  },
+  {
+    "id": 1016,
+    "name": "Munneswaram Temple",
+    "state": "North Western Province",
+    "country": "Sri Lanka",
+    "lat": 7.5855,
+    "lng": 79.8519,
+    "deity": "Shiva",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Heritage",
+      "Global Shrines",
+      "Pilgrimage"
+    ],
+    "description": "One of the Pancha Ishwarams dedicated to Shiva in Sri Lanka. According to the Ramayana, Lord Rama prayed to Shiva here after the war with Ravana.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Munneswaram_temple.jpg/640px-Munneswaram_temple.jpg",
+    "wiki_slug": "Munneswaram_temple"
+  },
+  {
+    "id": 1017,
+    "name": "Seetha Amman Temple (Ashok Vatika)",
+    "state": "Central Province",
+    "country": "Sri Lanka",
+    "lat": 6.9365,
+    "lng": 80.8141,
+    "deity": "Goddess",
+    "period": "Modern",
+    "circuit_tags": [
+      "Heritage",
+      "Global Shrines",
+      "Pilgrimage"
+    ],
+    "description": "Located in Seetha Eliya near Nuwara Eliya, this temple marks the sacred site of Ashok Vatika, where Devi Sita was held captive by Ravana in the Ramayana.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Seetha_Amman_Temple_Nuwara_Eliya.jpg/640px-Seetha_Amman_Temple_Nuwara_Eliya.jpg",
+    "wiki_slug": "Seetha_Amman_Temple"
+  },
+  {
+    "id": 1018,
+    "name": "Hinglaj Mata Mandir",
+    "state": "Balochistan",
+    "country": "Pakistan",
+    "lat": 25.5133,
+    "lng": 65.5167,
+    "deity": "Goddess",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Shakti Peetha",
+      "Pilgrimage",
+      "Global Shrines"
+    ],
+    "description": "One of the 51 sacred Shakti Peethas, situated in Hingol National Park in a mountain cave. According to tradition, the head of Sati fell here.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Hinglaj_Mata_Temple.jpg/640px-Hinglaj_Mata_Temple.jpg",
+    "wiki_slug": "Hinglaj_Mata"
+  },
+  {
+    "id": 1019,
+    "name": "Katas Raj Temples",
+    "state": "Punjab",
+    "country": "Pakistan",
+    "lat": 32.7247,
+    "lng": 72.9558,
+    "deity": "Shiva",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Heritage",
+      "Global Shrines"
+    ],
+    "description": "An ancient complex of Hindu temples connected by walkways around a sacred pond called Katas. Hindu tradition attributes the pond's creation to the tears of Lord Shiva weeping over Sati.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Katas_Raj_Temples_Chakwal.jpg/640px-Katas_Raj_Temples_Chakwal.jpg",
+    "wiki_slug": "Katas_Raj_Temples"
+  },
+  {
+    "id": 1020,
+    "name": "Dhakeshwari National Temple",
+    "state": "Dhaka",
+    "country": "Bangladesh",
+    "lat": 23.7231,
+    "lng": 90.3897,
+    "deity": "Goddess",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Shakti Peetha",
+      "Heritage",
+      "Global Shrines"
+    ],
+    "description": "The national Hindu temple of Bangladesh and an auspicious Shakti Peetha, built in the 12th century by King Ballal Sena of the Sena dynasty, from which Dhaka derives its name.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Dhakeshwari_Temple_Dhaka.jpg/640px-Dhakeshwari_Temple_Dhaka.jpg",
+    "wiki_slug": "Dhakeshwari_Temple"
+  },
+  {
+    "id": 1021,
+    "name": "Ganga Talao (Grand Bassin)",
+    "state": "Savanne",
+    "country": "Mauritius",
+    "lat": -20.418,
+    "lng": 57.4917,
+    "deity": "Shiva",
+    "period": "Modern",
+    "circuit_tags": [
+      "Pilgrimage",
+      "Global Shrines"
+    ],
+    "description": "A sacred crater lake high in the mountains of Mauritius, considered a continuation of the holy river Ganga. Features a colossal 33-metre statue of Lord Shiva (Mangal Mahadev).",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Grand_Bassin_Mauritius_Shiva.jpg/640px-Grand_Bassin_Mauritius_Shiva.jpg",
+    "wiki_slug": "Ganga_Talao"
+  },
+  {
+    "id": 1022,
+    "name": "BAPS Hindu Mandir Abu Dhabi",
+    "state": "Abu Dhabi",
+    "country": "United Arab Emirates",
+    "lat": 24.5889,
+    "lng": 54.7672,
+    "deity": "Vishnu",
+    "period": "Modern",
+    "circuit_tags": [
+      "Heritage",
+      "Global Shrines"
+    ],
+    "description": "The first traditional hand-carved stone Hindu mandir in the Middle East, inaugurated in 2024, featuring 7 ornate spires representing the seven emirates of the UAE.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/BAPS_Hindu_Mandir_Abu_Dhabi.jpg/640px-BAPS_Hindu_Mandir_Abu_Dhabi.jpg",
+    "wiki_slug": "BAPS_Hindu_Mandir_Abu_Dhabi"
+  },
+  {
+    "id": 1023,
+    "name": "BAPS Shri Swaminarayan Mandir London",
+    "state": "Neasden, London",
+    "country": "United Kingdom",
+    "lat": 51.5475,
+    "lng": -0.2608,
+    "deity": "Vishnu",
+    "period": "Modern",
+    "circuit_tags": [
+      "Heritage",
+      "Global Shrines"
+    ],
+    "description": "Britain's first authentic Hindu mandir, hand-carved in India from Bulgarian limestone and Italian Carrara marble before being assembled in Neasden, London.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Neasden_Temple_London.jpg/640px-Neasden_Temple_London.jpg",
+    "wiki_slug": "BAPS_Shri_Swaminarayan_Mandir_London"
+  },
+  {
+    "id": 1024,
+    "name": "BAPS Swaminarayan Akshardham",
+    "state": "Robbinsville, New Jersey",
+    "country": "United States",
+    "lat": 40.237,
+    "lng": -74.582,
+    "deity": "Vishnu",
+    "period": "Modern",
+    "circuit_tags": [
+      "Heritage",
+      "Global Shrines"
+    ],
+    "description": "The largest Hindu temple in the Western Hemisphere and second-largest in the modern world, meticulously hand-carved from four types of marble and granite.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Swaminarayan_Akshardham_New_Jersey.jpg/640px-Swaminarayan_Akshardham_New_Jersey.jpg",
+    "wiki_slug": "BAPS_Swaminarayan_Akshardham_(New_Jersey)"
+  },
+  {
+    "id": 1025,
+    "name": "Sri Venkateswara Temple, Penn Hills",
+    "state": "Pittsburgh, Pennsylvania",
+    "country": "United States",
+    "lat": 40.4856,
+    "lng": -79.7997,
+    "deity": "Vishnu",
+    "period": "Modern",
+    "circuit_tags": [
+      "Heritage",
+      "Global Shrines"
+    ],
+    "description": "One of the earliest traditional Hindu temples established in the United States (1976), modeled after the world-famous Tirupati Venkateswara Temple in Andhra Pradesh.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Sri_Venkateswara_Temple_Pittsburgh.jpg/640px-Sri_Venkateswara_Temple_Pittsburgh.jpg",
+    "wiki_slug": "Sri_Venkateswara_Temple,_Pittsburgh"
+  },
+  {
+    "id": 1026,
+    "name": "Malibu Hindu Temple",
+    "state": "Calabasas, California",
+    "country": "United States",
+    "lat": 34.1039,
+    "lng": -118.6811,
+    "deity": "Vishnu",
+    "period": "Modern",
+    "circuit_tags": [
+      "Heritage",
+      "Global Shrines"
+    ],
+    "description": "A magnificent traditional temple built in 1981 in the Santa Monica Mountains near Malibu, dedicated to Lord Venkateswara and featuring authentic South Indian Chola architecture.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Malibu_Hindu_Temple_California.jpg/640px-Malibu_Hindu_Temple_California.jpg",
+    "wiki_slug": "Malibu_Hindu_Temple"
+  },
+  {
+    "id": 1027,
+    "name": "Sri Siva Subramaniya Temple",
+    "state": "Nadi",
+    "country": "Fiji",
+    "lat": -17.805,
+    "lng": 177.4172,
+    "deity": "Murugan",
+    "period": "Modern",
+    "circuit_tags": [
+      "Heritage",
+      "Global Shrines"
+    ],
+    "description": "The largest Hindu temple in the Southern Hemisphere, located at the southern end of the main street in Nadi, Fiji, famed for its towering Dravidian gopurams and vibrant ceiling frescoes.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Sri_Siva_Subramaniya_Temple_Nadi_Fiji.jpg/640px-Sri_Siva_Subramaniya_Temple_Nadi_Fiji.jpg",
+    "wiki_slug": "Sri_Siva_Subramaniya_Temple"
+  },
+  {
+    "id": 1028,
+    "name": "Sydney Murugan Temple",
+    "state": "Mays Hill, NSW",
+    "country": "Australia",
+    "lat": -33.8247,
+    "lng": 150.9856,
+    "deity": "Murugan",
+    "period": "Modern",
+    "circuit_tags": [
+      "Heritage",
+      "Global Shrines"
+    ],
+    "description": "A major Hindu temple dedicated to Lord Murugan, constructed according to traditional Saiva Agamas in the western suburbs of Sydney, serving the Australian diaspora.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Sydney_Murugan_Temple.jpg/640px-Sydney_Murugan_Temple.jpg",
+    "wiki_slug": "Sydney_Murugan_Temple"
+  }
+]

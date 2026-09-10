@@ -4,46 +4,99 @@ import TempleMap from './components/TempleMap'
 import DarshanPanel from './components/DarshanPanel'
 import Sidebar from './components/Sidebar'
 import CircuitTourBar from './components/CircuitTourBar'
-import { TanpuraEngine } from './audio/tanpuraEngine'
-import { playTempleChime } from './audio/chimeSound'
+import YatraCompleteModal from './components/YatraCompleteModal'
+import BottomAudioPlayer from './components/BottomAudioPlayer'
+import { YouTubeAudioEngine } from './audio/youtubeAudioEngine'
+import {
+  YOUTUBE_BHAKTI_TRACKS,
+  getHarmonizedYoutubeTrack,
+} from './audio/youtubeBhaktiPlaylists'
+import { playTempleChime, playTempleBellSound, preloadTempleBell } from './audio/chimeSound'
 import { getUserLocation } from './utils/locationService'
+import { getOrderedCircuitTemples } from './utils/circuitOrder'
+import { DivineCallingIcon, TanpuraSvgIcon } from './components/ThemedIcons'
 import TEMPLES from './data/temples.json'
+import GLOBAL_TEMPLES from './data/globalTemples.json'
+import { searchGlobalTemples } from './api/overpassService'
+import CommunityEditModal from './components/CommunityEditModal'
+import CommunityHubModal from './components/CommunityHubModal'
+import {
+  getCommunityEdits,
+  mergeCommunityEdits,
+} from './utils/communityEditsService'
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // CONSTANTS
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-const ALL_DEITIES = ['All', ...Array.from(new Set(TEMPLES.map((t) => t.deity))).sort()]
+const CURATED_TEMPLES = [
+  ...TEMPLES.map((t) => ({ ...t, country: t.country || 'India' })),
+  ...GLOBAL_TEMPLES.map((t) => ({ ...t, country: t.country || 'International' })),
+]
+
+const ALL_DEITIES = ['All', ...Array.from(new Set(CURATED_TEMPLES.map((t) => t.deity))).sort()]
 const ERA_OPTIONS = ['All', 'Ancient', 'Medieval', 'Modern']
 const ALL_CIRCUITS = [
   'All',
-  ...Array.from(new Set(TEMPLES.flatMap((t) => t.circuit_tags || []))).sort(),
+  ...Array.from(new Set(CURATED_TEMPLES.flatMap((t) => t.circuit_tags || []))).sort(),
+]
+
+const ALL_COUNTRIES = [
+  'All',
+  'India',
+  'Global / International',
+  ...Array.from(
+    new Set(
+      CURATED_TEMPLES.map((t) => t.country).filter(
+        (c) => c && c !== 'India' && c !== 'International'
+      )
+    )
+  ).sort(),
 ]
 
 const HOLY_CIRCUITS = [
   {
     name: '12 Jyotirlingas',
     tag: 'Jyotirlinga',
-    total: TEMPLES.filter((t) => t.circuit_tags?.includes('Jyotirlinga')).length,
+    total: 12,
     icon: '🔱',
   },
   {
     name: 'Char Dham',
     tag: 'Char Dham',
-    total: TEMPLES.filter((t) => t.circuit_tags?.includes('Char Dham')).length,
+    total: 4,
     icon: '🛕',
+  },
+  {
+    name: 'Chota Char Dham',
+    tag: 'Chota Char Dham',
+    total: 4,
+    icon: '🏔️',
   },
   {
     name: 'Shakti Peethas',
     tag: 'Shakti Peetha',
-    total: TEMPLES.filter((t) => t.circuit_tags?.includes('Shakti Peetha')).length,
+    total: CURATED_TEMPLES.filter((t) => t.circuit_tags?.includes('Shakti Peetha')).length,
     icon: '🌺',
+  },
+  {
+    name: 'Global Shrines',
+    tag: 'Global Shrines',
+    total: CURATED_TEMPLES.filter((t) => t.circuit_tags?.includes('Global Shrines')).length,
+    icon: '🌏',
   },
 ]
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // ICONS
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+const SearchIcon = () => (
+  <svg className="w-3.5 h-3.5 text-saffron flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+    <circle cx="11" cy="11" r="8" />
+    <path d="m21 21-4.35-4.35" />
+  </svg>
+)
 
 const CloseIcon = () => (
   <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -129,8 +182,6 @@ function TopBar({
   filteredCount,
   totalCount,
   visitedIds,
-  tanpuraPlaying,
-  onToggleTanpura,
   theme,
   onToggleTheme,
   activeCircuit,
@@ -140,6 +191,8 @@ function TopBar({
   onToggleLocation,
   sidebarOpen,
   onToggleSidebar,
+  communityEditsCount = 0,
+  onOpenCommunityHub,
 }) {
   const [progressOpen, setProgressOpen] = useState(false)
 
@@ -149,7 +202,7 @@ function TopBar({
   )
   const totalPilgrimageVisited = useMemo(
     () =>
-      TEMPLES.filter(
+      CURATED_TEMPLES.filter(
         (t) =>
           HOLY_CIRCUITS.some((c) => t.circuit_tags?.includes(c.tag)) &&
           visitedIds.has(t.id)
@@ -164,14 +217,18 @@ function TopBar({
       transition={{ delay: 0.2, duration: 0.5, type: 'spring', stiffness: 200 }}
       className="fixed top-0 left-0 right-0 z-[1000] flex items-center justify-between px-2 sm:px-6 py-2 sm:py-2.5 pointer-events-none"
     >
-      {/* Brand title & Mobile Menu Toggle */}
-      <div className="glass-strong rounded-2xl px-2.5 sm:px-4 py-1.5 sm:py-2 flex items-center gap-1.5 sm:gap-2 pointer-events-auto shadow-lg">
+      {/* Brand title & Sidebar Toggle */}
+      <div className="glass-strong rounded-2xl px-2 sm:px-3.5 py-1.5 sm:py-2 flex items-center gap-1.5 sm:gap-2 pointer-events-auto shadow-lg flex-shrink-0">
         <button
           onClick={onToggleSidebar}
-          className="md:hidden p-1 -ml-1 text-saffron hover:bg-black/10 dark:hover:bg-white/10 rounded-xl transition-all active:scale-90 flex items-center justify-center"
-          aria-label={sidebarOpen ? 'Close explorer menu' : 'Open explorer menu'}
+          className="p-1 sm:p-1.5 -ml-1 text-saffron hover:bg-black/10 dark:hover:bg-white/10 rounded-xl transition-all active:scale-90 flex items-center justify-center gap-1"
+          aria-label={sidebarOpen ? 'Collapse explorer sidebar' : 'Open explorer sidebar'}
+          title={sidebarOpen ? 'Collapse sidebar' : 'Open sidebar (Temples list & filters)'}
         >
           {sidebarOpen ? <CloseIcon /> : <MenuIcon />}
+          <span className="hidden md:inline text-[11px] font-sans font-bold text-saffron">
+            {sidebarOpen ? 'Hide' : 'Temples'}
+          </span>
         </button>
         <span className="text-lg sm:text-xl select-none">🛕</span>
         <div>
@@ -185,7 +242,7 @@ function TopBar({
       </div>
 
       {/* Center & Right Controls */}
-      <div className="glass-strong rounded-2xl px-1.5 sm:px-3 py-1 sm:py-1.5 flex items-center gap-1 sm:gap-2 pointer-events-auto shadow-lg">
+      <div className="glass-strong rounded-2xl px-1.5 sm:px-3 py-1 sm:py-1.5 flex items-center gap-1 sm:gap-2 pointer-events-auto shadow-lg flex-shrink-0">
         {/* Temple count */}
         <div className="px-1.5 sm:px-2 py-1 flex items-center gap-1 text-xs font-sans">
           <span className="theme-muted hidden sm:inline">Temples</span>
@@ -367,35 +424,19 @@ function TopBar({
 
         <div className="w-px h-4 sm:h-5 bg-[var(--border-gold)]" />
 
-        {/* Ambient Tanpura Drone Toggle */}
+
+
+        {/* Community Contributions Hub Trigger */}
         <button
-          onClick={onToggleTanpura}
-          className={`p-1.5 sm:px-2.5 sm:py-1.5 flex items-center gap-1 sm:gap-1.5 rounded-xl transition-all duration-300 font-sans text-xs
-            ${tanpuraPlaying
-              ? 'bg-saffron/20 text-saffron font-bold'
-              : 'theme-muted hover:theme-title hover:bg-black/5 dark:hover:bg-white/5'
-            }`}
-          title={tanpuraPlaying ? 'Stop Tanpura Drone' : 'Play Meditative Tanpura Drone'}
+          onClick={onOpenCommunityHub}
+          className="px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-xl font-sans text-xs font-semibold hover:bg-black/5 dark:hover:bg-white/5 theme-title transition-all duration-200 flex items-center gap-1.5 cursor-pointer"
+          title="Community Contributions & Edits Hub"
         >
-          {tanpuraPlaying ? <VolumeOnIcon /> : <VolumeOffIcon />}
-          <span className="hidden sm:inline">
-            {tanpuraPlaying ? 'Tanpura' : 'Sound'}
-          </span>
-          {tanpuraPlaying && (
-            <span className="flex gap-[2px] items-end h-3">
-              {[1, 2, 3].map((i) => (
-                <motion.span
-                  key={i}
-                  className="w-[2px] bg-saffron rounded-full"
-                  animate={{ height: ['3px', '11px', '3px'] }}
-                  transition={{
-                    duration: 0.7 + i * 0.2,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                    delay: i * 0.15,
-                  }}
-                />
-              ))}
+          <span>🪔</span>
+          <span className="hidden md:inline">Community</span>
+          {communityEditsCount > 0 && (
+            <span className="px-1.5 py-0.2 text-[9.5px] font-bold rounded-full bg-amber-500 text-stone-950 font-mono">
+              {communityEditsCount}
             </span>
           )}
         </button>
@@ -437,6 +478,10 @@ export default function App() {
     } catch {}
   }, [theme])
 
+  useEffect(() => {
+    preloadTempleBell()
+  }, [])
+
   const toggleTheme = useCallback(() => {
     setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))
   }, [])
@@ -445,6 +490,8 @@ export default function App() {
   const [deity, setDeity] = useState('All')
   const [era, setEra] = useState('All')
   const [circuit, setCircuit] = useState('All')
+  const [selectedCountry, setSelectedCountry] = useState('All')
+  const [discoveredTemples, setDiscoveredTemples] = useState([])
   const [selectedTemple, setSelectedTemple] = useState(null)
   const [sidebarOpen, setSidebarOpen] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -453,6 +500,87 @@ export default function App() {
     return false
   })
   const [mapTarget, setMapTarget] = useState(null)
+
+  // Community Edits & Custom Shrines State
+  const [communityVersion, setCommunityVersion] = useState(0)
+  const [communityEditModalOpen, setCommunityEditModalOpen] = useState(false)
+  const [communityModalMode, setCommunityModalMode] = useState('edit') // 'edit' | 'add' | 'photo_only'
+  const [editingTemple, setEditingTemple] = useState(null)
+  const [communityHubOpen, setCommunityHubOpen] = useState(false)
+  const [previewPendingContributions, setPreviewPendingContributions] = useState(() => {
+    try {
+      const stored = localStorage.getItem('divine-india-preview-pending')
+      return stored != null ? JSON.parse(stored) : true
+    } catch {
+      return true
+    }
+  })
+
+  const handleTogglePreviewPending = useCallback((enabled) => {
+    setPreviewPendingContributions(enabled)
+    try {
+      localStorage.setItem('divine-india-preview-pending', JSON.stringify(enabled))
+    } catch {
+      // ignore
+    }
+  }, [])
+
+  // Listen to community storage updates across windows and components
+  useEffect(() => {
+    const handleCommunityUpdate = () => {
+      setCommunityVersion((v) => v + 1)
+    }
+    window.addEventListener('divine-india-community-updated', handleCommunityUpdate)
+    return () => window.removeEventListener('divine-india-community-updated', handleCommunityUpdate)
+  }, [])
+
+  const communityContributions = useMemo(() => {
+    const data = getCommunityEdits()
+    const count =
+      Object.keys(data.edits || {}).length +
+      (data.newTemples || []).length +
+      (data.photos || []).length
+    return { data, count }
+  }, [communityVersion])
+
+  // Combined master temples list (Curated India + Curated Global + Community Edits/Additions + Live Radar/OSM discovered)
+  const allTemples = useMemo(() => {
+    const withCommunity = mergeCommunityEdits(CURATED_TEMPLES, {
+      includePending: previewPendingContributions,
+    })
+    const existingIds = new Set(withCommunity.map((t) => t.id))
+    const uniqueDiscovered = discoveredTemples.filter((t) => !existingIds.has(t.id))
+    return [...withCommunity, ...uniqueDiscovered]
+  }, [discoveredTemples, communityVersion, previewPendingContributions])
+
+  const handleOpenEditTemple = useCallback((templeToEdit) => {
+    setEditingTemple(templeToEdit)
+    setCommunityModalMode('edit')
+    setCommunityEditModalOpen(true)
+  }, [])
+
+  const handleOpenAddNewTemple = useCallback(() => {
+    setEditingTemple(null)
+    setCommunityModalMode('add')
+    setCommunityEditModalOpen(true)
+  }, [])
+
+  const handleOpenPhotoOnlyContribution = useCallback((templeTarget) => {
+    setEditingTemple(templeTarget)
+    setCommunityModalMode('photo_only')
+    setCommunityEditModalOpen(true)
+  }, [])
+
+  const handleSavedCommunityTemple = useCallback((savedItem) => {
+    const target = savedItem?.temple || savedItem?.edit?.updated
+    if (target) {
+      playTempleBellSound(target)
+      setSelectedTemple(target)
+      if (target.lat && target.lng) {
+        setMapTarget({ center: [target.lat, target.lng], zoom: 12 })
+      }
+    }
+  }, [])
 
   // User Current Location State
   const [userLocation, setUserLocation] = useState(null)
@@ -500,12 +628,13 @@ export default function App() {
   // Interactive Circuit Tour state
   const [activeCircuit, setActiveCircuit] = useState(null)
   const [currentTourIndex, setCurrentTourIndex] = useState(0)
+  const [yatraModalOpen, setYatraModalOpen] = useState(false)
 
-  // Temples in active pilgrimage circuit
+  // Temples in active pilgrimage circuit (canonically ordered to eliminate criss-crossing)
   const circuitTemples = useMemo(() => {
     if (!activeCircuit) return []
-    return TEMPLES.filter((t) => t.circuit_tags?.includes(activeCircuit))
-  }, [activeCircuit])
+    return getOrderedCircuitTemples(activeCircuit, allTemples)
+  }, [activeCircuit, allTemples])
 
   // Visited temples tracking
   const [visitedIds, setVisitedIds] = useState(() => {
@@ -523,28 +652,102 @@ export default function App() {
     } catch {}
   }, [visitedIds])
 
-  // Tanpura engine
-  const tanpuraRef = useRef(null)
-  const [tanpuraPlaying, setTanpuraPlaying] = useState(false)
+  // ── Sacred Devotional Audio State (YouTube Bhakti Background Streaming) ──
+  const ytEngineRef = useRef(null)
+  const [audioPlaying, setAudioPlaying] = useState(false)
+  const [audioBuffering, setAudioBuffering] = useState(false)
+  const [currentTrack, setCurrentTrack] = useState(() => YOUTUBE_BHAKTI_TRACKS[0])
+  const [tracksList, setTracksList] = useState(() => YOUTUBE_BHAKTI_TRACKS)
+  const [soundVolume, setSoundVolume] = useState(0.8)
+  const [autoHarmonize, setAutoHarmonize] = useState(true)
+
+  const activeTrack = currentTrack || tracksList[0] || YOUTUBE_BHAKTI_TRACKS[0]
 
   useEffect(() => {
+    const engine = new YouTubeAudioEngine()
+    ytEngineRef.current = engine
+
+    engine
+      .init('youtube-bg-player-mount', {
+        onStateChange: ({ isPlaying, isBuffering }) => {
+          setAudioPlaying(isPlaying)
+          setAudioBuffering(isBuffering)
+        },
+        onTrackChange: (track) => {
+          setCurrentTrack(track)
+        },
+        onError: (errCode) => {
+          console.warn('[YouTube Audio Error]', errCode)
+        },
+      })
+      .then(() => {
+        // Attempt initial autoplay on page load
+        engine.play()
+      })
+      .catch((err) => {
+        console.warn('[YouTube Audio Init]', err)
+      })
+
     return () => {
-      tanpuraRef.current?.dispose()
+      engine.destroy()
     }
   }, [])
 
-  const toggleTanpura = useCallback(() => {
-    if (!tanpuraRef.current) {
-      tanpuraRef.current = new TanpuraEngine()
-    }
-    if (tanpuraRef.current.isPlaying) {
-      tanpuraRef.current.stop()
-      setTanpuraPlaying(false)
+  const handleTogglePlay = useCallback(() => {
+    if (!ytEngineRef.current) return
+    if (ytEngineRef.current.isPlaying || audioPlaying) {
+      ytEngineRef.current.pause()
+      setAudioPlaying(false)
     } else {
-      tanpuraRef.current.start()
-      setTanpuraPlaying(true)
+      ytEngineRef.current.play()
+      setAudioPlaying(true)
+    }
+  }, [audioPlaying])
+
+  const handleNextTrack = useCallback(() => {
+    if (!ytEngineRef.current) return
+    ytEngineRef.current.next()
+  }, [])
+
+  const handlePrevTrack = useCallback(() => {
+    if (!ytEngineRef.current) return
+    ytEngineRef.current.prev()
+  }, [])
+
+  const handleSelectTrack = useCallback((track) => {
+    if (!ytEngineRef.current) return
+    ytEngineRef.current.loadTrack(track)
+  }, [])
+
+  const handleAddCustomTrack = useCallback((rawInput) => {
+    if (!ytEngineRef.current) return
+    const success = ytEngineRef.current.loadCustomInput(rawInput)
+    if (success) {
+      setTracksList([...ytEngineRef.current.tracks])
+      setCurrentTrack(ytEngineRef.current.currentTrack)
     }
   }, [])
+
+  const handleVolumeChange = useCallback((val) => {
+    setSoundVolume(val)
+    if (ytEngineRef.current) {
+      ytEngineRef.current.setVolume(val)
+    }
+  }, [])
+
+  const handleToggleAutoHarmonize = useCallback(() => {
+    setAutoHarmonize((prev) => !prev)
+  }, [])
+
+  // Auto-harmonize devotional YouTube bhajan/chant when selected temple changes
+  useEffect(() => {
+    if (!selectedTemple || !autoHarmonize || !ytEngineRef.current) return
+    const harmonizedId = getHarmonizedYoutubeTrack(selectedTemple)
+    const matched = tracksList.find((t) => t.id === harmonizedId)
+    if (matched && currentTrack?.id !== matched.id) {
+      ytEngineRef.current.loadTrack(matched)
+    }
+  }, [selectedTemple, autoHarmonize, tracksList, currentTrack?.id])
 
   // Filter logic: when circuit tour is active, show only that circuit's temples
   const filteredTemples = useMemo(() => {
@@ -553,55 +756,162 @@ export default function App() {
     }
 
     const q = search.trim().toLowerCase()
-    return TEMPLES.filter((t) => {
+    return allTemples.filter((t) => {
       const matchesSearch =
         q === '' ||
         t.name.toLowerCase().includes(q) ||
         t.state?.toLowerCase().includes(q) ||
+        t.country?.toLowerCase().includes(q) ||
         t.deity?.toLowerCase().includes(q)
       const matchesDeity = deity === 'All' || t.deity === deity
       const matchesEra = era === 'All' || t.period === era
       const matchesCircuit =
         circuit === 'All' || (t.circuit_tags && t.circuit_tags.includes(circuit))
-      return matchesSearch && matchesDeity && matchesEra && matchesCircuit
-    })
-  }, [activeCircuit, circuitTemples, search, deity, era, circuit])
+      const matchesCountry =
+        selectedCountry === 'All' ||
+        (selectedCountry === 'India' && (t.country === 'India' || !t.country)) ||
+        (selectedCountry === 'Global / International' &&
+          t.country !== 'India' &&
+          Boolean(t.country)) ||
+        t.country === selectedCountry
 
-  const handleSelectTemple = useCallback((temple) => {
-    setSelectedTemple(temple)
-    if (temple && temple.lat != null && temple.lng != null && !isNaN(temple.lat) && !isNaN(temple.lng)) {
-      setMapTarget({ center: [temple.lat, temple.lng], zoom: 13 })
-    }
-    setVisitedIds((prev) => {
-      const next = new Set(prev)
-      next.add(temple.id)
-      return next
+      return matchesSearch && matchesDeity && matchesEra && matchesCircuit && matchesCountry
     })
-    if (window.innerWidth < 768) {
-      setSidebarOpen(false)
-    }
+  }, [activeCircuit, circuitTemples, allTemples, search, deity, era, circuit, selectedCountry])
+
+  // Select temple, center map camera, ring sacred temple bell, and mark visited in normal mode
+  const handleSelectTemple = useCallback(
+    (temple) => {
+      if (!temple) return
+      playTempleBellSound(temple)
+      setSelectedTemple(temple)
+      if (
+        temple.lat != null &&
+        temple.lng != null &&
+        !isNaN(temple.lat) &&
+        !isNaN(temple.lng)
+      ) {
+        setMapTarget({ center: [temple.lat, temple.lng], zoom: 13 })
+      }
+      // In normal explorer mode, viewing a temple marks it visited
+      if (!activeCircuit) {
+        setVisitedIds((prev) => {
+          const next = new Set(prev)
+          next.add(temple.id)
+          return next
+        })
+      }
+      if (window.innerWidth < 768) {
+        setSidebarOpen(false)
+      }
+    },
+    [activeCircuit]
+  )
+
+  // "दैवयोग · Divine Calling" — Spontaneous pilgrimage to a sacred shrine
+  const handleDivineCalling = useCallback(() => {
+    const pool = selectedTemple
+      ? allTemples.filter((t) => t.id !== selectedTemple.id)
+      : allTemples
+    if (pool.length === 0) return
+
+    const randomTemple = pool[Math.floor(Math.random() * pool.length)]
+    handleSelectTemple(randomTemple)
+    showLocationToast(
+      `✨ दैवयोग · Divine Calling: You have been guided to ${randomTemple.name}, ${[
+        randomTemple.state,
+        randomTemple.country || 'India',
+      ]
+        .filter(Boolean)
+        .join(', ')} 🙏`,
+      5000
+    )
+  }, [selectedTemple, allTemples, handleSelectTemple])
+
+  // Add discovered local/worldwide shrines to dynamic database
+  const handleAddDiscoveredTemples = useCallback((newTemples) => {
+    if (!newTemples || newTemples.length === 0) return
+    setDiscoveredTemples((prev) => {
+      const existing = new Set([
+        ...CURATED_TEMPLES.map((t) => t.id),
+        ...prev.map((t) => t.id),
+      ])
+      const unique = newTemples.filter((t) => !existing.has(t.id))
+      if (unique.length === 0) return prev
+      return [...prev, ...unique]
+    })
   }, [])
 
+  // Live on-demand global search across Google Maps & OpenStreetMap
+  const handleSearchGlobalLive = useCallback(
+    async (query) => {
+      try {
+        const results = await searchGlobalTemples(query)
+        if (results && results.length > 0) {
+          handleAddDiscoveredTemples(results)
+          const first = results[0]
+          handleSelectTemple(first)
+          playTempleChime()
+          showLocationToast(
+            `✨ Discovered ${first.name}, ${first.country || 'Global'}! Added to map.`,
+            5000
+          )
+          return results
+        }
+        return []
+      } catch {
+        return []
+      }
+    },
+    [handleAddDiscoveredTemples, handleSelectTemple]
+  )
+
+  // Handle taking Darshan at current pilgrimage stop
+  const handleTakeDarshan = useCallback(
+    (temple) => {
+      if (!temple) return
+      setVisitedIds((prev) => {
+        const next = new Set(prev)
+        next.add(temple.id)
+
+        // Check if all temples in the active circuit have been sanctified
+        if (activeCircuit && circuitTemples.length > 0) {
+          const allCompleted = circuitTemples.every((t) => next.has(t.id))
+          if (allCompleted) {
+            setTimeout(() => setYatraModalOpen(true), 600)
+          }
+        }
+        return next
+      })
+    },
+    [activeCircuit, circuitTemples]
+  )
+
   // Start Circuit Tour mode
-  const startCircuitTour = useCallback((circuitTag) => {
-    playTempleChime()
-    setActiveCircuit(circuitTag)
-    const list = TEMPLES.filter((t) => t.circuit_tags?.includes(circuitTag))
-    if (list.length > 0) {
-      setCurrentTourIndex(0)
-      handleSelectTemple(list[0])
-    }
-  }, [handleSelectTemple])
+  const startCircuitTour = useCallback(
+    (circuitTag) => {
+      setActiveCircuit(circuitTag)
+      const list = getOrderedCircuitTemples(circuitTag, allTemples)
+      if (list.length > 0) {
+        setCurrentTourIndex(0)
+        handleSelectTemple(list[0])
+      }
+    },
+    [allTemples, handleSelectTemple]
+  )
 
   // Stepper index select inside Circuit Tour mode
-  const handleTourIndexSelect = useCallback((idx) => {
-    if (!circuitTemples || circuitTemples.length === 0) return
-    setCurrentTourIndex(idx)
-    const temple = circuitTemples[idx]
-    if (temple) {
-      handleSelectTemple(temple)
-    }
-  }, [circuitTemples, handleSelectTemple])
+  const handleTourIndexSelect = useCallback(
+    (idx) => {
+      if (!circuitTemples || circuitTemples.length === 0) return
+      setCurrentTourIndex(idx)
+      const temple = circuitTemples[idx]
+      if (temple) {
+        handleSelectTemple(temple)
+      }
+    },
+    [circuitTemples, handleSelectTemple]
+  )
 
   // Exit Circuit Tour mode
   const handleExitTour = useCallback(() => {
@@ -609,6 +919,7 @@ export default function App() {
     setActiveCircuit(null)
     setCurrentTourIndex(0)
     setSelectedTemple(null)
+    setYatraModalOpen(false)
     setMapTarget({ center: [22.5, 79.0], zoom: 5 })
   }, [])
 
@@ -628,17 +939,17 @@ export default function App() {
         theme={theme}
         activeCircuit={activeCircuit}
         circuitTemples={circuitTemples}
+        visitedIds={visitedIds}
         userLocation={userLocation}
         onUpdateUserLocation={handleUpdateUserLocation}
+        onAddDiscoveredTemples={handleAddDiscoveredTemples}
       />
 
       {/* ── Top Bar Header (with GPS Near Me & Pilgrimage) ── */}
       <TopBar
         filteredCount={filteredTemples.length}
-        totalCount={TEMPLES.length}
+        totalCount={allTemples.length}
         visitedIds={visitedIds}
-        tanpuraPlaying={tanpuraPlaying}
-        onToggleTanpura={toggleTanpura}
         theme={theme}
         onToggleTheme={toggleTheme}
         activeCircuit={activeCircuit}
@@ -648,25 +959,34 @@ export default function App() {
         onToggleLocation={handleToggleLocation}
         sidebarOpen={sidebarOpen}
         onToggleSidebar={() => setSidebarOpen((prev) => !prev)}
+        communityEditsCount={communityContributions.count}
+        onOpenCommunityHub={() => setCommunityHubOpen(true)}
       />
 
-      {/* ── Left Explorer Sidebar with 44x44px Thumbnails & Distance Badges ── */}
+      {/* ── Left Explorer Sidebar with 44x44px Thumbnails, Divine Calling, Country Filter & Live Radar Search ── */}
       <Sidebar
         search={search} setSearch={setSearch}
         deity={deity} setDeity={setDeity}
         era={era} setEra={setEra}
         circuit={circuit} setCircuit={setCircuit}
+        country={selectedCountry} setCountry={setSelectedCountry}
         allDeities={ALL_DEITIES}
         eraOptions={ERA_OPTIONS}
         allCircuits={ALL_CIRCUITS}
+        allCountries={ALL_COUNTRIES}
         filteredTemples={filteredTemples}
-        totalTemples={TEMPLES.length}
+        totalTemples={allTemples.length}
         selectedTemple={selectedTemple}
         visitedIds={visitedIds}
         onSelectTemple={handleSelectTemple}
         isOpen={sidebarOpen}
         onToggle={() => setSidebarOpen(!sidebarOpen)}
         userLocation={userLocation}
+        onDivineCalling={handleDivineCalling}
+        onSearchGlobalLive={handleSearchGlobalLive}
+        onAddNewTemple={handleOpenAddNewTemple}
+        onOpenCommunityHub={() => setCommunityHubOpen(true)}
+        communityEditsCount={communityContributions.count}
       />
 
       {/* ── Right Darshan Detail Panel (with Gallery & Directions) ── */}
@@ -678,9 +998,33 @@ export default function App() {
             onClose={handleCloseDetail}
             theme={theme}
             userLocation={userLocation}
+            onSuggestEdit={handleOpenEditTemple}
+            onContributePhoto={handleOpenPhotoOnlyContribution}
           />
         )}
       </AnimatePresence>
+
+      {/* ── Centerpiece: "दैवयोग · Divine Calling" at Bottom Center ── */}
+      <div
+        className={`fixed left-1/2 -translate-x-1/2 z-[997] transition-all duration-300 pointer-events-auto ${
+          activeCircuit ? 'bottom-[188px] sm:bottom-[202px]' : 'bottom-[70px] sm:bottom-[78px]'
+        }`}
+      >
+        <motion.button
+          whileHover={{ scale: 1.05, y: -2 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={handleDivineCalling}
+          className="group relative flex items-center gap-2 sm:gap-2.5 px-4 sm:px-6 py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-amber-500 via-saffron to-orange-600 text-white font-cinzel font-bold text-xs sm:text-sm shadow-xl shadow-saffron/30 hover:shadow-2xl hover:shadow-saffron/50 border border-amber-200/40 backdrop-blur-md transition-all duration-300 cursor-pointer"
+          title="दैवयोग · Divine Calling: Receive a spontaneous calling to a sacred temple"
+        >
+          <span className="absolute -inset-0.5 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 opacity-60 group-hover:opacity-100 blur transition-all duration-500 animate-pulse pointer-events-none" />
+          <span className="relative flex items-center gap-2">
+            <DivineCallingIcon className="w-4 h-4 sm:w-5 sm:h-5 text-amber-200 group-hover:rotate-45 transition-transform duration-300" />
+            <span className="tracking-wide drop-shadow-sm font-extrabold">दैवयोग · Divine Calling</span>
+            <span className="text-xs sm:text-sm animate-pulse select-none" aria-hidden="true">✨</span>
+          </span>
+        </motion.button>
+      </div>
 
       {/* ── Circuit Tour Stepper Bottom Bar ── */}
       <AnimatePresence>
@@ -689,11 +1033,81 @@ export default function App() {
             activeCircuit={activeCircuit}
             circuitTemples={circuitTemples}
             currentTempleIndex={currentTourIndex}
+            visitedIds={visitedIds}
             onSelectIndex={handleTourIndexSelect}
+            onTakeDarshan={handleTakeDarshan}
             onExitTour={handleExitTour}
+            soundPlaying={audioPlaying}
+            currentSoundName={activeTrack.shortName}
+            onOpenSoundSanctuary={handleTogglePlay}
           />
         )}
       </AnimatePresence>
+
+      {/* ── Compact Sacred Audio Player Docked at Bottom (YouTube Background Streaming) ── */}
+      <BottomAudioPlayer
+        isPlaying={audioPlaying}
+        isBuffering={audioBuffering}
+        currentTrack={currentTrack}
+        tracks={tracksList}
+        onTogglePlay={handleTogglePlay}
+        onNextTrack={handleNextTrack}
+        onPrevTrack={handlePrevTrack}
+        onSelectTrack={handleSelectTrack}
+        onAddCustomTrack={handleAddCustomTrack}
+        volume={soundVolume}
+        onVolumeChange={handleVolumeChange}
+        autoHarmonize={autoHarmonize}
+        onToggleAutoHarmonize={handleToggleAutoHarmonize}
+        isTourActive={Boolean(activeCircuit)}
+      />
+
+      {/* ── Dedicated Headless YouTube IFrame Audio Stream Mount (100% Invisible, No Ghost Overlays) ── */}
+      <div
+        id="youtube-bg-player-container"
+        className="fixed bottom-0 left-0 w-60 h-36 opacity-[0.002] pointer-events-none z-[-50] overflow-hidden select-none"
+        aria-hidden="true"
+        tabIndex="-1"
+      >
+        <div id="youtube-bg-player-mount" />
+      </div>
+
+      {/* ── Yatra Completion Celebration & Holy Certificate Modal ── */}
+      <YatraCompleteModal
+        isOpen={yatraModalOpen}
+        circuitName={activeCircuit}
+        circuitTemples={circuitTemples}
+        onClose={() => setYatraModalOpen(false)}
+        onRevisit={() => {
+          setYatraModalOpen(false)
+          handleTourIndexSelect(0)
+        }}
+      />
+
+      {/* ── Community Edit & Add Temple Modal ── */}
+      <CommunityEditModal
+        isOpen={communityEditModalOpen}
+        mode={communityModalMode}
+        temple={editingTemple}
+        onClose={() => {
+          setCommunityEditModalOpen(false)
+          setEditingTemple(null)
+        }}
+        onSaved={handleSavedCommunityTemple}
+      />
+
+      {/* ── Community Hub Modal (Dashboard of contributions) ── */}
+      <CommunityHubModal
+        isOpen={communityHubOpen}
+        onClose={() => setCommunityHubOpen(false)}
+        onOpenAddModal={handleOpenAddNewTemple}
+        onOpenEditModal={handleOpenEditTemple}
+        onSelectTemple={(t) => {
+          handleSelectTemple(t)
+        }}
+        previewPending={previewPendingContributions}
+        onTogglePreviewPending={handleTogglePreviewPending}
+      />
 
       {/* ── Geolocation Toast Notification ── */}
       <AnimatePresence>

@@ -82,7 +82,7 @@
     "circuit_tags": [
       "Jyotirlinga",
       "Panch Kedar",
-      "Char Dham"
+      "Chota Char Dham"
     ],
     "wiki_slug": "Kedarnath_Temple",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Kedarnath_Temple_in_Rainy_season.jpg/1280px-Kedarnath_Temple_in_Rainy_season.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
@@ -222,7 +222,8 @@
     "period": "Medieval",
     "circuit_tags": [
       "Char Dham",
-      "Divya Desam"
+      "Divya Desam",
+      "Chota Char Dham"
     ],
     "wiki_slug": "Badrinath_Temple",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Badrinath_Temple_%2C_Uttarakhand.jpg/1280px-Badrinath_Temple_%2C_Uttarakhand.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
@@ -2975,9 +2976,7 @@
     "location": "Ahmedabad",
     "era": null,
     "period": null,
-    "circuit_tags": [
-      "Char Dham"
-    ],
+    "circuit_tags": [],
     "wiki_slug": "Jagannath_Temple,_Ahmedabad",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Jagannath_Temple_Ahmedabad.jpg/1280px-Jagannath_Temple_Ahmedabad.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Jagannath%20Temple%2C%20Ahmedabad%2C%20Ahmedabad%2C%20Gujarat%2C%20India"
@@ -3142,9 +3141,7 @@
     "location": "Bet Dwarka",
     "era": null,
     "period": null,
-    "circuit_tags": [
-      "Char Dham"
-    ],
+    "circuit_tags": [],
     "wiki_slug": "Shri_Keshavraiji_Temple,_Bet_Dwarka",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/4/4f/Shri_Keshavraiji_Temple_Door.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
     "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Shri%20Keshavraiji%20Temple%2C%20Bet%20Dwarka%2C%20Bet%20Dwarka%2C%20Gujarat%2C%20India"
@@ -3882,8 +3879,7 @@
     "era": "1857 CE",
     "period": "Modern",
     "circuit_tags": [
-      "Heritage",
-      "Char Dham"
+      "Heritage"
     ],
     "wiki_slug": "Raghunath_Temple",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/The_Temples_of_Raghunath%2C_Jammu%2C_India%2C_ca.1875-ca.1940_%28imp-cswc-GB-237-CSWC47-LS10-011%29.jpg/1280px-The_Temples_of_Raghunath%2C_Jammu%2C_India%2C_ca.1875-ca.1940_%28imp-cswc-GB-237-CSWC47-LS10-011%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
@@ -4156,9 +4152,7 @@
     "location": null,
     "era": null,
     "period": null,
-    "circuit_tags": [
-      "Char Dham"
-    ],
+    "circuit_tags": [],
     "wiki_slug": "Jagannath_Temple,_Ranchi",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/17th_century_Jagannath_temple_Ranchi_Jharkhand_-_9.jpg/1280px-17th_century_Jagannath_temple_Ranchi_Jharkhand_-_9.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Jagannath%20hill%20Temple%2C%20Jharkhand%2C%20India"
@@ -7855,9 +7849,7 @@
     "location": "Baripada",
     "era": null,
     "period": null,
-    "circuit_tags": [
-      "Char Dham"
-    ],
+    "circuit_tags": [],
     "wiki_slug": "Jagannath_Temple,_Baripada",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Jagannath_Temple_baripada_3.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
     "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Jagannath%20Temple%2C%20Baripada%2C%20Baripada%2C%20Odisha%2C%20India"
@@ -7872,9 +7864,7 @@
     "location": "Koraput",
     "era": null,
     "period": null,
-    "circuit_tags": [
-      "Char Dham"
-    ],
+    "circuit_tags": [],
     "wiki_slug": "Jagannath_Temple,_Koraput",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Jagannath_temple_of_Koraput_03.jpg/1280px-Jagannath_temple_of_Koraput_03.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Jagannath%20Temple%2C%20Koraput%2C%20Koraput%2C%20Odisha%2C%20India"
@@ -7889,9 +7879,7 @@
     "location": "Nayagarh",
     "era": null,
     "period": null,
-    "circuit_tags": [
-      "Char Dham"
-    ],
+    "circuit_tags": [],
     "wiki_slug": "Jagannath_Temple,_Nayagarh",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/1/12/Jagannath_Temple%2C_Nayagarh.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
     "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Jagannath%20Temple%2C%20Nayagarh%2C%20Nayagarh%2C%20Odisha%2C%20India"
@@ -7906,9 +7894,7 @@
     "location": "Puri",
     "era": null,
     "period": null,
-    "circuit_tags": [
-      "Char Dham"
-    ],
+    "circuit_tags": [],
     "wiki_slug": "Jagannath_Temple",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Shri_Jagannath_temple.jpg/1280px-Shri_Jagannath_temple.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Jagannath%20Temple%2C%20Puri%2C%20Odisha%2C%20India"
@@ -9680,9 +9666,7 @@
     "location": null,
     "era": null,
     "period": null,
-    "circuit_tags": [
-      "Char Dham"
-    ],
+    "circuit_tags": [],
     "wiki_slug": "Adi_Jagannatha_Perumal_Temple",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Tirupullani1.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
     "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Adi%20Jagannatha%20Perumal%20Temple%2C%20Tamil%20Nadu%2C%20India"
@@ -9997,9 +9981,7 @@
     "location": null,
     "era": null,
     "period": null,
-    "circuit_tags": [
-      "Char Dham"
-    ],
+    "circuit_tags": [],
     "wiki_slug": "Jagannatha_Perumal_temple",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Jagannatha_Perumal_temple1.JPG/1280px-Jagannatha_Perumal_temple1.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Jagannatha%20Perumal%20temple%2C%20Tamil%20Nadu%2C%20India"
@@ -11173,9 +11155,7 @@
     "location": "Hyderabad",
     "era": null,
     "period": null,
-    "circuit_tags": [
-      "Char Dham"
-    ],
+    "circuit_tags": [],
     "wiki_slug": "Jagannath_Temple,_Hyderabad",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/8/82/%E0%AC%9C%E0%AC%97%E0%AC%A8%E0%AD%8D%E0%AC%A8%E0%AC%BE%E0%AC%A5_%E0%AC%AE%E0%AC%A8%E0%AD%8D%E0%AC%A6%E0%AC%BF%E0%AC%B0%2C_%E0%AC%B9%E0%AC%BE%E0%AC%87%E0%AC%A6%E0%AD%8D%E0%AC%B0%E0%AC%BE%E0%AC%AC%E0%AC%BE%E0%AC%A6.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
     "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Jagannath%20Temple%2C%20Hyderabad%2C%20Hyderabad%2C%20Telangana%2C%20India"
@@ -11535,9 +11515,7 @@
     "location": null,
     "era": null,
     "period": null,
-    "circuit_tags": [
-      "Char Dham"
-    ],
+    "circuit_tags": [],
     "wiki_slug": "Agartala_Jagannath_Mandir",
     "image_url": null,
     "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Agartala%20Jagannath%20Mandir%2C%20Tripura%2C%20India"
@@ -11687,9 +11665,7 @@
     "location": "Mathura",
     "era": null,
     "period": null,
-    "circuit_tags": [
-      "Char Dham"
-    ],
+    "circuit_tags": [],
     "wiki_slug": "Dwarkadheesh_temple_Mathura",
     "image_url": null,
     "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Dwarkadheesh%20temple%2C%20Mathura%2C%20Uttar%20Pradesh%2C%20India"
@@ -12139,7 +12115,9 @@
     "location": null,
     "era": null,
     "period": null,
-    "circuit_tags": [],
+    "circuit_tags": [
+      "Chota Char Dham"
+    ],
     "wiki_slug": "Gangotri",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Gangotri_%28ganga_river%29.jpg/1280px-Gangotri_%28ganga_river%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Gangotri%2C%20Uttarakhand%2C%20India"
@@ -12889,9 +12867,7 @@
     "location": "Digha",
     "era": null,
     "period": null,
-    "circuit_tags": [
-      "Char Dham"
-    ],
+    "circuit_tags": [],
     "wiki_slug": "Jagannath_Temple,_Digha",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Jagannath_Temple%2C_Digha_-_%E0%A6%9C%E0%A6%97%E0%A6%A8%E0%A7%8D%E0%A6%A8%E0%A6%BE%E0%A6%A5_%E0%A6%AE%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A6%BF%E0%A6%B0%2C_%E0%A6%A6%E0%A7%80%E0%A6%98%E0%A6%BE-%E0%A7%AA.jpg/1280px-Jagannath_Temple%2C_Digha_-_%E0%A6%9C%E0%A6%97%E0%A6%A8%E0%A7%8D%E0%A6%A8%E0%A6%BE%E0%A6%A5_%E0%A6%AE%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A6%BF%E0%A6%B0%2C_%E0%A6%A6%E0%A7%80%E0%A6%98%E0%A6%BE-%E0%A7%AA.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Jagannath%20Temple%2C%20Digha%2C%20Digha%2C%20West%20Bengal%2C%20India"
@@ -14251,5 +14227,812 @@
     "image_url": null,
     "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Aap%20Shambhu%20Temple%2C%20Roop%20Nagar%2C%20Jammu",
     "id": 934
+  },
+  {
+    "id": 935,
+    "name": "Yamunotri Temple",
+    "lat": 31.014,
+    "lng": 78.46,
+    "deity": "Goddess",
+    "state": "Uttarakhand",
+    "location": "Uttarkashi",
+    "era": "19th Century",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Chota Char Dham"
+    ],
+    "wiki_slug": "Yamunotri_temple",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Yamunotri_Temple_Uttarakhand.jpg/640px-Yamunotri_Temple_Uttarakhand.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Yamunotri%20Temple%2C%20Uttarakhand%2C%20India"
+  },
+  {
+    "id": 936,
+    "name": "Kanak Bhawan",
+    "lat": 26.7997,
+    "lng": 82.2023,
+    "deity": "Vishnu",
+    "state": "Uttar Pradesh",
+    "location": "Ayodhya",
+    "era": "19th Century",
+    "period": "Modern",
+    "circuit_tags": [
+      "Ram Circuit"
+    ],
+    "wiki_slug": "Kanak_Bhawan",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Kanak_Bhawan_Ayodhya.jpg/640px-Kanak_Bhawan_Ayodhya.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Kanak%20Bhawan%2C%20Uttar%20Pradesh%2C%20India"
+  },
+  {
+    "id": 937,
+    "name": "Hanuman Garhi Ayodhya",
+    "lat": 26.7975,
+    "lng": 82.2014,
+    "deity": "Hanuman",
+    "state": "Uttar Pradesh",
+    "location": "Ayodhya",
+    "era": "10th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Ram Circuit",
+      "Hanuman Circuit"
+    ],
+    "wiki_slug": "Hanuman_Garhi,_Ayodhya",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Hanuman_Garhi_Ayodhya.jpg/640px-Hanuman_Garhi_Ayodhya.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Hanuman%20Garhi%20Ayodhya%2C%20Uttar%20Pradesh%2C%20India"
+  },
+  {
+    "id": 938,
+    "name": "Kaal Bhairav Mandir Varanasi",
+    "lat": 25.3182,
+    "lng": 83.0118,
+    "deity": "Shiva",
+    "state": "Uttar Pradesh",
+    "location": "Varanasi",
+    "era": "17th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Kashi Kshetra"
+    ],
+    "wiki_slug": "Kaal_Bhairav_Mandir,_Varanasi",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Kal_Bhairav_Temple_Varanasi.jpg/640px-Kal_Bhairav_Temple_Varanasi.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Kaal%20Bhairav%20Mandir%20Varanasi%2C%20Uttar%20Pradesh%2C%20India"
+  },
+  {
+    "id": 939,
+    "name": "Annapurna Devi Mandir Varanasi",
+    "lat": 25.3108,
+    "lng": 83.0105,
+    "deity": "Goddess",
+    "state": "Uttar Pradesh",
+    "location": "Varanasi",
+    "era": "18th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Kashi Kshetra"
+    ],
+    "wiki_slug": "Annapurna_Devi_Mandir",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Annapurna_temple_Varanasi.jpg/640px-Annapurna_temple_Varanasi.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Annapurna%20Devi%20Mandir%20Varanasi%2C%20Uttar%20Pradesh%2C%20India"
+  },
+  {
+    "id": 940,
+    "name": "Tulsi Manas Mandir",
+    "lat": 25.2882,
+    "lng": 82.9997,
+    "deity": "Vishnu",
+    "state": "Uttar Pradesh",
+    "location": "Varanasi",
+    "era": "20th Century",
+    "period": "Modern",
+    "circuit_tags": [
+      "Kashi Kshetra",
+      "Ram Circuit"
+    ],
+    "wiki_slug": "Tulsi_Manas_Mandir",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Tulsi_Manas_Temple_Varanasi.jpg/640px-Tulsi_Manas_Temple_Varanasi.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Tulsi%20Manas%20Mandir%2C%20Uttar%20Pradesh%2C%20India"
+  },
+  {
+    "id": 941,
+    "name": "Durga Mandir Varanasi",
+    "lat": 25.2869,
+    "lng": 82.9992,
+    "deity": "Goddess",
+    "state": "Uttar Pradesh",
+    "location": "Varanasi",
+    "era": "18th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Kashi Kshetra"
+    ],
+    "wiki_slug": "Durga_Mandir,_Varanasi",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Durga_Kund_Temple_Varanasi.jpg/640px-Durga_Kund_Temple_Varanasi.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Durga%20Mandir%20Varanasi%2C%20Uttar%20Pradesh%2C%20India"
+  },
+  {
+    "id": 942,
+    "name": "Maa Vindhyavasini Mandir",
+    "lat": 25.1633,
+    "lng": 82.5028,
+    "deity": "Goddess",
+    "state": "Uttar Pradesh",
+    "location": "Vindhyachal, Mirzapur",
+    "era": "Ancient",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Shakti Peetha"
+    ],
+    "wiki_slug": "Vindhyavasini",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Vindhyavasini_temple.jpg/640px-Vindhyavasini_temple.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Maa%20Vindhyavasini%20Mandir%2C%20Uttar%20Pradesh%2C%20India"
+  },
+  {
+    "id": 943,
+    "name": "Shakumbhari Devi Dham",
+    "lat": 30.2242,
+    "lng": 77.6781,
+    "deity": "Goddess",
+    "state": "Uttar Pradesh",
+    "location": "Saharanpur",
+    "era": "Ancient",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Shakti Peetha"
+    ],
+    "wiki_slug": "Shakumbhari_Devi",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Shakumbhari_devi.jpg/640px-Shakumbhari_devi.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Shakumbhari%20Devi%20Dham%2C%20Uttar%20Pradesh%2C%20India"
+  },
+  {
+    "id": 944,
+    "name": "Gorakhnath Dham",
+    "lat": 26.7725,
+    "lng": 83.3592,
+    "deity": "Shiva",
+    "state": "Uttar Pradesh",
+    "location": "Gorakhpur",
+    "era": "12th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Nath Sampradaya"
+    ],
+    "wiki_slug": "Gorakhnath_Temple",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Gorakhnath_temple.jpg/640px-Gorakhnath_temple.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Gorakhnath%20Dham%2C%20Uttar%20Pradesh%2C%20India"
+  },
+  {
+    "id": 945,
+    "name": "Bade Hanuman Ji Mandir Prayagraj",
+    "lat": 25.4308,
+    "lng": 81.8806,
+    "deity": "Hanuman",
+    "state": "Uttar Pradesh",
+    "location": "Prayagraj",
+    "era": "Ancient",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Triveni Sangam Kshetra",
+      "Hanuman Circuit"
+    ],
+    "wiki_slug": "Prayagraj",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Prayag_Kumbh.jpg/640px-Prayag_Kumbh.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Bade%20Hanuman%20Ji%20Mandir%20Prayagraj%2C%20Uttar%20Pradesh%2C%20India"
+  },
+  {
+    "id": 946,
+    "name": "Veni Madhav Temple Prayagraj",
+    "lat": 25.4312,
+    "lng": 81.8742,
+    "deity": "Vishnu",
+    "state": "Uttar Pradesh",
+    "location": "Prayagraj",
+    "era": "Ancient",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Triveni Sangam Kshetra"
+    ],
+    "wiki_slug": "Prayagraj",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Allahabad_Sangam.jpg/640px-Allahabad_Sangam.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Veni%20Madhav%20Temple%20Prayagraj%2C%20Uttar%20Pradesh%2C%20India"
+  },
+  {
+    "id": 947,
+    "name": "Jal Mandir Pawapuri",
+    "lat": 25.0933,
+    "lng": 85.5342,
+    "deity": "Jain",
+    "state": "Bihar",
+    "location": "Pawapuri, Nalanda",
+    "era": "Ancient",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Jain Circuit"
+    ],
+    "wiki_slug": "Jal_Mandir",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Jal_Mandir_Pawapuri.jpg/640px-Jal_Mandir_Pawapuri.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Jal%20Mandir%20Pawapuri%2C%20Bihar%2C%20India"
+  },
+  {
+    "id": 948,
+    "name": "Takht Sri Patna Sahib",
+    "lat": 25.5972,
+    "lng": 85.2289,
+    "deity": "Multi",
+    "state": "Bihar",
+    "location": "Patna",
+    "era": "18th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Panj Takht"
+    ],
+    "wiki_slug": "Takht_Sri_Patna_Sahib",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Takht_Sri_Patna_Sahib.jpg/640px-Takht_Sri_Patna_Sahib.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Takht%20Sri%20Patna%20Sahib%2C%20Bihar%2C%20India"
+  },
+  {
+    "id": 949,
+    "name": "Mata Sita Samahit Sthal Sitamarhi",
+    "lat": 26.5936,
+    "lng": 85.4925,
+    "deity": "Goddess",
+    "state": "Bihar",
+    "location": "Sitamarhi",
+    "era": "Ancient",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Ram Circuit"
+    ],
+    "wiki_slug": "Sitamarhi",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Sitamarhi_Bihar.jpg/640px-Sitamarhi_Bihar.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Mata%20Sita%20Samahit%20Sthal%20Sitamarhi%2C%20Bihar%2C%20India"
+  },
+  {
+    "id": 950,
+    "name": "Shreemant Dagdusheth Halwai Ganpati Mandir",
+    "lat": 18.5165,
+    "lng": 73.8561,
+    "deity": "Ganesh",
+    "state": "Maharashtra",
+    "location": "Pune",
+    "era": "19th Century",
+    "period": "Modern",
+    "circuit_tags": [
+      "Ashtavinayak & Ganesha"
+    ],
+    "wiki_slug": "Dagdusheth_Halwai_Ganpati_Temple",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Dagdusheth_Ganpati_Pune.jpg/640px-Dagdusheth_Ganpati_Pune.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Shreemant%20Dagdusheth%20Halwai%20Ganpati%20Mandir%2C%20Maharashtra%2C%20India"
+  },
+  {
+    "id": 951,
+    "name": "Sant Dnyaneshwar Maharaj Sansthan Alandi",
+    "lat": 18.6756,
+    "lng": 73.8967,
+    "deity": "Vishnu",
+    "state": "Maharashtra",
+    "location": "Alandi, Pune",
+    "era": "13th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Warkari Sampradaya"
+    ],
+    "wiki_slug": "Alandi",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Alandi_Temple.jpg/640px-Alandi_Temple.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Sant%20Dnyaneshwar%20Maharaj%20Sansthan%20Alandi%2C%20Maharashtra%2C%20India"
+  },
+  {
+    "id": 952,
+    "name": "Sant Tukaram Maharaj Gatha Mandir Dehu",
+    "lat": 18.7183,
+    "lng": 73.7667,
+    "deity": "Vishnu",
+    "state": "Maharashtra",
+    "location": "Dehu, Pune",
+    "era": "17th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Warkari Sampradaya"
+    ],
+    "wiki_slug": "Dehu",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Dehu_Gatha_Mandir.jpg/640px-Dehu_Gatha_Mandir.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Sant%20Tukaram%20Maharaj%20Gatha%20Mandir%20Dehu%2C%20Maharashtra%2C%20India"
+  },
+  {
+    "id": 953,
+    "name": "Babulnath Mandir Mumbai",
+    "lat": 18.9567,
+    "lng": 72.8094,
+    "deity": "Shiva",
+    "state": "Maharashtra",
+    "location": "Girgaon, Mumbai",
+    "era": "12th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Mumbai Shrines"
+    ],
+    "wiki_slug": "Babulnath",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Babulnath_Temple_Mumbai.jpg/640px-Babulnath_Temple_Mumbai.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Babulnath%20Mandir%20Mumbai%2C%20Maharashtra%2C%20India"
+  },
+  {
+    "id": 954,
+    "name": "Walkeshwar Temple Banganga",
+    "lat": 18.9458,
+    "lng": 72.7936,
+    "deity": "Shiva",
+    "state": "Maharashtra",
+    "location": "Malabar Hill, Mumbai",
+    "era": "12th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Mumbai Shrines"
+    ],
+    "wiki_slug": "Walkeshwar_Temple",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Banganga_Tank_Mumbai.jpg/640px-Banganga_Tank_Mumbai.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Walkeshwar%20Temple%20Banganga%2C%20Maharashtra%2C%20India"
+  },
+  {
+    "id": 955,
+    "name": "Chamunda Nandikeshwar Dham",
+    "lat": 32.1481,
+    "lng": 76.4383,
+    "deity": "Goddess",
+    "state": "Himachal Pradesh",
+    "location": "Kangra",
+    "era": "16th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Himachal Devi Circuit"
+    ],
+    "wiki_slug": "Chamunda_Nandikeshwar_Dham",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Chamunda_Devi_Temple_Kangra.jpg/640px-Chamunda_Devi_Temple_Kangra.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Chamunda%20Nandikeshwar%20Dham%2C%20Himachal%20Pradesh%2C%20India"
+  },
+  {
+    "id": 956,
+    "name": "Jwalamukhi Devi Mandir",
+    "lat": 31.8767,
+    "lng": 76.3208,
+    "deity": "Goddess",
+    "state": "Himachal Pradesh",
+    "location": "Jawalamukhi, Kangra",
+    "era": "Ancient",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Shakti Peetha"
+    ],
+    "wiki_slug": "Jwala_Ji",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Jwalamukhi_Temple.jpg/640px-Jwalamukhi_Temple.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Jwalamukhi%20Devi%20Mandir%2C%20Himachal%20Pradesh%2C%20India"
+  },
+  {
+    "id": 957,
+    "name": "Maa Baglamukhi Dham Bankhandi",
+    "lat": 31.9619,
+    "lng": 76.2417,
+    "deity": "Goddess",
+    "state": "Himachal Pradesh",
+    "location": "Bankhandi, Kangra",
+    "era": "Ancient",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Mahavidya Shrines"
+    ],
+    "wiki_slug": "Bagalamukhi",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Bagalamukhi_temple.jpg/640px-Bagalamukhi_temple.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Maa%20Baglamukhi%20Dham%20Bankhandi%2C%20Himachal%20Pradesh%2C%20India"
+  },
+  {
+    "id": 958,
+    "name": "Sheetla Mata Mandir Gurugram",
+    "lat": 28.4739,
+    "lng": 77.0267,
+    "deity": "Goddess",
+    "state": "Haryana",
+    "location": "Gurugram",
+    "era": "18th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Mata Shrines"
+    ],
+    "wiki_slug": "Sheetla_Mata_Temple,_Gurugram",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Sheetla_Mata_Temple_Gurgaon.jpg/640px-Sheetla_Mata_Temple_Gurgaon.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Sheetla%20Mata%20Mandir%20Gurugram%2C%20Haryana%2C%20India"
+  },
+  {
+    "id": 959,
+    "name": "Mata Mansa Devi Dham Panchkula",
+    "lat": 30.7061,
+    "lng": 76.8833,
+    "deity": "Goddess",
+    "state": "Haryana",
+    "location": "Panchkula",
+    "era": "19th Century",
+    "period": "Modern",
+    "circuit_tags": [
+      "Shakti Peetha"
+    ],
+    "wiki_slug": "Mata_Mansa_Devi_Temple",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Mata_Mansa_Devi_Temple_Panchkula.jpg/640px-Mata_Mansa_Devi_Temple_Panchkula.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Mata%20Mansa%20Devi%20Dham%20Panchkula%2C%20Haryana%2C%20India"
+  },
+  {
+    "id": 960,
+    "name": "Maa Bamleshwari Devi Mandir",
+    "lat": 21.1894,
+    "lng": 80.7611,
+    "deity": "Goddess",
+    "state": "Chhattisgarh",
+    "location": "Dongargarh",
+    "era": "Ancient",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Hilltop Shrines"
+    ],
+    "wiki_slug": "Maa_Bamleshwari_Temple",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Dongargarh_Bamleshwari_Temple.jpg/640px-Dongargarh_Bamleshwari_Temple.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Maa%20Bamleshwari%20Devi%20Mandir%2C%20Chhattisgarh%2C%20India"
+  },
+  {
+    "id": 961,
+    "name": "Chandrahasini Devi Temple Chandrapur",
+    "lat": 21.7008,
+    "lng": 83.2167,
+    "deity": "Goddess",
+    "state": "Chhattisgarh",
+    "location": "Chandrapur, Janjgir-Champa",
+    "era": "Ancient",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Mahanadi Shrines"
+    ],
+    "wiki_slug": "Chandrahasini_Devi_Temple",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Chandrahasini_temple.jpg/640px-Chandrahasini_temple.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Chandrahasini%20Devi%20Temple%20Chandrapur%2C%20Chhattisgarh%2C%20India"
+  },
+  {
+    "id": 962,
+    "name": "Rajim Lochan Mandir",
+    "lat": 20.9639,
+    "lng": 81.8792,
+    "deity": "Vishnu",
+    "state": "Chhattisgarh",
+    "location": "Rajim, Gariaband",
+    "era": "8th Century",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Prayag of Chhattisgarh"
+    ],
+    "wiki_slug": "Rajim",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Rajiv_Lochan_Temple_Rajim.jpg/640px-Rajiv_Lochan_Temple_Rajim.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Rajim%20Lochan%20Mandir%2C%20Chhattisgarh%2C%20India"
+  },
+  {
+    "id": 963,
+    "name": "Kapil Muni Mandir Gangasagar",
+    "lat": 21.6494,
+    "lng": 88.0531,
+    "deity": "Vishnu",
+    "state": "West Bengal",
+    "location": "Sagar Island",
+    "era": "Ancient",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Gangasagar Pilgrimage"
+    ],
+    "wiki_slug": "Sagar_Island",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Kapil_Muni_Temple_Gangasagar.jpg/640px-Kapil_Muni_Temple_Gangasagar.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Kapil%20Muni%20Mandir%20Gangasagar%2C%20West%20Bengal%2C%20India"
+  },
+  {
+    "id": 964,
+    "name": "Mayapur ISKCON Sri Mayapur Chandrodaya Mandir",
+    "lat": 23.4244,
+    "lng": 88.3889,
+    "deity": "Krishna",
+    "state": "West Bengal",
+    "location": "Mayapur, Nadia",
+    "era": "20th Century",
+    "period": "Modern",
+    "circuit_tags": [
+      "Gaudiya Vaishnava Circuit"
+    ],
+    "wiki_slug": "Temple_of_the_Vedic_Planetarium,_Mayapur",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Temple_of_the_Vedic_Planetarium.jpg/640px-Temple_of_the_Vedic_Planetarium.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Mayapur%20ISKCON%20Sri%20Mayapur%20Chandrodaya%20Mandir%2C%20West%20Bengal%2C%20India"
+  },
+  {
+    "id": 965,
+    "name": "Calcutta Jain Temple Pareshnath",
+    "lat": 22.5975,
+    "lng": 88.3756,
+    "deity": "Jain",
+    "state": "West Bengal",
+    "location": "Kolkata",
+    "era": "19th Century",
+    "period": "Modern",
+    "circuit_tags": [
+      "Jain Circuit"
+    ],
+    "wiki_slug": "Calcutta_Jain_Temple",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Calcutta_Jain_Temple.jpg/640px-Calcutta_Jain_Temple.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Calcutta%20Jain%20Temple%20Pareshnath%2C%20West%20Bengal%2C%20India"
+  },
+  {
+    "id": 966,
+    "name": "Umananda Devaloi Peacock Island",
+    "lat": 26.1906,
+    "lng": 91.7456,
+    "deity": "Shiva",
+    "state": "Assam",
+    "location": "Peacock Island, Guwahati",
+    "era": "17th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Brahmaputra Shrines"
+    ],
+    "wiki_slug": "Umananda_Temple",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Umananda_Temple_Guwahati.jpg/640px-Umananda_Temple_Guwahati.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Umananda%20Devaloi%20Peacock%20Island%2C%20Assam%2C%20India"
+  },
+  {
+    "id": 967,
+    "name": "Navagraha Devalaya Chitrasal Hill",
+    "lat": 26.1928,
+    "lng": 91.7675,
+    "deity": "Surya",
+    "state": "Assam",
+    "location": "Guwahati",
+    "era": "18th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Navagraha Circuit"
+    ],
+    "wiki_slug": "Navagraha_temple",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Navagraha_Temple_Guwahati.jpg/640px-Navagraha_Temple_Guwahati.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Navagraha%20Devalaya%20Chitrasal%20Hill%2C%20Assam%2C%20India"
+  },
+  {
+    "id": 968,
+    "name": "Basistha Ashram Temple",
+    "lat": 26.0967,
+    "lng": 91.7925,
+    "deity": "Shiva",
+    "state": "Assam",
+    "location": "Guwahati",
+    "era": "18th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Assam Shaiva Shrines"
+    ],
+    "wiki_slug": "Basistha_Temple",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Basistha_Temple_Guwahati.jpg/640px-Basistha_Temple_Guwahati.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Basistha%20Ashram%20Temple%2C%20Assam%2C%20India"
+  },
+  {
+    "id": 969,
+    "name": "Sri Sri Auniati Satra",
+    "lat": 26.9536,
+    "lng": 94.1842,
+    "deity": "Krishna",
+    "state": "Assam",
+    "location": "Majuli",
+    "era": "17th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Majuli Satras"
+    ],
+    "wiki_slug": "Auniati_Satra",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Auniati_Satra_Majuli.jpg/640px-Auniati_Satra_Majuli.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Sri%20Sri%20Auniati%20Satra%2C%20Assam%2C%20India"
+  },
+  {
+    "id": 970,
+    "name": "Sri Sri Kamalabari Satra",
+    "lat": 26.9608,
+    "lng": 94.1617,
+    "deity": "Krishna",
+    "state": "Assam",
+    "location": "Majuli",
+    "era": "17th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Majuli Satras"
+    ],
+    "wiki_slug": "Kamalabari_Satra",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Kamalabari_Satra_Majuli.jpg/640px-Kamalabari_Satra_Majuli.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Sri%20Sri%20Kamalabari%20Satra%2C%20Assam%2C%20India"
+  },
+  {
+    "id": 971,
+    "name": "Bhubaneswar Shiva Mandir Silchar",
+    "lat": 24.6933,
+    "lng": 93.0036,
+    "deity": "Shiva",
+    "state": "Assam",
+    "location": "Bhuban Hills, Cachar",
+    "era": "Ancient",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Barak Valley Shrines"
+    ],
+    "wiki_slug": "Cachar_district",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Bhuban_Hill_Assam.jpg/640px-Bhuban_Hill_Assam.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Bhubaneswar%20Shiva%20Mandir%20Silchar%2C%20Assam%2C%20India"
+  },
+  {
+    "id": 972,
+    "name": "Tawang Monastery Gaden Namgyal Lhatse",
+    "lat": 27.5861,
+    "lng": 91.8653,
+    "deity": "Buddha",
+    "state": "Arunachal Pradesh",
+    "location": "Tawang",
+    "era": "17th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Himalayan Monasteries"
+    ],
+    "wiki_slug": "Tawang_Monastery",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Tawang_Monastery_Arunachal_Pradesh.jpg/640px-Tawang_Monastery_Arunachal_Pradesh.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Tawang%20Monastery%20Gaden%20Namgyal%20Lhatse%2C%20Arunachal%20Pradesh%2C%20India"
+  },
+  {
+    "id": 973,
+    "name": "Salasar Balaji Dham Churu",
+    "lat": 27.7214,
+    "lng": 74.7211,
+    "deity": "Hanuman",
+    "state": "Rajasthan",
+    "location": "Salasar, Churu",
+    "era": "18th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Hanuman Circuit"
+    ],
+    "wiki_slug": "Salasar_Balaji",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Salasar_Balaji_Temple.jpg/640px-Salasar_Balaji_Temple.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Salasar%20Balaji%20Dham%20Churu%2C%20Rajasthan%2C%20India"
+  },
+  {
+    "id": 974,
+    "name": "Ambaji Mandir Gabbar Hill",
+    "lat": 24.3314,
+    "lng": 72.8519,
+    "deity": "Goddess",
+    "state": "Gujarat",
+    "location": "Banaskantha",
+    "era": "Ancient",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Shakti Peetha"
+    ],
+    "wiki_slug": "Ambaji",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Ambaji_Temple.jpg/640px-Ambaji_Temple.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Ambaji%20Mandir%20Gabbar%20Hill%2C%20Gujarat%2C%20India"
+  },
+  {
+    "id": 975,
+    "name": "Shri Swaminarayan Mandir Ahmedabad",
+    "lat": 23.0294,
+    "lng": 72.5936,
+    "deity": "Vishnu",
+    "state": "Gujarat",
+    "location": "Kalupur, Ahmedabad",
+    "era": "19th Century",
+    "period": "Modern",
+    "circuit_tags": [
+      "Swaminarayan Sampradaya"
+    ],
+    "wiki_slug": "Shri_Swaminarayan_Mandir,_Ahmedabad",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Swaminarayan_Mandir_Kalupur_Ahmedabad.jpg/640px-Swaminarayan_Mandir_Kalupur_Ahmedabad.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Shri%20Swaminarayan%20Mandir%20Ahmedabad%2C%20Gujarat%2C%20India"
+  },
+  {
+    "id": 976,
+    "name": "Chitrakoot Kamadgiri Dham",
+    "lat": 25.1783,
+    "lng": 80.8661,
+    "deity": "Vishnu",
+    "state": "Madhya Pradesh",
+    "location": "Chitrakoot",
+    "era": "Ancient",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Ram Circuit"
+    ],
+    "wiki_slug": "Kamadgiri",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Kamadgiri_Chitrakoot.jpg/640px-Kamadgiri_Chitrakoot.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Chitrakoot%20Kamadgiri%20Dham%2C%20Madhya%20Pradesh%2C%20India"
+  },
+  {
+    "id": 977,
+    "name": "Maihar Sharda Devi Mandir",
+    "lat": 24.2708,
+    "lng": 80.7583,
+    "deity": "Goddess",
+    "state": "Madhya Pradesh",
+    "location": "Maihar, Satna",
+    "era": "Ancient",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Shakti Peetha",
+      "Trikuta Hill"
+    ],
+    "wiki_slug": "Maihar",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Sharda_Devi_Temple_Maihar.jpg/640px-Sharda_Devi_Temple_Maihar.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Maihar%20Sharda%20Devi%20Mandir%2C%20Madhya%20Pradesh%2C%20India"
+  },
+  {
+    "id": 978,
+    "name": "Chausath Yogini Temple Bhedaghat",
+    "lat": 23.1311,
+    "lng": 79.8008,
+    "deity": "Goddess",
+    "state": "Madhya Pradesh",
+    "location": "Bhedaghat, Jabalpur",
+    "era": "10th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Chausath Yogini",
+      "Narmada Valley"
+    ],
+    "wiki_slug": "Chausath_Yogini_Temple,_Bhedaghat",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Chausath_Yogini_Temple_Jabalpur.jpg/640px-Chausath_Yogini_Temple_Jabalpur.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Chausath%20Yogini%20Temple%20Bhedaghat%2C%20Madhya%20Pradesh%2C%20India"
+  },
+  {
+    "id": 979,
+    "name": "Chausath Yogini Temple Mitawali",
+    "lat": 26.4464,
+    "lng": 78.2383,
+    "deity": "Shiva",
+    "state": "Madhya Pradesh",
+    "location": "Mitawali, Morena",
+    "era": "14th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Chausath Yogini",
+      "Chambal Heritage"
+    ],
+    "wiki_slug": "Chausath_Yogini_Temple,_Mitaoli",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Chausath_Yogini_Temple_Morena.jpg/640px-Chausath_Yogini_Temple_Morena.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Chausath%20Yogini%20Temple%20Mitawali%2C%20Madhya%20Pradesh%2C%20India"
+  },
+  {
+    "id": 980,
+    "name": "Tapkeshwar Mahadev Temple",
+    "lat": 30.3547,
+    "lng": 78.0169,
+    "deity": "Shiva",
+    "state": "Uttarakhand",
+    "location": "Dehradun",
+    "era": "Ancient",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Dronacharya Tirtha",
+      "Garhwal Shrines"
+    ],
+    "wiki_slug": "Tapkeshwar_Temple",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Tapkeshwar_Temple_Dehradun.jpg/640px-Tapkeshwar_Temple_Dehradun.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Tapkeshwar%20Mahadev%20Temple%2C%20Uttarakhand%2C%20India"
+  },
+  {
+    "id": 981,
+    "name": "Chitai Golu Devta Temple",
+    "lat": 29.5936,
+    "lng": 79.6975,
+    "deity": "Shiva",
+    "state": "Uttarakhand",
+    "location": "Chitai, Almora",
+    "era": "12th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "God of Justice",
+      "Kumaon Shrines"
+    ],
+    "wiki_slug": "Golu_Devta",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Golu_Devta_Chitai_Temple.jpg/640px-Golu_Devta_Chitai_Temple.jpg",
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Chitai%20Golu%20Devta%20Temple%2C%20Uttarakhand%2C%20India"
   }
 ]

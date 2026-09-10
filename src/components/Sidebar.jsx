@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { calculateDistance, formatDistance } from '../utils/geoUtils'
+import { DivineCallingIcon } from './ThemedIcons'
 
 const DEITY_EMOJIS = {
   Shiva: '🔱',
@@ -47,6 +48,32 @@ const MenuIcon = () => (
     <line x1="3" y1="18" x2="21" y2="18" />
   </svg>
 )
+
+function TempleSidebarThumbnail({ src, deityEmoji }) {
+  const [failed, setFailed] = useState(false)
+
+  useEffect(() => {
+    setFailed(false)
+  }, [src])
+
+  if (!src || failed) {
+    return (
+      <span className="text-xl filter drop-shadow-sm select-none">
+        {deityEmoji}
+      </span>
+    )
+  }
+
+  return (
+    <img
+      src={src}
+      alt=""
+      onError={() => setFailed(true)}
+      className="w-full h-full object-cover"
+      loading="lazy"
+    />
+  )
+}
 
 function FilterPills({ label, options, value, onChange }) {
   const [open, setOpen] = useState(false)
@@ -100,15 +127,23 @@ export default function Sidebar({
   deity, setDeity,
   era, setEra,
   circuit, setCircuit,
-  allDeities, eraOptions, allCircuits,
+  country = 'All', setCountry,
+  allDeities, eraOptions, allCircuits, allCountries = ['All', 'India', 'Global / International'],
   filteredTemples, totalTemples,
   selectedTemple, visitedIds,
   onSelectTemple,
   isOpen, onToggle,
   userLocation,
+  onDivineCalling,
+  onSearchGlobalLive,
+  onAddNewTemple,
+  onOpenCommunityHub,
+  communityEditsCount = 0,
 }) {
   // Store item DOM refs for smooth scroll-into-view behavior
   const itemRefs = useRef({})
+  const [globalSearching, setGlobalSearching] = useState(false)
+  const [globalSearchStatus, setGlobalSearchStatus] = useState(null)
 
   // Automatically scroll selected temple item into view when selection changes
   useEffect(() => {
@@ -119,6 +154,28 @@ export default function Sidebar({
       })
     }
   }, [selectedTemple?.id])
+
+  // Handle triggered live search across Google Maps & OpenStreetMap worldwide
+  const handleTriggerGlobalSearch = async (term) => {
+    if (!term || term.trim().length < 2 || !onSearchGlobalLive) return
+    setGlobalSearching(true)
+    setGlobalSearchStatus(null)
+    try {
+      const results = await onSearchGlobalLive(term.trim())
+      if (!results || results.length === 0) {
+        setGlobalSearchStatus(`No shrines found worldwide for "${term}".`)
+        setTimeout(() => setGlobalSearchStatus(null), 4000)
+      } else {
+        setGlobalSearchStatus(`Found ${results.length} shrine${results.length > 1 ? 's' : ''}! Added to map.`)
+        setTimeout(() => setGlobalSearchStatus(null), 4000)
+      }
+    } catch {
+      setGlobalSearchStatus('Search request failed. Please check network connection.')
+      setTimeout(() => setGlobalSearchStatus(null), 4000)
+    } finally {
+      setGlobalSearching(false)
+    }
+  }
 
   // Sort temples by distance if user location is active
   const sortedTemples = useMemo(() => {
@@ -186,12 +243,37 @@ export default function Sidebar({
               </div>
             </div>
 
+            {/* Community Quick Actions */}
+            <div className="px-4 pt-2.5 pb-1 flex items-center gap-2">
+              <button
+                onClick={onAddNewTemple}
+                className="flex-1 py-1.5 px-2.5 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/35 text-amber-300 hover:text-amber-200 text-xs font-sans font-semibold flex items-center justify-center gap-1.5 transition-all active:scale-95 shadow-sm"
+                title="Add a sacred shrine to Divine India"
+              >
+                <span>➕</span>
+                <span>Add Shrine</span>
+              </button>
+              <button
+                onClick={onOpenCommunityHub}
+                className="py-1.5 px-3 rounded-xl bg-white/5 hover:bg-white/10 border border-[var(--border-gold)] text-amber-200 text-xs font-sans font-medium flex items-center justify-center gap-1.5 transition-all active:scale-95 shadow-sm"
+                title="Community Contributions & Edits Hub"
+              >
+                <span>🪔</span>
+                <span>Hub</span>
+                {communityEditsCount > 0 && (
+                  <span className="px-1.5 py-0.2 text-[10px] font-bold rounded-full bg-amber-500 text-stone-950">
+                    {communityEditsCount}
+                  </span>
+                )}
+              </button>
+            </div>
+
             {/* Divider */}
             <div className="mx-5 h-px bg-gradient-to-r from-transparent via-[var(--border-gold)] to-transparent" />
 
-            {/* Search */}
-            <div className="px-4 pt-3 pb-2">
-              <div className="relative">
+            {/* Search & Divine Calling */}
+            <div className="px-4 pt-2.5 pb-1.5 flex items-center gap-2">
+              <div className="relative flex-1">
                 <span className="absolute left-3 top-1/2 -translate-y-1/2 theme-muted">
                   <SearchIcon />
                 </span>
@@ -200,16 +282,57 @@ export default function Sidebar({
                   placeholder="Search temple, state, deity…"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && search.trim().length >= 2) {
+                      handleTriggerGlobalSearch(search)
+                    }
+                  }}
                   className="w-full pl-9 pr-3 py-2 rounded-xl bg-[var(--input-bg)] border border-[var(--input-border)]
                              text-[var(--text-title)] text-xs sm:text-sm font-sans placeholder:text-[var(--text-muted)]
                              focus:outline-none focus:ring-1 focus:ring-saffron/50
                              transition-all duration-300"
                 />
               </div>
+
+              {onDivineCalling && (
+                <button
+                  onClick={onDivineCalling}
+                  className="p-2 sm:px-2.5 rounded-xl bg-gradient-to-r from-saffron/20 to-amber-400/20 text-saffron border border-saffron/40 hover:from-saffron/30 hover:to-amber-400/30 transition-all flex-shrink-0 flex items-center gap-1.5 text-xs font-bold font-sans shadow-sm active:scale-95"
+                  title="दैवयोग · Divine Calling"
+                  aria-label="Divine Calling"
+                >
+                  <DivineCallingIcon className="w-4 h-4 text-saffron" />
+                  <span className="hidden xs:inline text-[11px]">Divine Calling ✨</span>
+                </button>
+              )}
             </div>
+
+            {/* Worldwide Live Radar Search Action when query is entered */}
+            {search.trim().length >= 2 && onSearchGlobalLive && (
+              <div className="px-4 pb-2">
+                <button
+                  onClick={() => handleTriggerGlobalSearch(search)}
+                  disabled={globalSearching}
+                  className="w-full py-1.5 px-3 rounded-xl bg-gradient-to-r from-emerald-500/15 via-teal-500/15 to-emerald-500/15 border border-emerald-500/35 hover:border-emerald-500/60 text-emerald-600 dark:text-emerald-400 text-xs font-bold font-sans flex items-center justify-center gap-2 transition-all active:scale-98 shadow-sm"
+                >
+                  <span>{globalSearching ? '⏳' : '🌐'}</span>
+                  <span>
+                    {globalSearching
+                      ? 'Searching Worldwide Map…'
+                      : `Live Radar: Search Earth for "${search}"`}
+                  </span>
+                </button>
+                {globalSearchStatus && (
+                  <p className="text-[10.5px] text-center font-sans mt-1 text-saffron font-medium">
+                    {globalSearchStatus}
+                  </p>
+                )}
+              </div>
+            )}
 
             {/* Filters */}
             <div className="px-4 space-y-1.5 pb-2">
+              <FilterPills label="Region" options={allCountries} value={country} onChange={setCountry} />
               <FilterPills label="Deity" options={allDeities} value={deity} onChange={setDeity} />
               <FilterPills label="Era" options={eraOptions} value={era} onChange={setEra} />
               <FilterPills label="Circuit" options={allCircuits} value={circuit} onChange={setCircuit} />
@@ -221,9 +344,30 @@ export default function Sidebar({
             {/* Temple list with 44x44px rounded thumbnails, distance badges & smooth scroll into view */}
             <div className="flex-1 overflow-y-auto custom-scrollbar px-3 py-2 space-y-1.5">
               {sortedTemples.length === 0 ? (
-                <div className="text-center py-12">
-                  <p className="theme-title text-sm font-sans font-medium">No temples found</p>
-                  <p className="theme-muted text-xs mt-1 font-sans">Try adjusting your filters</p>
+                <div className="text-center py-10 px-3 space-y-3">
+                  <p className="theme-title text-sm font-sans font-bold">No shrines in curated list</p>
+                  <p className="theme-muted text-xs font-sans leading-relaxed">
+                    Would you like to search the entire world & Google Maps via Live Radar for <strong className="text-saffron">"{search}"</strong>?
+                  </p>
+                  {onSearchGlobalLive && search.trim().length >= 2 && (
+                    <button
+                      onClick={() => handleTriggerGlobalSearch(search)}
+                      disabled={globalSearching}
+                      className="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500/20 to-teal-500/20 border border-emerald-500/40 text-emerald-600 dark:text-emerald-400 text-xs font-bold font-sans hover:from-emerald-500/30 hover:to-teal-500/30 transition-all shadow-lg active:scale-95 flex items-center justify-center gap-2 mx-auto"
+                    >
+                      <span>{globalSearching ? '⏳' : '🌐'}</span>
+                      <span>{globalSearching ? 'Searching Earth…' : `Search Worldwide Live Map`}</span>
+                    </button>
+                  )}
+                  {onAddNewTemple && (
+                    <button
+                      onClick={onAddNewTemple}
+                      className="px-4 py-2 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/35 text-amber-300 text-xs font-bold font-sans transition-all active:scale-95 flex items-center justify-center gap-2 mx-auto shadow-sm"
+                    >
+                      <span>➕</span>
+                      <span>Contribute Shrine to Divine India</span>
+                    </button>
+                  )}
                 </div>
               ) : (
                 sortedTemples.map((temple) => {
@@ -251,18 +395,10 @@ export default function Sidebar({
                     >
                       {/* 44x44px Rounded Thumbnail or Stylized Deity Icon */}
                       <div className="relative w-11 h-11 rounded-xl overflow-hidden flex-shrink-0 bg-saffron/15 border border-[var(--border-gold)] flex items-center justify-center shadow-sm">
-                        {temple.image_url ? (
-                          <img
-                            src={temple.image_url}
-                            alt={temple.name}
-                            className="w-full h-full object-cover"
-                            loading="lazy"
-                          />
-                        ) : (
-                          <span className="text-xl filter drop-shadow-sm select-none">
-                            {deityEmoji}
-                          </span>
-                        )}
+                        <TempleSidebarThumbnail
+                          src={temple.image_url}
+                          deityEmoji={deityEmoji}
+                        />
                         {/* Visited Checkmark Micro-badge */}
                         {isVisited && (
                           <span className="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-emerald-500 text-slate-950 font-black text-[8px] flex items-center justify-center shadow">
@@ -297,6 +433,27 @@ export default function Sidebar({
                           {temple.state && (
                             <span className="theme-muted truncate">· {temple.state}</span>
                           )}
+                          {temple.country && temple.country !== 'India' && (
+                            <span className="px-1.5 py-0.2 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 font-bold flex items-center gap-0.5">
+                              <span>🌏</span>
+                              <span>{temple.country}</span>
+                            </span>
+                          )}
+                          {temple.isOSM && (
+                            <span className="px-1.5 py-0.2 rounded-full bg-teal-500/15 text-teal-600 dark:text-teal-400 border border-teal-500/30 font-bold">
+                              📍 Live POI
+                            </span>
+                          )}
+                          {temple.isCommunityAdded && (
+                            <span className="px-1.5 py-0.2 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold">
+                              🪔 Community
+                            </span>
+                          )}
+                          {temple.isCommunityEdited && (
+                            <span className="px-1.5 py-0.2 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 font-bold">
+                              ✨ Edited
+                            </span>
+                          )}
                         </div>
 
                         {/* Circuit micro-badges */}
@@ -322,7 +479,17 @@ export default function Sidebar({
             {/* Footer */}
             <div className="px-4 py-2.5 border-t border-[var(--border-gold)] flex items-center justify-between text-[10px] font-sans theme-muted">
               <span>{filteredTemples.length} of {totalTemples} Shrines</span>
-              <span>🙏 Har Har Mahadev</span>
+              {communityEditsCount > 0 ? (
+                <button
+                  onClick={onOpenCommunityHub}
+                  className="theme-gold hover:text-saffron font-semibold transition-colors flex items-center gap-1 cursor-pointer"
+                >
+                  <span>🪔</span>
+                  <span>{communityEditsCount} Community {communityEditsCount === 1 ? 'Edit' : 'Edits'}</span>
+                </button>
+              ) : (
+                <span>🙏 Har Har Mahadev</span>
+              )}
             </div>
           </motion.aside>
         </>

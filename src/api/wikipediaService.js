@@ -87,6 +87,7 @@ export async function fetchTempleDetails(wikiSlug) {
       exintro: 'true',
       explaintext: 'true',
       pithumbsize: '1200',
+      redirects: '1',
       format: 'json',
       origin: '*',
     })
@@ -100,6 +101,7 @@ export async function fetchTempleDetails(wikiSlug) {
       prop: 'imageinfo',
       iiprop: 'url',
       iiurlwidth: '900',
+      redirects: '1',
       format: 'json',
       origin: '*',
     })

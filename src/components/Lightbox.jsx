@@ -137,6 +137,9 @@ export default function Lightbox({
             <img
               src={currentImage}
               alt={title || 'Temple Fullscreen View'}
+              onError={(e) => {
+                e.target.style.display = 'none'
+              }}
               className="max-w-full max-h-[80vh] rounded-2xl object-contain shadow-2xl border border-white/10"
             />
           </motion.div>
@@ -168,7 +171,14 @@ export default function Lightbox({
                       : 'border-transparent opacity-60 hover:opacity-100'
                   }`}
                 >
-                  <img src={img} alt={`Thumb ${idx + 1}`} className="w-full h-full object-cover" />
+                  <img
+                    src={img}
+                    alt={`Thumb ${idx + 1}`}
+                    onError={(e) => {
+                      if (e.target.parentElement) e.target.parentElement.style.display = 'none'
+                    }}
+                    className="w-full h-full object-cover"
+                  />
                 </button>
               ))}
             </div>

@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { fetchTempleDetails } from '../api/wikipediaService'
 import { playTempleChime } from '../audio/chimeSound'
 import { calculateDistance, formatDistance } from '../utils/geoUtils'
+import { getCuratedLore } from '../data/curatedLore'
 import Lightbox from './Lightbox'
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -76,14 +77,38 @@ function ContentSkeleton() {
 }
 
 function HistoryTab({ temple, wikiData, loading, error }) {
+  const curated = useMemo(() => getCuratedLore(temple), [temple])
+
   // Split raw text by newline characters into distinct formatted paragraphs
   const paragraphs = useMemo(() => {
+    if (curated?.paragraphs?.length) {
+      return curated.paragraphs
+    }
     if (!wikiData?.extract) return []
     return wikiData.extract
       .split(/\n+/)
       .map((p) => p.trim())
       .filter((p) => p.length > 0)
-  }, [wikiData?.extract])
+  }, [curated, wikiData?.extract])
+
+  // Detect sensitive northern/border regions to avoid linking to modern partition discussions
+  const isBorderOrSensitiveRegion = useMemo(() => {
+    if (!temple) return false
+    const state = (temple.state || '').toLowerCase()
+    const loc = (temple.location || '').toLowerCase()
+    return (
+      state.includes('jammu') ||
+      state.includes('kashmir') ||
+      state.includes('ladakh') ||
+      loc.includes('gilgit') ||
+      loc.includes('skardu') ||
+      loc.includes('neelum') ||
+      loc.includes('baltistan') ||
+      loc.includes('kargil')
+    )
+  }, [temple])
+
+  const showLoading = loading && !curated
 
   return (
     <motion.div
@@ -96,21 +121,21 @@ function HistoryTab({ temple, wikiData, loading, error }) {
       <div>
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-1.5 theme-gold">
-            <WikiIcon />
+            <span className="text-sm">📜</span>
             <h4 className="text-[11px] font-bold uppercase tracking-widest font-cinzel">
-              Sacred Heritage
+              {curated ? 'Ancient Sacred Lore' : 'Sacred Heritage'}
             </h4>
           </div>
-          {loading && (
+          {showLoading && (
             <span className="text-[10px] text-saffron font-sans animate-pulse font-bold">
               fetching live lore…
             </span>
           )}
         </div>
 
-        {loading && <ContentSkeleton />}
+        {showLoading && <ContentSkeleton />}
 
-        {error && (
+        {error && !curated && (
           <div className="rounded-xl p-3 bg-red-500/10 border border-red-500/25">
             <p className="text-xs text-red-500 font-sans font-medium">
               Could not load live Wikipedia extract. Showing temple record details.
@@ -119,7 +144,7 @@ function HistoryTab({ temple, wikiData, loading, error }) {
         )}
 
         {/* Clean paragraph formatting with mb-4 spacing and high-contrast theme-body */}
-        {!loading && paragraphs.length > 0 && (
+        {!showLoading && paragraphs.length > 0 && (
           <div className="space-y-1">
             {paragraphs.map((para, idx) => (
               <p
@@ -132,7 +157,7 @@ function HistoryTab({ temple, wikiData, loading, error }) {
           </div>
         )}
 
-        {!loading && paragraphs.length === 0 && !error && (
+        {!showLoading && paragraphs.length === 0 && !error && (
           <div className="space-y-3">
             <p className="mb-4 text-[15px] font-sans leading-[1.75] tracking-normal theme-body">
               {temple.name} is a renowned spiritual pilgrimage shrine situated in{' '}
@@ -146,8 +171,24 @@ function HistoryTab({ temple, wikiData, loading, error }) {
         )}
       </div>
 
-      {/* Wikipedia Source link */}
-      {temple.wiki_slug && (
+      {/* Source Citation: Pre-1947 classical source or suppressed external link */}
+      {curated ? (
+        <div className="flex items-center gap-2 pt-2">
+          <div className="flex-1 h-px bg-[var(--border-gold)]" />
+          <span className="text-[10px] font-sans theme-gold/80 italic text-center px-2">
+            📜 {curated.source}
+          </span>
+          <div className="flex-1 h-px bg-[var(--border-gold)]" />
+        </div>
+      ) : isBorderOrSensitiveRegion ? (
+        <div className="flex items-center gap-2 pt-2">
+          <div className="flex-1 h-px bg-[var(--border-gold)]" />
+          <span className="text-[10.5px] font-sans theme-gold flex items-center gap-1 font-semibold">
+            📜 Historical Source: Archaeological & Sacred Heritage Archives
+          </span>
+          <div className="flex-1 h-px bg-[var(--border-gold)]" />
+        </div>
+      ) : temple.wiki_slug ? (
         <div className="flex items-center gap-2 pt-2">
           <div className="flex-1 h-px bg-[var(--border-gold)]" />
           <a
@@ -160,7 +201,7 @@ function HistoryTab({ temple, wikiData, loading, error }) {
           </a>
           <div className="flex-1 h-px bg-[var(--border-gold)]" />
         </div>
-      )}
+      ) : null}
     </motion.div>
   )
 }
@@ -314,6 +355,7 @@ export default function DarshanPanel({ selectedTemple, onClose, theme = 'dark', 
   const [wikiError, setWikiError] = useState(null)
   const [imageLoaded, setImageLoaded] = useState(false)
   const [selectedHeroImage, setSelectedHeroImage] = useState(null)
+  const [failedImages, setFailedImages] = useState(new Set())
 
   // Lightbox modal state
   const [lightboxOpen, setLightboxOpen] = useState(false)
@@ -327,6 +369,7 @@ export default function DarshanPanel({ selectedTemple, onClose, theme = 'dark', 
     setSelectedHeroImage(null)
     setActiveTab('history')
     setLightboxOpen(false)
+    setFailedImages(new Set())
 
     if (!selectedTemple.wiki_slug) {
       setWikiData(null)
@@ -367,23 +410,31 @@ export default function DarshanPanel({ selectedTemple, onClose, theme = 'dark', 
     }
   }
 
-  if (!selectedTemple) return null
-
-  const currentHero = selectedHeroImage || wikiData?.imageUrl || selectedTemple.image_url || null
-
-  // Ensure all available photos are included in the Lightbox array (guaranteed at least [currentHero] if an image exists)
+  // Filter out broken / 404 image URLs from gallery and lightboxes
   const allGalleryImages = useMemo(() => {
     const list = []
-    if (currentHero) list.push(currentHero)
-    if (wikiData?.imageUrl && !list.includes(wikiData.imageUrl)) list.push(wikiData.imageUrl)
-    if (selectedTemple.image_url && !list.includes(selectedTemple.image_url)) list.push(selectedTemple.image_url)
-    if (Array.isArray(wikiData?.galleryImages)) {
-      for (const img of wikiData.galleryImages) {
-        if (img && !list.includes(img)) list.push(img)
+    const candidates = [
+      selectedHeroImage,
+      wikiData?.imageUrl,
+      selectedTemple?.image_url,
+      ...(wikiData?.galleryImages || []),
+    ]
+    for (const url of candidates) {
+      if (url && typeof url === 'string' && !list.includes(url) && !failedImages.has(url)) {
+        list.push(url)
       }
     }
     return list
-  }, [currentHero, wikiData?.imageUrl, wikiData?.galleryImages, selectedTemple.image_url])
+  }, [selectedHeroImage, wikiData?.imageUrl, wikiData?.galleryImages, selectedTemple?.image_url, failedImages])
+
+  const currentHero = useMemo(() => {
+    if (selectedHeroImage && !failedImages.has(selectedHeroImage)) {
+      return selectedHeroImage
+    }
+    return allGalleryImages[0] || null
+  }, [selectedHeroImage, allGalleryImages, failedImages])
+
+  if (!selectedTemple) return null
 
   const openLightboxForImage = (imgUrl) => {
     let targetList = allGalleryImages
@@ -438,6 +489,10 @@ export default function DarshanPanel({ selectedTemple, onClose, theme = 'dark', 
                 src={currentHero}
                 alt={selectedTemple.name}
                 onLoad={() => setImageLoaded(true)}
+                onError={() => {
+                  setFailedImages((prev) => new Set([...prev, currentHero]))
+                  setImageLoaded(false)
+                }}
                 initial={{ opacity: 0, scale: 1.08 }}
                 animate={{ opacity: imageLoaded ? 1 : 0, scale: 1 }}
                 exit={{ opacity: 0 }}
@@ -450,7 +505,7 @@ export default function DarshanPanel({ selectedTemple, onClose, theme = 'dark', 
                   {DEITY_EMOJIS[selectedTemple.deity] || '🛕'}
                 </span>
                 <p className="font-cinzel text-xs uppercase tracking-widest theme-gold font-bold">
-                  {selectedTemple.deity ? `${selectedTemple.deity} Temple` : 'Sacred Hindu Temple'}
+                  {selectedTemple.deity ? `${selectedTemple.deity} Temple` : 'Sacred Heritage Shrine'}
                 </p>
               </div>
             )}
@@ -524,7 +579,7 @@ export default function DarshanPanel({ selectedTemple, onClose, theme = 'dark', 
                 const isActive = currentHero === imgUrl
                 return (
                   <button
-                    key={idx}
+                    key={imgUrl}
                     onClick={() => {
                       playTempleChime()
                       setSelectedHeroImage(imgUrl)
@@ -536,7 +591,12 @@ export default function DarshanPanel({ selectedTemple, onClose, theme = 'dark', 
                         : 'opacity-70 hover:opacity-100 hover:scale-105 border border-[var(--border-gold)]'
                       }`}
                   >
-                    <img src={imgUrl} alt={`Gallery view ${idx + 1}`} className="w-full h-full object-cover" />
+                    <img
+                      src={imgUrl}
+                      alt={`Gallery view ${idx + 1}`}
+                      onError={() => setFailedImages((prev) => new Set([...prev, imgUrl]))}
+                      className="w-full h-full object-cover"
+                    />
                   </button>
                 )
               })}

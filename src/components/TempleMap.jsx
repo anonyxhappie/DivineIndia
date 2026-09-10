@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react'
-import { MapContainer, TileLayer, Marker, Tooltip, Polyline, ZoomControl, useMap, useMapEvents } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Tooltip, Polyline, ZoomControl, GeoJSON, useMap, useMapEvents } from 'react-leaflet'
 import MarkerClusterGroup from 'react-leaflet-cluster'
 import L from 'leaflet'
 import { motion, AnimatePresence } from 'framer-motion'
 import { fetchOSMTemples } from '../api/overpassService'
 import { fetchTempleDetails } from '../api/wikipediaService'
 import { calculateDistance, formatDistance } from '../utils/geoUtils'
+import indiaBoundaryData from '../data/india-boundary.json'
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Deity Emojis
@@ -182,8 +183,13 @@ function BoundsWatcher({ onBoundsChange }) {
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 function TempleTooltipContent({ temple, activeImage, userLocation }) {
+  const [imgError, setImgError] = useState(false)
   const deityEmoji = DEITY_EMOJIS[temple.deity] || '🛕'
-  const imgUrl = activeImage || temple.image_url || null
+  const imgUrl = !imgError ? (activeImage || temple.image_url || null) : null
+
+  useEffect(() => {
+    setImgError(false)
+  }, [temple?.id, activeImage])
 
   const distanceKm = userLocation && temple.lat != null && temple.lng != null
     ? calculateDistance(userLocation.lat, userLocation.lng, temple.lat, temple.lng)
@@ -197,6 +203,7 @@ function TempleTooltipContent({ temple, activeImage, userLocation }) {
           <img
             src={imgUrl}
             alt={temple.name}
+            onError={() => setImgError(true)}
             className="w-12 h-12 rounded-xl object-cover flex-shrink-0 border border-[var(--border-gold)] shadow-sm"
           />
         ) : (
@@ -296,10 +303,7 @@ export default function TempleMap({
       return
     }
 
-    if (selectedTemple.image_url) {
-      setActiveTempleImage(selectedTemple.image_url)
-      return
-    }
+    setActiveTempleImage(selectedTemple.image_url || null)
 
     if (selectedTemple.wiki_slug) {
       let isCurrent = true
@@ -402,6 +406,41 @@ export default function TempleMap({
           maxZoom={19}
           className={theme === 'dark' ? 'dark-map-filter' : ''}
         />
+
+        {/* Official Survey of India International Boundary Overlay (encloses J&K, Ladakh, PoK & CoK / Aksai Chin) */}
+        {indiaBoundaryData && (
+          <>
+            {/* Outer subtle glow/casing to ensure high contrast against both dark and light tiles */}
+            <GeoJSON
+              key={`india-boundary-casing-${theme}`}
+              data={indiaBoundaryData}
+              style={() => ({
+                color: theme === 'dark' ? '#FF9933' : '#B84E00',
+                weight: 4.5,
+                opacity: theme === 'dark' ? 0.35 : 0.22,
+                lineCap: 'round',
+                lineJoin: 'round',
+                interactive: false,
+              })}
+              interactive={false}
+            />
+            {/* Core crisp international border (Survey of India standard dash-dot delineation) */}
+            <GeoJSON
+              key={`india-boundary-core-${theme}`}
+              data={indiaBoundaryData}
+              style={() => ({
+                color: theme === 'dark' ? '#FFD700' : '#854800',
+                weight: 2.2,
+                opacity: 0.95,
+                dashArray: '10, 5, 2, 5',
+                lineCap: 'round',
+                lineJoin: 'round',
+                interactive: false,
+              })}
+              interactive={false}
+            />
+          </>
+        )}
 
         {/* Custom positioned ZoomControl at bottom-right */}
         <ZoomControl position="bottomright" />

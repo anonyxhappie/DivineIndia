@@ -3877,14 +3877,17 @@
     "lat": 32.7304,
     "lng": 74.8623,
     "deity": "Vishnu",
-    "state": "Himachal Pradesh",
-    "location": "Kullu",
-    "era": null,
-    "period": null,
-    "circuit_tags": [],
+    "state": "Jammu and Kashmir",
+    "location": "Jammu",
+    "era": "1857 CE",
+    "period": "Modern",
+    "circuit_tags": [
+      "Heritage",
+      "Char Dham"
+    ],
     "wiki_slug": "Raghunath_Temple",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/The_Temples_of_Raghunath%2C_Jammu%2C_India%2C_ca.1875-ca.1940_%28imp-cswc-GB-237-CSWC47-LS10-011%29.jpg/1280px-The_Temples_of_Raghunath%2C_Jammu%2C_India%2C_ca.1875-ca.1940_%28imp-cswc-GB-237-CSWC47-LS10-011%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Raghunath%20Temple%2C%20Kullu%2C%20Himachal%20Pradesh%2C%20India"
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Raghunath%20Temple%2C%20Jammu%2C%20Jammu%20and%20Kashmir%2C%20India"
   },
   {
     "id": 254,
@@ -4057,7 +4060,7 @@
     "lat": 34.1053,
     "lng": 74.8161,
     "deity": "Deity",
-    "state": "Kashmir Division",
+    "state": "Jammu and Kashmir",
     "location": "Srinagar",
     "era": null,
     "period": null,
@@ -4072,7 +4075,7 @@
     "lat": 34.2211,
     "lng": 74.73,
     "deity": "Deity",
-    "state": "Kashmir Division",
+    "state": "Jammu and Kashmir",
     "location": "Ganderbal",
     "era": null,
     "period": null,
@@ -4083,16 +4086,18 @@
   },
   {
     "id": 267,
-    "name": "Khrew",
+    "name": "Jawala Ji Temple (Khrew)",
     "lat": 34.02,
     "lng": 74.99,
-    "deity": "Deity",
-    "state": "Kashmir Division",
-    "location": "Pulwama",
-    "era": null,
-    "period": null,
-    "circuit_tags": [],
-    "wiki_slug": "Khrew",
+    "deity": "Goddess",
+    "state": "Jammu and Kashmir",
+    "location": "Khrew, Pulwama",
+    "era": "Ancient",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Shakti"
+    ],
+    "wiki_slug": "Jwala_Ji_Temple,_Khrew",
     "image_url": null,
     "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Khrew%2C%20Pulwama%2C%20Kashmir%20Division%2C%20India"
   },
@@ -4102,7 +4107,7 @@
     "lat": 33.7456,
     "lng": 75.2203,
     "deity": "Surya",
-    "state": "Kashmir Division",
+    "state": "Jammu and Kashmir",
     "location": "Anantnag",
     "era": null,
     "period": null,
@@ -4117,7 +4122,7 @@
     "lat": 34.0789,
     "lng": 74.8436,
     "deity": "Deity",
-    "state": "Kashmir Division",
+    "state": "Jammu and Kashmir",
     "location": "Srinagar",
     "era": null,
     "period": null,
@@ -13389,18 +13394,862 @@
     "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Lists%20of%20Hindu%20temples%2C%20West%20Bengal%2C%20India"
   },
   {
-    "id": 884,
-    "name": "ISBN",
-    "lat": null,
-    "lng": null,
+    "name": "Sharada Peeth",
+    "lat": 34.7936,
+    "lng": 74.1925,
+    "deity": "Goddess",
+    "state": "Jammu and Kashmir",
+    "location": "Sharda, Neelum Valley",
+    "era": "6th Century",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Shakti Peetha",
+      "Heritage"
+    ],
+    "wiki_slug": "Sharada_Peeth",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Sharada%20Peeth%2C%20Sharda%2C%20Neelum%20Valley",
+    "id": 885
+  },
+  {
+    "name": "Kargah Buddha",
+    "lat": 35.9183,
+    "lng": 74.2606,
+    "deity": "Buddha",
+    "state": "Ladakh",
+    "location": "Kargah Valley, Gilgit",
+    "era": "7th Century",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Heritage"
+    ],
+    "wiki_slug": "Kargah_Buddha",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Kargah%20Buddha%2C%20Gilgit",
+    "id": 886
+  },
+  {
+    "name": "Manthal Buddha Rock",
+    "lat": 35.2639,
+    "lng": 75.6417,
+    "deity": "Buddha",
+    "state": "Ladakh",
+    "location": "Manthal, Skardu",
+    "era": "8th Century",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Heritage"
+    ],
+    "wiki_slug": "Manthal_Buddha_Rock",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Manthal%20Buddha%20Rock%2C%20Skardu",
+    "id": 887
+  },
+  {
+    "name": "Alchi Monastery",
+    "lat": 34.2237,
+    "lng": 77.1752,
+    "deity": "Buddha",
+    "state": "Ladakh",
+    "location": "Alchi, Leh",
+    "era": "11th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Heritage"
+    ],
+    "wiki_slug": "Alchi_Monastery",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Alchi%20Monastery%2C%20Leh%2C%20Ladakh",
+    "id": 888
+  },
+  {
+    "name": "Thiksey Monastery",
+    "lat": 34.0569,
+    "lng": 77.6667,
+    "deity": "Buddha",
+    "state": "Ladakh",
+    "location": "Thiksey, Leh",
+    "era": "15th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Heritage"
+    ],
+    "wiki_slug": "Thikse_Monastery",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Thiksey%20Monastery%2C%20Leh%2C%20Ladakh",
+    "id": 889
+  },
+  {
+    "name": "Hemis Monastery",
+    "lat": 33.9126,
+    "lng": 77.7081,
+    "deity": "Buddha",
+    "state": "Ladakh",
+    "location": "Hemis, Leh",
+    "era": "11th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Heritage"
+    ],
+    "wiki_slug": "Hemis_Monastery",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Hemis%20Monastery%2C%20Leh%2C%20Ladakh",
+    "id": 890
+  },
+  {
+    "name": "Diskit Monastery",
+    "lat": 34.5428,
+    "lng": 77.5614,
+    "deity": "Buddha",
+    "state": "Ladakh",
+    "location": "Nubra Valley",
+    "era": "14th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Heritage"
+    ],
+    "wiki_slug": "Diskit_Monastery",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Diskit%20Monastery%2C%20Nubra%20Valley%2C%20Ladakh",
+    "id": 891
+  },
+  {
+    "name": "Lamayuru Monastery",
+    "lat": 34.2828,
+    "lng": 76.7742,
+    "deity": "Buddha",
+    "state": "Ladakh",
+    "location": "Lamayuru, Leh",
+    "era": "11th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Heritage"
+    ],
+    "wiki_slug": "Lamayuru_Monastery",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Lamayuru%20Monastery%2C%20Ladakh",
+    "id": 892
+  },
+  {
+    "name": "Spituk Monastery (Kali Temple)",
+    "lat": 34.1255,
+    "lng": 77.5262,
+    "deity": "Goddess",
+    "state": "Ladakh",
+    "location": "Spituk, Leh",
+    "era": "11th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Heritage",
+      "Shakti"
+    ],
+    "wiki_slug": "Spituk_Monastery",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Spituk%20Monastery%2C%20Leh%2C%20Ladakh",
+    "id": 893
+  },
+  {
+    "name": "Shey Monastery",
+    "lat": 34.0722,
+    "lng": 77.6322,
+    "deity": "Buddha",
+    "state": "Ladakh",
+    "location": "Shey, Leh",
+    "era": "17th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Heritage"
+    ],
+    "wiki_slug": "Shey_Monastery",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Shey%20Monastery%2C%20Leh%2C%20Ladakh",
+    "id": 894
+  },
+  {
+    "name": "Likir Monastery",
+    "lat": 34.2933,
+    "lng": 77.2153,
+    "deity": "Buddha",
+    "state": "Ladakh",
+    "location": "Likir, Leh",
+    "era": "11th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Heritage"
+    ],
+    "wiki_slug": "Likir_Monastery",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Likir%20Monastery%2C%20Leh%2C%20Ladakh",
+    "id": 895
+  },
+  {
+    "name": "Phuktal Monastery",
+    "lat": 33.2721,
+    "lng": 77.1818,
+    "deity": "Buddha",
+    "state": "Ladakh",
+    "location": "Zanskar",
+    "era": "12th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Heritage"
+    ],
+    "wiki_slug": "Phugtal_Monastery",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Phugtal%20Monastery%2C%20Zanskar%2C%20Ladakh",
+    "id": 896
+  },
+  {
+    "name": "Mulbekh Monastery",
+    "lat": 34.3828,
+    "lng": 76.3564,
+    "deity": "Buddha",
+    "state": "Ladakh",
+    "location": "Mulbekh, Kargil",
+    "era": "8th Century",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Heritage"
+    ],
+    "wiki_slug": "Mulbekh_Monastery",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Mulbekh%20Monastery%2C%20Kargil%2C%20Ladakh",
+    "id": 897
+  },
+  {
+    "name": "Stakna Monastery",
+    "lat": 34.0044,
+    "lng": 77.6853,
+    "deity": "Buddha",
+    "state": "Ladakh",
+    "location": "Stakna, Leh",
+    "era": "16th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Heritage"
+    ],
+    "wiki_slug": "Stakna_Monastery",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Stakna%20Monastery%2C%20Leh%2C%20Ladakh",
+    "id": 898
+  },
+  {
+    "name": "Matho Monastery",
+    "lat": 33.9936,
+    "lng": 77.6433,
+    "deity": "Buddha",
+    "state": "Ladakh",
+    "location": "Matho, Leh",
+    "era": "15th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Heritage"
+    ],
+    "wiki_slug": "Matho_Monastery",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Matho%20Monastery%2C%20Leh%2C%20Ladakh",
+    "id": 899
+  },
+  {
+    "name": "Chemrey Monastery",
+    "lat": 34.0489,
+    "lng": 77.7881,
+    "deity": "Buddha",
+    "state": "Ladakh",
+    "location": "Chemrey, Leh",
+    "era": "17th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Heritage"
+    ],
+    "wiki_slug": "Chemrey_Monastery",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Chemrey%20Monastery%2C%20Leh%2C%20Ladakh",
+    "id": 900
+  },
+  {
+    "name": "Rangdum Monastery",
+    "lat": 34.0456,
+    "lng": 76.2878,
+    "deity": "Buddha",
+    "state": "Ladakh",
+    "location": "Suru Valley, Kargil",
+    "era": "18th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Heritage"
+    ],
+    "wiki_slug": "Rangdum_Monastery",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Rangdum%20Monastery%2C%20Kargil%2C%20Ladakh",
+    "id": 901
+  },
+  {
+    "name": "Gurdwara Pathar Sahib",
+    "lat": 34.2389,
+    "lng": 77.3756,
+    "deity": "Sikh",
+    "state": "Ladakh",
+    "location": "Leh-Kargil Highway, Leh",
+    "era": "1517 CE",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Pilgrimage"
+    ],
+    "wiki_slug": "Gurdwara_Pathar_Sahib",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Gurdwara%20Pathar%20Sahib%2C%20Leh%2C%20Ladakh",
+    "id": 902
+  },
+  {
+    "name": "Avantiswami Temple",
+    "lat": 33.9239,
+    "lng": 75.0142,
+    "deity": "Vishnu",
+    "state": "Jammu and Kashmir",
+    "location": "Awantipora, Pulwama",
+    "era": "9th Century",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Heritage"
+    ],
+    "wiki_slug": "Avantiswami_Temple",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Avantiswami%20Temple%2C%20Awantipora%2C%20Jammu%20and%20Kashmir",
+    "id": 903
+  },
+  {
+    "name": "Avantishwar Temple",
+    "lat": 33.9272,
+    "lng": 75.0117,
+    "deity": "Shiva",
+    "state": "Jammu and Kashmir",
+    "location": "Awantipora, Pulwama",
+    "era": "9th Century",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Heritage"
+    ],
+    "wiki_slug": "Avantiswami_Temple",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Avantishwar%20Temple%2C%20Awantipora%2C%20Jammu%20and%20Kashmir",
+    "id": 904
+  },
+  {
+    "name": "Naranag Temples",
+    "lat": 34.3547,
+    "lng": 74.9819,
+    "deity": "Shiva",
+    "state": "Jammu and Kashmir",
+    "location": "Naranag, Ganderbal",
+    "era": "8th Century",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Heritage"
+    ],
+    "wiki_slug": "Naranag_temple",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Naranag%20Temples%2C%20Ganderbal%2C%20Jammu%20and%20Kashmir",
+    "id": 905
+  },
+  {
+    "name": "Mamaleshwar Temple",
+    "lat": 34.0153,
+    "lng": 75.3131,
+    "deity": "Shiva",
+    "state": "Jammu and Kashmir",
+    "location": "Pahalgam, Anantnag",
+    "era": "12th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Heritage"
+    ],
+    "wiki_slug": "Mamal_Temple",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Mamal%20Temple%2C%20Pahalgam%2C%20Jammu%20and%20Kashmir",
+    "id": 906
+  },
+  {
+    "name": "Pandrethan Temple",
+    "lat": 34.0531,
+    "lng": 74.8586,
+    "deity": "Shiva",
+    "state": "Jammu and Kashmir",
+    "location": "Pandrethan, Srinagar",
+    "era": "10th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Heritage"
+    ],
+    "wiki_slug": "Pandrethan_Temple",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Pandrethan%20Temple%2C%20Srinagar%2C%20Jammu%20and%20Kashmir",
+    "id": 907
+  },
+  {
+    "name": "Buniyar Temple",
+    "lat": 34.1333,
+    "lng": 74.1833,
+    "deity": "Vishnu",
+    "state": "Jammu and Kashmir",
+    "location": "Buniyar, Baramulla",
+    "era": "9th Century",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Heritage"
+    ],
+    "wiki_slug": "Buniar_temple",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Buniyar%20Temple%2C%20Baramulla%2C%20Jammu%20and%20Kashmir",
+    "id": 908
+  },
+  {
+    "name": "Payar Temple",
+    "lat": 33.8828,
+    "lng": 74.9753,
+    "deity": "Shiva",
+    "state": "Jammu and Kashmir",
+    "location": "Payar, Pulwama",
+    "era": "10th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Heritage"
+    ],
+    "wiki_slug": "Payar_temple",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Payar%20Temple%2C%20Pulwama%2C%20Jammu%20and%20Kashmir",
+    "id": 909
+  },
+  {
+    "name": "Zeashta Devi Temple",
+    "lat": 34.0792,
+    "lng": 74.8825,
+    "deity": "Goddess",
+    "state": "Jammu and Kashmir",
+    "location": "Zeathyar, Srinagar",
+    "era": "Ancient",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Shakti"
+    ],
+    "wiki_slug": "Zeashta_Devi_Shrine",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Zeashta%20Devi%20Temple%2C%20Srinagar%2C%20Jammu%20and%20Kashmir",
+    "id": 910
+  },
+  {
+    "name": "Bhadrakali Temple",
+    "lat": 34.4253,
+    "lng": 74.2411,
+    "deity": "Goddess",
+    "state": "Jammu and Kashmir",
+    "location": "Handwara, Kupwara",
+    "era": "Ancient",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Shakti"
+    ],
+    "wiki_slug": "Bhadrakali_Temple,_Kupwara",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Bhadrakali%20Temple%2C%20Kupwara%2C%20Jammu%20and%20Kashmir",
+    "id": 911
+  },
+  {
+    "name": "Shailputri Temple",
+    "lat": 34.2047,
+    "lng": 74.3486,
+    "deity": "Goddess",
+    "state": "Jammu and Kashmir",
+    "location": "Baramulla",
+    "era": "Ancient",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Shakti"
+    ],
+    "wiki_slug": "Shailputri_Temple_Baramulla",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Shailputri%20Temple%2C%20Baramulla%2C%20Jammu%20and%20Kashmir",
+    "id": 912
+  },
+  {
+    "name": "Machail Mata Temple",
+    "lat": 33.2844,
+    "lng": 76.2894,
+    "deity": "Goddess",
+    "state": "Jammu and Kashmir",
+    "location": "Machail, Kishtwar",
+    "era": "Ancient",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Shakti",
+      "Pilgrimage"
+    ],
+    "wiki_slug": "Machail_Mata",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Machail%20Mata%20Temple%2C%20Kishtwar%2C%20Jammu%20and%20Kashmir",
+    "id": 913
+  },
+  {
+    "name": "Ranbireshwar Temple",
+    "lat": 32.7358,
+    "lng": 74.8631,
+    "deity": "Shiva",
+    "state": "Jammu and Kashmir",
+    "location": "Shalamar Road, Jammu",
+    "era": "1883 CE",
+    "period": "Modern",
+    "circuit_tags": [
+      "Heritage"
+    ],
+    "wiki_slug": "Ranbireshwar_Temple",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Ranbireshwar%20Temple%2C%20Jammu",
+    "id": 914
+  },
+  {
+    "name": "Bawe Wali Mata Temple (Bahu Fort)",
+    "lat": 32.7297,
+    "lng": 74.8797,
+    "deity": "Goddess",
+    "state": "Jammu and Kashmir",
+    "location": "Bahu Fort, Jammu",
+    "era": "Ancient / 18th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Shakti"
+    ],
+    "wiki_slug": "Bahu_Fort",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Bawe%20Wali%20Mata%20Temple%2C%20Bahu%20Fort%2C%20Jammu",
+    "id": 915
+  },
+  {
+    "name": "Shiv Khori",
+    "lat": 33.0978,
+    "lng": 74.5261,
+    "deity": "Shiva",
+    "state": "Jammu and Kashmir",
+    "location": "Ransoo, Reasi",
+    "era": "Ancient",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Cave Temple",
+      "Pilgrimage"
+    ],
+    "wiki_slug": "Shivkhori",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Shiv%20Khori%2C%20Ransoo%2C%20Reasi%2C%20Jammu%20and%20Kashmir",
+    "id": 916
+  },
+  {
+    "name": "Krimchi Temples",
+    "lat": 32.9667,
+    "lng": 75.1167,
+    "deity": "Shiva",
+    "state": "Jammu and Kashmir",
+    "location": "Krimchi, Udhampur",
+    "era": "8th Century",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Heritage"
+    ],
+    "wiki_slug": "Krimchi_temples",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Krimchi%20Temples%2C%20Udhampur%2C%20Jammu%20and%20Kashmir",
+    "id": 917
+  },
+  {
+    "name": "Sudh Mahadev Temple",
+    "lat": 33.0278,
+    "lng": 75.3611,
+    "deity": "Shiva",
+    "state": "Jammu and Kashmir",
+    "location": "Chenani, Udhampur",
+    "era": "Ancient",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Pilgrimage",
+      "Heritage"
+    ],
+    "wiki_slug": "Sudh_Mahadev",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Sudh%20Mahadev%20Temple%2C%20Udhampur%2C%20Jammu%20and%20Kashmir",
+    "id": 918
+  },
+  {
+    "name": "Mantalai Temple",
+    "lat": 33.0117,
+    "lng": 75.3853,
+    "deity": "Shiva",
+    "state": "Jammu and Kashmir",
+    "location": "Mantalai, Udhampur",
+    "era": "Ancient",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Pilgrimage"
+    ],
+    "wiki_slug": "Mantalai",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Mantalai%20Temple%2C%20Udhampur%2C%20Jammu%20and%20Kashmir",
+    "id": 919
+  },
+  {
+    "name": "Peer Kho Cave Temple",
+    "lat": 32.7369,
+    "lng": 74.8731,
+    "deity": "Shiva",
+    "state": "Jammu and Kashmir",
+    "location": "Circular Road, Jammu",
+    "era": "15th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Cave Temple"
+    ],
+    "wiki_slug": "Peer_Kho_Cave",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Peer%20Kho%20Cave%20Temple%2C%20Jammu",
+    "id": 920
+  },
+  {
+    "name": "Purmandal Temple",
+    "lat": 32.7003,
+    "lng": 75.0489,
+    "deity": "Shiva",
+    "state": "Jammu and Kashmir",
+    "location": "Purmandal, Samba",
+    "era": "8th Century",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Pilgrimage",
+      "Heritage"
+    ],
+    "wiki_slug": "Purmandal",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Purmandal%20Temple%2C%20Samba%2C%20Jammu%20and%20Kashmir",
+    "id": 921
+  },
+  {
+    "name": "Utterbehni Temples",
+    "lat": 32.6667,
+    "lng": 75.05,
+    "deity": "Shiva",
+    "state": "Jammu and Kashmir",
+    "location": "Utterbehni, Samba",
+    "era": "Ancient",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Pilgrimage"
+    ],
+    "wiki_slug": "Utterbehni",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Utterbehni%20Temples%2C%20Samba%2C%20Jammu%20and%20Kashmir",
+    "id": 922
+  },
+  {
+    "name": "Sukrala Mata Temple",
+    "lat": 32.6167,
+    "lng": 75.6,
+    "deity": "Goddess",
+    "state": "Jammu and Kashmir",
+    "location": "Billawar, Kathua",
+    "era": "18th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Shakti"
+    ],
+    "wiki_slug": "Sukrala_Mata",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Sukrala%20Mata%20Temple%2C%20Billawar%2C%20Kathua",
+    "id": 923
+  },
+  {
+    "name": "Mahabilvakeshwar Temple",
+    "lat": 32.6128,
+    "lng": 75.6033,
+    "deity": "Shiva",
+    "state": "Jammu and Kashmir",
+    "location": "Billawar, Kathua",
+    "era": "10th Century",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Heritage"
+    ],
+    "wiki_slug": "Billawar",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Mahabilvakeshwar%20Temple%2C%20Billawar%2C%20Kathua",
+    "id": 924
+  },
+  {
+    "name": "Basohli Mahakaleshwar Temple",
+    "lat": 32.5028,
+    "lng": 75.8111,
+    "deity": "Shiva",
+    "state": "Jammu and Kashmir",
+    "location": "Basohli, Kathua",
+    "era": "11th Century",
+    "period": "Medieval",
+    "circuit_tags": [
+      "Heritage"
+    ],
+    "wiki_slug": "Basohli",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Mahakaleshwar%20Temple%2C%20Basohli%2C%20Kathua",
+    "id": 925
+  },
+  {
+    "name": "Baba Dhansar",
+    "lat": 33.0889,
+    "lng": 74.9667,
+    "deity": "Shiva",
+    "state": "Jammu and Kashmir",
+    "location": "Karu, Reasi",
+    "era": "Ancient",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Pilgrimage"
+    ],
+    "wiki_slug": "Baba_Dhansar",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Baba%20Dhansar%2C%20Reasi%2C%20Jammu%20and%20Kashmir",
+    "id": 926
+  },
+  {
+    "name": "Kol Kandoli Temple",
+    "lat": 32.7889,
+    "lng": 74.9167,
+    "deity": "Goddess",
+    "state": "Jammu and Kashmir",
+    "location": "Nagrota, Jammu",
+    "era": "Ancient",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Shakti",
+      "Pilgrimage"
+    ],
+    "wiki_slug": "Nagrota,_Jammu_and_Kashmir",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Kol%20Kandoli%20Temple%2C%20Nagrota%2C%20Jammu",
+    "id": 927
+  },
+  {
+    "name": "Ardhkuwari Cave Temple",
+    "lat": 33.0189,
+    "lng": 74.9531,
+    "deity": "Goddess",
+    "state": "Jammu and Kashmir",
+    "location": "Katra",
+    "era": "Ancient",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Cave Temple",
+      "Pilgrimage"
+    ],
+    "wiki_slug": "Vaishno_Devi",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Ardhkuwari%20Temple%2C%20Katra%2C%20Jammu%20and%20Kashmir",
+    "id": 928
+  },
+  {
+    "name": "Bhairavnath Temple",
+    "lat": 33.0361,
+    "lng": 74.9458,
+    "deity": "Shiva",
+    "state": "Jammu and Kashmir",
+    "location": "Bhairav Ghati, Katra",
+    "era": "Ancient",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Pilgrimage"
+    ],
+    "wiki_slug": "Vaishno_Devi",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Bhairavnath%20Temple%2C%20Katra%2C%20Jammu%20and%20Kashmir",
+    "id": 929
+  },
+  {
+    "name": "Vasuki Nag Temple",
+    "lat": 32.9806,
+    "lng": 75.7139,
     "deity": "Deity",
-    "state": "West Bengal",
-    "location": "Encyclopedia of Hindu Temple architecture and Vastu S.K.Ramachandara Rao",
-    "era": null,
-    "period": null,
-    "circuit_tags": [],
-    "wiki_slug": "ISBN_(identifier)",
-    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/EAN-13-ISBN-13.svg/1280px-EAN-13-ISBN-13.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=ISBN%2C%20Encyclopedia%20of%20Hindu%20Temple%20architecture%20and%20Vastu%20S.K.Ramachandara%20Rao%2C%20West%20Bengal%2C%20India"
+    "state": "Jammu and Kashmir",
+    "location": "Bhaderwah, Doda",
+    "era": "11th Century",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Heritage"
+    ],
+    "wiki_slug": "Bhaderwah",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Vasuki%20Nag%20Temple%2C%20Bhaderwah%2C%20Jammu%20and%20Kashmir",
+    "id": 930
+  },
+  {
+    "name": "Gupt Ganga Temple",
+    "lat": 32.9778,
+    "lng": 75.7222,
+    "deity": "Shiva",
+    "state": "Jammu and Kashmir",
+    "location": "Bhaderwah, Doda",
+    "era": "Ancient",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Pilgrimage",
+      "Heritage"
+    ],
+    "wiki_slug": "Bhaderwah",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Gupt%20Ganga%20Temple%2C%20Bhaderwah%2C%20Jammu%20and%20Kashmir",
+    "id": 931
+  },
+  {
+    "name": "Subar Nag Temple",
+    "lat": 33.0222,
+    "lng": 75.75,
+    "deity": "Deity",
+    "state": "Jammu and Kashmir",
+    "location": "Bhaderwah, Doda",
+    "era": "Ancient",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Pilgrimage"
+    ],
+    "wiki_slug": "Bhaderwah",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Subar%20Nag%20Temple%2C%20Bhaderwah%2C%20Jammu%20and%20Kashmir",
+    "id": 932
+  },
+  {
+    "name": "Pingla Devi Temple",
+    "lat": 32.8167,
+    "lng": 75.3167,
+    "deity": "Goddess",
+    "state": "Jammu and Kashmir",
+    "location": "Ramnagar, Udhampur",
+    "era": "Ancient",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Shakti"
+    ],
+    "wiki_slug": "Ramnagar,_Jammu_and_Kashmir",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Pingla%20Devi%20Temple%2C%20Ramnagar%2C%20Udhampur",
+    "id": 933
+  },
+  {
+    "name": "Aap Shambhu Temple",
+    "lat": 32.7722,
+    "lng": 74.8444,
+    "deity": "Shiva",
+    "state": "Jammu and Kashmir",
+    "location": "Roop Nagar, Jammu",
+    "era": "Ancient",
+    "period": "Ancient",
+    "circuit_tags": [
+      "Pilgrimage"
+    ],
+    "wiki_slug": "Jammu",
+    "image_url": null,
+    "google_maps_link": "https://www.google.com/maps/search/?api=1&query=Aap%20Shambhu%20Temple%2C%20Roop%20Nagar%2C%20Jammu",
+    "id": 934
   }
 ]

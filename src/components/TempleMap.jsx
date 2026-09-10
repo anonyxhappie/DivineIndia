@@ -44,7 +44,8 @@ export const MAP_STYLES = {
     description: 'Streets, cities & English names (Google)',
     url: 'https://mt{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}&hl=en&gl=IN',
     subdomains: '0123',
-    maxZoom: 20,
+    maxZoom: 19,
+    nativeMaxZoom: 18,
     attribution: '&copy; Google Maps',
     supportsDarkFilter: true,
   },
@@ -56,7 +57,8 @@ export const MAP_STYLES = {
     description: 'Topographic relief & English names (Google)',
     url: 'https://mt{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}&hl=en&gl=IN',
     subdomains: '0123',
-    maxZoom: 20,
+    maxZoom: 19,
+    nativeMaxZoom: 18,
     attribution: '&copy; Google Maps',
     supportsDarkFilter: true,
   },
@@ -69,6 +71,7 @@ export const MAP_STYLES = {
     url: 'https://mt{s}.google.com/vt/lyrs=y&x={x}&y={y}&z={z}&hl=en&gl=IN',
     subdomains: '0123',
     maxZoom: 20,
+    nativeMaxZoom: 20,
     attribution: '&copy; Google Maps',
     supportsDarkFilter: false,
   },
@@ -81,6 +84,7 @@ export const MAP_STYLES = {
     url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     subdomains: 'abc',
     maxZoom: 19,
+    nativeMaxZoom: 19,
     attribution: '&copy; OpenStreetMap contributors',
     supportsDarkFilter: true,
   },
@@ -118,7 +122,7 @@ function createTempleIcon(isActive = false, isLight = false) {
 
   const html = `
     <div class="temple-marker-inner ${isActive ? 'temple-marker-active-inner' : 'diya-pulse-inner'}"
-         style="width: 40px; height: 52px; display: flex; align-items: center; justify-content: center; transform-origin: 20px 50px;">
+         style="width: 40px; height: 52px; display: flex; align-items: center; justify-content: center; transform-origin: 20px 52px;">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 52" width="40" height="52"
            style="filter: drop-shadow(${glow});">
         <path d="M20 2 L8 22 L12 22 L12 38 L28 38 L28 22 L32 22 Z"
@@ -127,7 +131,7 @@ function createTempleIcon(isActive = false, isLight = false) {
         <ellipse cx="20" cy="6" rx="3" ry="5" fill="#FFD700" opacity="0.95"/>
         <ellipse cx="20" cy="5" rx="1.5" ry="3" fill="#FFF5E0" opacity="0.98"/>
         <rect x="10" y="38" width="20" height="4" rx="1" fill="#D4AF37" opacity="0.9"/>
-        <path d="M18 42 L20 50 L22 42" fill="#FF9933" opacity="0.95"/>
+        <path d="M18 42 L20 52 L22 42" fill="#FF9933" opacity="0.95"/>
       </svg>
     </div>`
 
@@ -135,15 +139,15 @@ function createTempleIcon(isActive = false, isLight = false) {
     html,
     className: 'temple-marker-wrapper',
     iconSize: [40, 52],
-    iconAnchor: [20, 50],
-    popupAnchor: [0, -50],
+    iconAnchor: [20, 52],
+    popupAnchor: [0, -52],
   })
 }
 
 function createOSMIcon(isActive = false) {
   const html = `
     <div class="osm-marker-inner ${isActive ? 'osm-marker-active-inner' : ''}"
-         style="width: 28px; height: 38px; display: flex; align-items: center; justify-content: center; transform-origin: 14px 37px;">
+         style="width: 28px; height: 38px; display: flex; align-items: center; justify-content: center; transform-origin: 14px 38px;">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 38" width="28" height="38"
            style="filter: drop-shadow(0 0 10px rgba(74,222,195,0.8));">
         <path d="M14 2 L5 16 L8 16 L8 28 L20 28 L20 16 L23 16 Z"
@@ -151,7 +155,7 @@ function createOSMIcon(isActive = false) {
         <rect x="11" y="19" width="6" height="9" rx="1" fill="#2DD4A8" opacity="0.75"/>
         <ellipse cx="14" cy="5" rx="2" ry="3.5" fill="#7FFFDC" opacity="0.9"/>
         <rect x="7" y="28" width="14" height="3" rx="1" fill="#2DD4A8" opacity="0.8"/>
-        <path d="M12 31 L14 37 L16 31" fill="#4ADEC3" opacity="0.9"/>
+        <path d="M12 31 L14 38 L16 31" fill="#4ADEC3" opacity="0.9"/>
       </svg>
     </div>`
 
@@ -159,8 +163,8 @@ function createOSMIcon(isActive = false) {
     html,
     className: 'osm-marker-wrapper',
     iconSize: [28, 38],
-    iconAnchor: [14, 37],
-    popupAnchor: [0, -37],
+    iconAnchor: [14, 38],
+    popupAnchor: [0, -38],
   })
 }
 
@@ -254,8 +258,8 @@ function createCircuitStopIcon({ stopNumber, isVisited = false, isActive = false
     html,
     className: `circuit-stop-marker ${isActive ? 'circuit-stop-active' : ''}`,
     iconSize: [size, size + 8],
-    iconAnchor: [size / 2, size + 7],
-    popupAnchor: [0, -(size + 7)],
+    iconAnchor: [size / 2, size + 8],
+    popupAnchor: [0, -(size + 8)],
   })
 }
 
@@ -714,6 +718,7 @@ export default function TempleMap({
       <MapContainer
         center={INDIA_CENTER}
         zoom={DEFAULT_ZOOM}
+        maxZoom={20}
         zoomControl={false}
         className="w-full h-full"
         style={{ position: 'absolute', inset: 0 }}
@@ -725,6 +730,7 @@ export default function TempleMap({
           attribution={currentStyle.attribution}
           subdomains={currentStyle.subdomains}
           maxZoom={currentStyle.maxZoom}
+          maxNativeZoom={currentStyle.nativeMaxZoom ?? currentStyle.maxZoom}
           className={currentStyle.supportsDarkFilter && theme === 'dark' ? 'dark-map-filter' : ''}
         />
 
@@ -957,7 +963,7 @@ export default function TempleMap({
             >
               <Tooltip
                 direction="top"
-                offset={[0, -62]}
+                offset={[0, -64]}
                 opacity={1}
                 permanent={true}
                 className="custom-temple-tooltip"

@@ -358,10 +358,7 @@ export default function TempleMap({
     setOsmMessage(null)
   }, [])
 
-  const tileUrl =
-    theme === 'dark'
-      ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
-      : 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png'
+  const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 
   // Positions array for glowing pilgrimage circuit polyline (null-safe)
   const circuitPositions = useMemo(() => {
@@ -400,9 +397,10 @@ export default function TempleMap({
         <TileLayer
           key={theme}
           url={tileUrl}
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>'
-          subdomains="abcd"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          subdomains="abc"
           maxZoom={19}
+          className={theme === 'dark' ? 'dark-map-filter' : ''}
         />
 
         {/* Custom positioned ZoomControl at bottom-right */}

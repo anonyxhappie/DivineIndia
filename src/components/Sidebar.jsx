@@ -142,7 +142,7 @@ export default function Sidebar({
       {/* Mobile sidebar toggle button */}
       <button
         onClick={onToggle}
-        className="md:hidden fixed top-16 left-3 z-[1000] glass-strong rounded-xl p-2.5 text-saffron hover:scale-105 transition-all shadow-lg"
+        className="md:hidden fixed top-20 left-3 z-[1001] glass-strong rounded-xl p-2.5 text-saffron hover:scale-105 transition-all shadow-lg"
         aria-label="Toggle explorer sidebar"
       >
         <MenuIcon />

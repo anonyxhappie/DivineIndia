@@ -108,6 +108,11 @@ html, body, #root {
   background: var(--bg-app) !important;
 }
 
+/* Filter to create a dark map from light OSM tiles without API keys */
+.dark-map-filter {
+  filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+}
+
 .leaflet-control-attribution {
   font-size: 10px !important;
   backdrop-filter: blur(6px);
